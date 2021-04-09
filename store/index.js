@@ -9,9 +9,6 @@ export const state = () => ({
 export const mutations = {
   setError(state, error) {
     state.error = error
-    setTimeout(() => {
-      state.error = null
-    }, 5000)
   },
   toggleSignInModal(state) {
     state.showSignInModal = !state.showSignInModal

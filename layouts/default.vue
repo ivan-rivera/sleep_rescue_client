@@ -31,7 +31,10 @@ html {
   @apply bg-dark text-white font-oxygen;
   @apply w-screen h-screen;
   @apply flex flex-col;
-  @apply pr-5 pl-5 mb-10 md:pr-10 md:pl-10 lg:pl-24 lg:pr-24 xl:pl-36 xl:pr-36 m-auto;
+  @apply pr-5 pl-5 mb-10 m-auto;
+  @apply md:pr-10 md:pl-10;
+  @apply lg:pl-24 lg:pr-24;
+  @apply xl:pl-36 xl:pr-36;
   @apply 2xl:text-xl;
 }
 
@@ -49,7 +52,7 @@ html {
 
 .heading-top {
   @apply font-bold text-4xl;
-  @apply mt-5 mb-2.5;
+  @apply mt-5 mb-5;
   @screen md {
     @apply text-5xl;
   }
@@ -68,25 +71,22 @@ html {
 
 .form-entry {
   @apply flex flex-col;
-  @apply pb-2;
 }
 
 .form-entry-group {
   @apply flex flex-row items-center;
-  @apply mb-2.5;
-  @apply w-full;
 }
 
 .form-icon {
   @apply bg-dark;
   @apply rounded-l-3xl;
-  @apply ml-10 p-2.5;
+  @apply p-2.5;
   @apply text-white;
 }
 
 .form-input {
   @apply flex-grow rounded-r-3xl border-2;
-  @apply pl-2.5 pt-2 pb-2 mr-10;
+  @apply p-2 m-1 ml-0;
   @apply focus:outline-none;
 }
 
@@ -95,14 +95,14 @@ html {
   @apply shadow-lg;
   @apply text-lg;
   @apply cursor-pointer;
+  @apply mt-1 mb-1 ml-auto mr-auto pt-2 pb-2 pl-28 pr-28;
+  @apply transition duration-150 ease-in;
 }
 
-.action-btn {
+.dark-btn {
   @include sr-btn;
   @apply bg-dark;
   @apply text-white;
-  @apply mt-2.5 mb-5 pt-3 pb-2 ml-10 mr-10;
-  @apply transition duration-150 ease-in;
   @apply hover:text-dark hover:bg-secondary;
 }
 

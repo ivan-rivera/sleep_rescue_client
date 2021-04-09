@@ -50,7 +50,7 @@
             />
           </FormEntry>
           <input
-            class="action-btn"
+            class="dark-btn"
             type="submit"
             name="reset-password"
             value="Reset"
@@ -94,7 +94,7 @@
             />
           </FormEntry>
           <input
-            class="action-btn"
+            class="dark-btn"
             type="submit"
             name="change-email"
             value="Change"

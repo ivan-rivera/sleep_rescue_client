@@ -26,7 +26,7 @@
           required
         />
       </FormEntry>
-      <input class="action-btn" type="submit" name="sign in" value="Continue" />
+      <input class="dark-btn" type="submit" name="sign in" value="Continue" />
     </form>
   </section>
 </template>

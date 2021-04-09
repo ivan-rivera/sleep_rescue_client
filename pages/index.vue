@@ -46,11 +46,14 @@
         >
           <FormEntry icon="at">
             <input
+              id="email"
               v-model="registration.user.email"
               type="text"
               placeholder="Email..."
               class="form-input"
               required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+              oninvalid="setCustomValidity('Please provide a valid email address')"
             />
           </FormEntry>
           <FormEntry icon="key">
@@ -60,10 +63,13 @@
               placeholder="Password..."
               class="form-input"
               required
+              pattern="\w{8,}"
+              oninvalid="setCustomValidity('Your password must contain at least 8 characters')"
             />
           </FormEntry>
           <FormEntry icon="key">
             <input
+              id="password_confirmation"
               v-model="registration.user.password_confirmation"
               type="password"
               placeholder="Repeat password..."
@@ -72,7 +78,7 @@
             />
           </FormEntry>
           <input
-            class="action-btn"
+            class="dark-btn"
             type="submit"
             name="sign up"
             value="Continue"
@@ -201,6 +207,12 @@ export default {
       toggleSignInModal: 'toggleSignInModal',
       toggleResetModal: 'toggleResetModal',
     }),
+    flashError(message) {
+      this.$store.commit('setError', message)
+      setTimeout(() => {
+        this.$store.commit('setError', null)
+      }, 5000)
+    },
     async registerUser(event) {
       event.preventDefault()
       this.$v.$touch()
@@ -214,8 +226,19 @@ export default {
           await this.$auth.loginWith('local', { data: this.registration })
           this.$auth.redirect('home')
         } catch (error) {
-          this.$store.commit('setError', error.response.data.error.message)
+          if (error.name === 'NetworkError') {
+            this.flashError(error.response.data.error.message)
+          } else {
+            this.flashError('Our server seems to be down :(')
+          }
         }
+      } else if (
+        this.registration.user.password !==
+        this.registration.user.password_confirmation
+      ) {
+        document
+          .getElementById('password_confirmation')
+          .setCustomValidity('Passwords do not match')
       } else {
         this.$store.commit(
           'setError',
@@ -271,9 +294,9 @@ export default {
 .signup-card {
   @apply text-dark;
   @apply rounded-xl;
-  @apply flex flex-col justify-between;
+  @apply flex flex-col justify-between items-center;
   @apply max-w-lg 2xl:max-w-xl;
-  @apply p-1.5 lg:pl-16 lg:pr-16;
+  @apply p-1.5 pt-10 pb-10 lg:pl-16 lg:pr-16;
 }
 
 .signup-text {
@@ -299,7 +322,7 @@ export default {
 
 .existing-users {
   @apply text-center;
-  @apply mb-2.5;
+  @apply mb-2.5 mt-2.5;
 }
 
 .existing-user-option {
