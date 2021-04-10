@@ -42,7 +42,7 @@
           name="signup"
           method="post"
           class="form-entry"
-          @submit="registerUser"
+          @submit.prevent="registerUser"
         >
           <FormEntry icon="at">
             <input
@@ -70,6 +70,7 @@
           <FormEntry icon="key">
             <input
               id="password_confirmation"
+              ref="password_confirmation"
               v-model="registration.user.password_confirmation"
               type="password"
               placeholder="Repeat password..."
@@ -152,9 +153,9 @@ export default {
     return {
       registration: {
         user: {
-          email: null,
-          password: null,
-          password_confirmation: null,
+          email: 'a@b.co',
+          password: '12345678',
+          password_confirmation: '123456789',
         },
       },
     }
@@ -214,7 +215,6 @@ export default {
       }, 5000)
     },
     async registerUser(event) {
-      event.preventDefault()
       this.$v.$touch()
       const valid = _.every(
         ['email', 'password', 'password_confirmation'],
@@ -236,9 +236,9 @@ export default {
         this.registration.user.password !==
         this.registration.user.password_confirmation
       ) {
-        document
-          .getElementById('password_confirmation')
-          .setCustomValidity('Passwords do not match')
+        this.$refs.password_confirmation.setCustomValidity(
+          'Passwords do not match'
+        )
       } else {
         this.$store.commit(
           'setError',
