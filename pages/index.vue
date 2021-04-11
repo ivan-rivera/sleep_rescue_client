@@ -85,7 +85,8 @@
             class="dark-btn"
             type="submit"
             name="sign up"
-            value="Continue"
+            :value="buttonLabel"
+            :class="isLoading ? 'animate-pulse' : ''"
           />
         </form>
         <section class="existing-users">
@@ -134,6 +135,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       registration: {
         user: {
           email: null,
@@ -171,6 +173,9 @@ export default {
     ],
   },
   computed: {
+    buttonLabel() {
+      return this.isLoading ? 'Processing...' : 'Continue'
+    },
     showSignInModal() {
       return this.$store.state.showSignInModal
     },
@@ -199,6 +204,7 @@ export default {
         )
       } else {
         try {
+          this.isLoading = true
           await this.$axios.post('registration', this.registration)
           await this.$auth.loginWith('local', { data: this.registration })
           this.$auth.redirect('home')
@@ -208,6 +214,8 @@ export default {
           } else {
             this.flashError(error.response.data.error.message)
           }
+        } finally {
+          this.isLoading = false
         }
       }
     },

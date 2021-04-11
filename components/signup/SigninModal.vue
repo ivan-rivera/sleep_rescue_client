@@ -9,7 +9,7 @@
             name="signin"
             method="post"
             class="form-entry"
-            @submit="login"
+            @submit.prevent="login"
           >
             <FormEntry icon="at">
               <input
@@ -39,7 +39,8 @@
               class="dark-btn w-full"
               type="submit"
               name="sign in"
-              value="Continue"
+              :class="isLoading ? 'animate-pulse' : ''"
+              :value="buttonLabel"
             />
           </form>
           <div class="mt-5 mb-5 line-divider" />
@@ -60,13 +61,7 @@
       <div v-if="!showSignIn">
         <section class="modal-content">
           <h1 class="title-text">Reset Password</h1>
-          <form
-            action=""
-            name="signin"
-            method="post"
-            class="form-entry"
-            @submit="login"
-          >
+          <form action="" name="signin" method="post" class="form-entry">
             <FormEntry icon="at">
               <input
                 v-model="resetForm.user.email"
@@ -83,7 +78,7 @@
               class="dark-btn w-full"
               type="submit"
               name="reset"
-              value="Reset"
+              :value="buttonLabel"
             />
           </form>
           <div class="mt-5"></div>
@@ -127,11 +122,12 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       showSignIn: true,
       loginForm: {
         user: {
-          email: null,
-          password: null,
+          email: 'tester@mail.com',
+          password: 'secret123',
         },
       },
       resetForm: {
@@ -141,18 +137,25 @@ export default {
       },
     }
   },
+  computed: {
+    buttonLabel() {
+      return this.isLoading ? 'Processing...' : 'Continue'
+    },
+  },
   methods: {
     ...mapMutations({
       toggleSignInModal: 'toggleSignInModal',
       setError: 'setError',
     }),
-    async login(event) {
-      event.preventDefault()
+    async login() {
       try {
+        this.isLoading = true
         await this.$auth.loginWith('local', { data: this.loginForm })
         this.$auth.redirect('home')
       } catch (error) {
         this.$store.commit('setError', error.response.data.message)
+      } finally {
+        this.isLoading = false
       }
     },
   },
