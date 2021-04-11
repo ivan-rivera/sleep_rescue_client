@@ -46,13 +46,13 @@
         >
           <FormEntry icon="at">
             <input
-              id="email"
               v-model="registration.user.email"
               type="text"
               placeholder="Email..."
               class="form-input"
               required
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+              oninput="setCustomValidity('')"
               oninvalid="setCustomValidity('Please provide a valid email address')"
             />
           </FormEntry>
@@ -63,7 +63,8 @@
               placeholder="Password..."
               class="form-input"
               required
-              pattern="\w{8,}"
+              minlength="8"
+              oninput="setCustomValidity('')"
               oninvalid="setCustomValidity('Your password must contain at least 8 characters')"
             />
           </FormEntry>
@@ -75,7 +76,9 @@
               type="password"
               placeholder="Repeat password..."
               class="form-input"
+              oninput="setCustomValidity('')"
               required
+              @change="checkPasswordEquality"
             />
           </FormEntry>
           <input
@@ -88,18 +91,12 @@
         <section class="existing-users">
           <div>
             Already have an account?
-            <span class="existing-user-option" @click="toggleSignInModal"
+            <span class="highlight-text-white" @click="toggleSignInModal"
               ><u><strong>Sign in</strong></u></span
             >
           </div>
-          <div>
-            Forgot your password?
-            <span class="existing-user-option" @click="toggleResetModal"
-              ><u><strong>Reset here</strong></u></span
-            >
-          </div>
         </section>
-        <div class="signup-divider" />
+        <div class="line-divider" />
         <div class="signup-disclaimer">
           By signing up, you confirm that you agree to our
           <strong>Terms of Service</strong> and <strong>Privacy Policy</strong>
@@ -111,33 +108,21 @@
       professionals, check with your doctor if CBT-i is right for you
     </p>
     <!-- Revealable content -->
-    <Modal
+    <SigninModal
       v-if="showSignInModal"
       :click-fn="toggleSignInModal"
       modal-width="max-w-md"
-    >
-      <SigninModal />
-    </Modal>
-    <Modal
-      v-if="showResetModal"
-      :click-fn="toggleResetModal"
-      modal-width="max-w-md"
-    >
-      <ResetModal />
-    </Modal>
+    />
     <CookiesNotice />
   </div>
 </template>
 
 <script>
-import _ from 'lodash'
 import { mapMutations } from 'vuex'
 import { minLength, sameAs, email, required } from 'vuelidate/lib/validators'
 import HeroCard from '~/components/signup/HeroCard'
 import SigninModal from '~/components/signup/SigninModal'
-import ResetModal from '~/components/signup/ResetModal'
 import FormEntry from '~/components/layout/FormEntry'
-import Modal from '~/components/layout/Modal'
 import CookiesNotice from '~/components/signup/CookiesNotice'
 export default {
   auth: false,
@@ -145,17 +130,15 @@ export default {
     CookiesNotice,
     HeroCard,
     FormEntry,
-    Modal,
-    ResetModal,
     SigninModal,
   },
   data() {
     return {
       registration: {
         user: {
-          email: 'a@b.co',
-          password: '12345678',
-          password_confirmation: '123456789',
+          email: null,
+          password: null,
+          password_confirmation: null,
         },
       },
     }
@@ -191,8 +174,9 @@ export default {
     showSignInModal() {
       return this.$store.state.showSignInModal
     },
-    showResetModal() {
-      return this.$store.state.showResetModal
+    passwordsMatch() {
+      const form = this.registration.user
+      return form.password === form.password_confirmation
     },
   },
   beforeCreate() {
@@ -206,45 +190,36 @@ export default {
     ...mapMutations({
       setError: 'setError',
       toggleSignInModal: 'toggleSignInModal',
-      toggleResetModal: 'toggleResetModal',
     }),
-    flashError(message) {
-      this.$store.commit('setError', message)
-      setTimeout(() => {
-        this.$store.commit('setError', null)
-      }, 5000)
-    },
-    async registerUser(event) {
+    async registerUser() {
       this.$v.$touch()
-      const valid = _.every(
-        ['email', 'password', 'password_confirmation'],
-        (v) => !this.$v.registration.user[v].$invalid
-      )
-      if (valid) {
+      if (this.$v.$invalid) {
+        this.flashError(
+          'Please provide a valid email with matching passwords containing at least 8 alphanumeric characters'
+        )
+      } else {
         try {
           await this.$axios.post('registration', this.registration)
           await this.$auth.loginWith('local', { data: this.registration })
           this.$auth.redirect('home')
         } catch (error) {
           if (error.name === 'NetworkError') {
-            this.flashError(error.response.data.error.message)
-          } else {
             this.flashError('Our server seems to be down :(')
+          } else {
+            this.flashError(error.response.data.error.message)
           }
         }
-      } else if (
-        this.registration.user.password !==
-        this.registration.user.password_confirmation
-      ) {
-        this.$refs.password_confirmation.setCustomValidity(
-          'Passwords do not match'
-        )
-      } else {
-        this.$store.commit(
-          'setError',
-          'You need to give us a valid email address and 2 identical passwords with at least 8 characters'
-        )
       }
+    },
+    checkPasswordEquality() {
+      const validity = this.passwordsMatch ? '' : 'passwords do not match'
+      this.$refs.password_confirmation.setCustomValidity(validity)
+    },
+    flashError(message) {
+      this.$store.commit('setError', message)
+      setTimeout(() => {
+        this.$store.commit('setError', null)
+      }, 5000)
     },
   },
 }
@@ -312,22 +287,8 @@ export default {
   @apply text-center;
 }
 
-.signup-divider {
-  @apply self-center;
-  @apply mb-5;
-  @apply w-56;
-  @apply rounded;
-  @apply border-4 border-primary;
-}
-
 .existing-users {
   @apply text-center;
   @apply mb-2.5 mt-2.5;
-}
-
-.existing-user-option {
-  @apply transition duration-150;
-  @apply hover:text-white;
-  @apply cursor-pointer;
 }
 </style>

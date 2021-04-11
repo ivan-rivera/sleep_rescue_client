@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div tabindex="0" @keydown.esc="clickFn">
     <div :class="['sr-modal', 'card-background', modalWidth]">
       <div class="close-cross" @click="clickFn">
         <div class="close-line close-line-forward" />
@@ -48,14 +48,18 @@ export default {
   @apply rounded-2xl;
   @apply cursor-pointer;
   @apply relative;
-  @apply ml-5 mt-5;
-  @apply w-8 h-8;
+  @apply ml-auto mr-5 mt-5;
+  @apply w-7 h-7;
+  @apply flex align-middle justify-center;
 }
 
 .close-line {
   @apply bg-supplementary;
-  @apply absolute w-full h-1;
+  @apply absolute;
+  @apply w-4/5 h-1;
+  @apply -top-0.5;
   @apply transform translate-y-3.5;
+  @apply rounded-lg;
   &-back {
     @apply rotate-45;
   }
@@ -69,5 +73,16 @@ export default {
   @apply z-20;
   @apply w-screen h-screen;
   @apply bg-dark opacity-90;
+}
+
+.modal-content {
+  @apply flex flex-col;
+}
+
+.title-text {
+  @apply pb-5;
+  @apply text-center;
+  @apply text-dark;
+  @apply font-bold text-3xl;
 }
 </style>

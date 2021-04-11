@@ -69,8 +69,24 @@ html {
   }
 }
 
+.highlight-text-white {
+  @apply transition duration-150;
+  @apply hover:text-white;
+  @apply cursor-pointer;
+}
+
+.line-divider {
+  @apply self-center;
+  @apply mb-5;
+  @apply w-56;
+  @apply rounded;
+  @apply border-4 border-primary;
+}
+
 .form-entry {
+  @apply w-72;
   @apply flex flex-col;
+  @apply ml-auto mr-auto;
 }
 
 .form-entry-group {
@@ -95,7 +111,8 @@ html {
   @apply shadow-lg;
   @apply text-lg;
   @apply cursor-pointer;
-  @apply mt-1 mb-1 ml-auto mr-auto pt-2 pb-2 pl-28 pr-28;
+  @apply mt-1 mb-1 ml-auto mr-auto pt-2 pb-2;
+  @apply w-full;
   @apply transition duration-150 ease-in;
 }
 
