@@ -34,10 +34,13 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['@/assets/css/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: '~/plugins/Vuelidate' }],
+  plugins: [
+    { src: '~/plugins/Vuelidate', ssr: false },
+    { src: '~/plugins/vClickOutside', ssr: false },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
@@ -85,7 +88,7 @@ export default {
         scheme: 'refresh',
         token: {
           property: 'data.access_token',
-          maxAge: 60 * 20,
+          maxAge: 10,
           type: '',
         },
         refreshToken: {

@@ -34,7 +34,7 @@
       </div>
       <div class="signup-card card-background">
         <section class="signup-text">
-          <div class="signup-header">Sign Up For Free</div>
+          <div class="title-text text-center">Sign Up For Free</div>
           <div class="signup-subheader">Your recovery begins today</div>
         </section>
         <form
@@ -51,7 +51,7 @@
               placeholder="Email..."
               class="form-input"
               required
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+              :pattern="emailPattern"
               oninput="setCustomValidity('')"
               oninvalid="setCustomValidity('Please provide a valid email address')"
             />
@@ -63,9 +63,9 @@
               placeholder="Password..."
               class="form-input"
               required
-              minlength="8"
+              pattern="\w{8,}"
               oninput="setCustomValidity('')"
-              oninvalid="setCustomValidity('Your password must contain at least 8 characters')"
+              oninvalid="setCustomValidity('Your password must contain at least 8 alphanumeric characters')"
             />
           </FormEntry>
           <FormEntry icon="key">
@@ -121,6 +121,7 @@
 <script>
 import { mapMutations } from 'vuex'
 import { minLength, sameAs, email, required } from 'vuelidate/lib/validators'
+import { EMAIL_PATTERN } from '~/assets/js/constants'
 import HeroCard from '~/components/signup/HeroCard'
 import SigninModal from '~/components/signup/SigninModal'
 import FormEntry from '~/components/layout/FormEntry'
@@ -135,6 +136,7 @@ export default {
   },
   data() {
     return {
+      emailPattern: EMAIL_PATTERN,
       isLoading: false,
       registration: {
         user: {
@@ -284,11 +286,6 @@ export default {
 
 .signup-text {
   @apply pb-5;
-}
-
-.signup-header {
-  @apply text-center font-bold text-3xl;
-  @apply pb-2.5;
 }
 
 .signup-subheader {

@@ -1,0 +1,107 @@
+// --------------------------------------------------------
+// MIXINS
+// --------------------------------------------------------
+
+@mixin sr-btn {
+  @apply rounded-3xl;
+  @apply shadow-lg;
+  @apply text-lg;
+  @apply cursor-pointer;
+  @apply mt-1 mb-1 ml-auto mr-auto pt-2 pb-2;
+  @apply w-full;
+  @apply transition duration-150 ease-in;
+  @apply focus:outline-none;
+}
+
+// --------------------------------------------------------
+// CARDS
+// --------------------------------------------------------
+
+.card-background {
+  @apply bg-gradient-to-br from-supplementary to-primary;
+}
+
+// --------------------------------------------------------
+// TEXT
+// --------------------------------------------------------
+
+.heading-top {
+  @apply font-bold text-4xl;
+  @apply mt-5 mb-5;
+  @screen md {
+    @apply text-5xl;
+  }
+  @screen xl {
+    @apply text-6xl;
+  }
+}
+
+.heading-sub {
+  @apply text-lg text-supplementary;
+  @apply mb-5;
+  @screen md {
+    @apply text-2xl;
+  }
+}
+
+.title-text {
+  @apply font-bold text-3xl;
+  @apply pb-5;
+}
+
+.message-header {
+  @apply text-center font-bold text-xl;
+  @apply mb-2.5;
+}
+
+.highlight-text-white {
+  @apply transition duration-150;
+  @apply hover:text-white;
+  @apply cursor-pointer;
+}
+
+// --------------------------------------------------------
+// FORMS
+// --------------------------------------------------------
+
+.form-entry {
+  @apply w-72;
+  @apply flex flex-col;
+  @apply ml-auto mr-auto;
+}
+
+.form-input {
+  @apply flex-grow rounded-r-3xl border-2;
+  @apply p-2 m-1 ml-0;
+  @apply focus:outline-none;
+}
+
+// --------------------------------------------------------
+// BUTTONS
+// --------------------------------------------------------
+
+.dark-btn {
+  @include sr-btn;
+  @apply bg-dark;
+  @apply text-white;
+  @apply hover:text-dark hover:bg-secondary;
+}
+
+.danger-btn {
+  @include sr-btn;
+  @apply bg-secondary;
+  @apply text-dark;
+  @apply pt-2.5 pb-2.5;
+}
+
+// --------------------------------------------------------
+// MISC ELEMENTS
+// --------------------------------------------------------
+
+.line-divider {
+  @apply self-center;
+  @apply mb-5;
+  @apply w-56;
+  @apply rounded;
+  @apply border-4 border-primary;
+}

@@ -17,3 +17,16 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.form-entry-group {
+  @apply flex flex-row items-center;
+}
+
+.form-icon {
+  @apply bg-dark;
+  @apply rounded-l-3xl;
+  @apply p-2.5;
+  @apply text-white;
+}
+</style>

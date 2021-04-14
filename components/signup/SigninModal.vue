@@ -3,7 +3,7 @@
     <div>
       <div v-if="showSignIn">
         <section class="modal-content">
-          <h1 class="title-text">Sign In</h1>
+          <h1 class="title-text text-center mb-8 mt-8">Sign In</h1>
           <form
             action=""
             name="signin"
@@ -18,7 +18,7 @@
                 placeholder="Email..."
                 class="form-input"
                 required
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                :pattern="emailPattern"
                 oninput="setCustomValidity('')"
                 oninvalid="setCustomValidity('Please provide a valid email address')"
               />
@@ -29,7 +29,7 @@
                 type="password"
                 placeholder="Password..."
                 class="form-input"
-                minlength="8"
+                pattern="\w{8,}"
                 required
                 oninput="setCustomValidity('')"
                 oninvalid="setCustomValidity('Your password must contain at least 8 characters')"
@@ -60,7 +60,7 @@
       </div>
       <div v-if="!showSignIn">
         <section class="modal-content">
-          <h1 class="title-text">Reset Password</h1>
+          <h1 class="title-text text-center mb-8 mt-8">Reset Password</h1>
           <form action="" name="signin" method="post" class="form-entry">
             <FormEntry icon="at">
               <input
@@ -69,7 +69,7 @@
                 placeholder="Email..."
                 class="form-input"
                 required
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                :pattern="emailPattern"
                 oninput="setCustomValidity('')"
                 oninvalid="setCustomValidity('Please provide a valid email address')"
               />
@@ -83,9 +83,9 @@
           </form>
           <div class="mt-5"></div>
           <p class="text-center">We'll send you the instructions</p>
-          <div class="mt-5 mb-5 line-divider" />
+          <div class="mt-8 mb-8 line-divider" />
           <section class="text-center">
-            <p>Want to try another password?</p>
+            <p>Do you want to try another password?</p>
             <p>
               <u
                 ><strong
@@ -105,6 +105,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import { EMAIL_PATTERN } from '~/assets/js/constants'
 import FormEntry from '~/components/layout/FormEntry'
 import Modal from '~/components/layout/Modal'
 export default {
@@ -122,6 +123,7 @@ export default {
   },
   data() {
     return {
+      emailPattern: EMAIL_PATTERN,
       isLoading: false,
       showSignIn: true,
       loginForm: {

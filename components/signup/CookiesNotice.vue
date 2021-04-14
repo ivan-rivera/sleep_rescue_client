@@ -2,8 +2,7 @@
   <transition name="reveal" appear>
     <div v-if="reveal" class="cookies">
       <p class="cookie-text">
-        Heads up! we use cookies to optimize your browsing experience. Basically
-        we just want to keep you logged in next time you visit us
+        Note that we use cookies to optimize your browsing experience
       </p>
       <div class="acknowledge" @click="acceptCookies">OK</div>
     </div>
@@ -46,7 +45,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .reveal-enter-active,
 .reveal-leave-active {
   transition: opacity 0.5s;
@@ -57,19 +56,23 @@ export default {
 }
 
 .cookies {
-  @apply fixed bottom-5 left-0 right-0 ml-auto mr-auto;
+  @apply fixed;
   @apply z-50;
-  @apply max-w-2xl;
-  @apply flex flex-col justify-between items-center;
-  @apply bg-white;
+  @apply flex flex-row justify-between items-center;
+  @apply bg-secondary;
   @apply border-2 border-dark;
-  @apply rounded-2xl;
-  @apply p-5;
+  @apply p-2;
+  @apply bottom-0 left-0 right-0;
+  @apply w-screen;
+  @screen md {
+    @apply bottom-5 left-5 right-5 ml-auto mr-auto;
+    @apply max-w-xl;
+    @apply rounded-2xl;
+  }
 }
 
 .cookie-text {
-  @apply text-base text-dark text-center;
-  @apply mb-5;
+  @apply text-base text-dark text-right mr-5;
 }
 
 .acknowledge {
