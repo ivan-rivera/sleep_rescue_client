@@ -3,11 +3,10 @@
 // --------------------------------------------------------
 
 @mixin sr-btn {
-  @apply rounded-3xl;
   @apply shadow-lg;
   @apply text-lg;
   @apply cursor-pointer;
-  @apply mt-1 mb-1 ml-auto mr-auto pt-2 pb-2;
+  @apply ml-auto mr-auto pt-2 pb-2;
   @apply w-full;
   @apply transition duration-150 ease-in;
   @apply focus:outline-none;
@@ -27,7 +26,6 @@
 
 .heading-top {
   @apply font-bold text-4xl;
-  @apply mt-5 mb-5;
   @screen md {
     @apply text-5xl;
   }
@@ -76,22 +74,42 @@
   @apply focus:outline-none;
 }
 
+.form-input-alternative {
+  background-color: transparent;
+  @apply border-b-2 border-dark;
+  @apply focus:outline-none;
+  @apply p-1;
+  @apply text-dark;
+}
+
+.error-message {
+  @apply w-full p-2.5;
+  @apply text-center;
+  @apply bg-secondary;
+}
+
 // --------------------------------------------------------
 // BUTTONS
 // --------------------------------------------------------
 
 .dark-btn {
   @include sr-btn;
+  @apply mt-1 mb-1;
+  @apply rounded-3xl;
   @apply bg-dark;
   @apply text-white;
   @apply hover:text-dark hover:bg-secondary;
 }
 
-.danger-btn {
+.secondary-btn {
   @include sr-btn;
-  @apply bg-secondary;
-  @apply text-dark;
-  @apply pt-2.5 pb-2.5;
+  @apply mt-5 mb-5;
+  @apply rounded-lg;
+  @apply bg-supplementary;
+  @apply text-dark font-bold text-center;
+  @apply shadow-inner;
+  @apply hover:bg-secondary;
+  box-shadow: 1px 1px 3px darkblue;
 }
 
 // --------------------------------------------------------

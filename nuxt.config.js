@@ -88,12 +88,12 @@ export default {
         scheme: 'refresh',
         token: {
           property: 'data.access_token',
-          maxAge: 10,
+          maxAge: 60 * 60 * 24 * 90,
           type: '',
         },
         refreshToken: {
           property: 'data.refresh_token',
-          maxAge: 60 * 60 * 24 * 30,
+          maxAge: 60 * 60 * 24 * 90,
           type: '',
         },
         endpoints: {

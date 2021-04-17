@@ -4,7 +4,7 @@
       <div class="hero-content">
         <!-- left/top: text and cards -->
         <section>
-          <div class="heading-top text-center">SleepRescue.org</div>
+          <div class="heading-top text-center mt-5 mb-5">SleepRescue.org</div>
           <div class="heading-sub text-center">
             Let's get your sleep back on track
           </div>
@@ -109,11 +109,7 @@
       professionals, check with your doctor if CBT-i is right for you
     </p>
     <!-- Revealable content -->
-    <SigninModal
-      v-if="showSignInModal"
-      :click-fn="toggleSignInModal"
-      modal-width="max-w-md"
-    />
+    <SigninModal v-if="showSignInModal" />
     <CookiesNotice />
   </div>
 </template>

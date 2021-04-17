@@ -1,86 +1,52 @@
 <template>
-  <div class="flex flex-row items-left">
-    <h1 class="heading-top">Your Account</h1>
-    <!-- About you card -->
-    <div class="card card-background">
-      <h2 class="title-text text-center">About you</h2>
-      <div>
-        <p>
-          Email: <strong>{{ email }}</strong>
-        </p>
-        <p>
-          Joined on: <strong>{{ dateJoined }}</strong>
-        </p>
-        <p>
-          Nights recorded: <strong>{{ temp.nightsRecorded }}</strong>
-        </p>
-        <p>
-          1st week sleep efficiency:
-          <strong>{{ temp.firstWeekSleepEfficiency }}</strong>
-        </p>
-        <p>
-          Last week sleep efficiency:
-          <strong>{{ temp.lastWeekSleepEfficiency }}</strong>
-        </p>
+  <div>
+    <h1 class="heading-top text-right mb-10 pr-32">Your Account</h1>
+    <div class="flex flex-row space-between">
+      <div class="flex flex-col border-2 border-white rounded-3xl p-5">
+        <div class="p-5 text-white text-center">
+          <h2 class="title-text text-center">About you</h2>
+          <div>
+            <p>
+              Email: <strong>{{ email }}</strong>
+            </p>
+            <p>
+              Joined on: <strong>{{ dateJoined }}</strong>
+            </p>
+            <p>
+              Nights recorded: <strong>{{ temp.nightsRecorded }}</strong>
+            </p>
+          </div>
+        </div>
+        <div class="w-72 mt-5">
+          <div class="secondary-btn" @click="togglePasswordChangeModal">
+            Change my password
+          </div>
+          <div class="secondary-btn" @click="toggleEmailChangeModal">
+            Change my email
+          </div>
+          <div class="secondary-btn" @click="toggleAccountDeletionModal">
+            Delete my account
+          </div>
+        </div>
       </div>
+      <img src="images/profile.svg" alt="account" class="ml-auto" />
     </div>
-    <!-- Change password card -->
-    <div class="card card-background">
-      <h2 class="title-text text-center">Change password</h2>
-      <form action="" name="signin" method="post" class="form-entry">
-        <FormEntry icon="key">
-          <input
-            v-model="passwordReset.user.password"
-            type="password"
-            placeholder="Current password"
-            class="form-input"
-            pattern="\w{8,}"
-            required
-            oninput="setCustomValidity('')"
-            oninvalid="setCustomValidity('You password must contain at least 8 alphanumeric characters')"
-          />
-        </FormEntry>
-        <FormEntry icon="key">
-          <input
-            v-model="passwordReset.user.new_password"
-            type="password"
-            placeholder="New password"
-            class="form-input"
-            pattern="\w{8,}"
-            required
-            oninput="setCustomValidity('')"
-            oninvalid="setCustomValidity('You password must contain at least 8 alphanumeric characters')"
-          />
-        </FormEntry>
-        <FormEntry icon="key">
-          <input
-            v-model="passwordReset.user.new_password_confirmation"
-            type="password"
-            placeholder="Repeat new password"
-            class="form-input"
-            pattern="\w{8,}"
-            required
-            oninput="setCustomValidity('')"
-            oninvalid="setCustomValidity('You password must contain at least 8 alphanumeric characters')"
-          />
-        </FormEntry>
-        <input
-          class="dark-btn w-full"
-          type="submit"
-          name="reset"
-          :value="buttonLabel"
-        />
-      </form>
-    </div>
+    <PasswordChangeModal v-if="showPasswordChangeModal" />
+    <EmailChangeModal v-if="showEmailChangeModal" />
+    <AccountDeletionModal v-if="showAccountDeletionModal" />
   </div>
 </template>
 
 <script>
-import FormEntry from '~/components/layout/FormEntry'
+// TODO: make it responsive
+// TODO: add email and deletion modals
+// TODO: add sidebar
+import { mapMutations, mapState } from 'vuex'
+import PasswordChangeModal from '~/components/account/PasswordChangeModal'
+import EmailChangeModal from '~/components/account/EmailChangeModal'
+import AccountDeletionModal from '~/components/account/AccountDeletionModal'
 export default {
-  // todo: look for account settings pages on Figma for inspiration
-  // todo: add a flash message indicating success
-  components: { FormEntry },
+  components: { PasswordChangeModal, EmailChangeModal, AccountDeletionModal },
   async asyncData({ $axios }) {
     const response = await $axios.$get('user')
     const email = response.user.email
@@ -90,56 +56,25 @@ export default {
   data() {
     return {
       temp: {
-        // todo: look into anonymous components: do I have to repeat forms?
         // todo: pull these from the backend via asyncData
         nightsRecorded: 30,
-        firstWeekSleepEfficiency: 0.7,
-        lastWeekSleepEfficiency: 0.9,
       },
-      isLoading: false,
-      passwordReset: {
-        user: {
-          password: null,
-          new_password: null,
-          new_password_confirmation: null,
-        },
-      },
-      emailChange: {
-        user: {
-          new_email: null,
-          new_email_confirmation: null,
-          password: null,
-        },
+      modal: {
+        password: false,
+        email: false,
+        account: false,
       },
     }
   },
-  computed: {
-    // todo: find a way to convert pct in JS + access asyncData
-    firstWeekSleepEfficiencyFmt() {
-      return this.firstWeekSleepEfficiency * 100
-    },
-    lastWeekSleepEfficiencyFmt() {
-      return this.lastWeekSleepEfficiency * 100
-    },
-    buttonLabel() {
-      return this.isLoading ? 'Processing...' : 'Continue'
-    },
-  },
-  methods: {
-    resetPassword(event) {
-      event.preventDefault()
-      console.log('reset password...') // TODO: reset password
-    },
-    changeEmail(event) {
-      event.preventDefault()
-      console.log('change email...') // TODO: change email
-    },
-  },
+  computed: mapState([
+    'showPasswordChangeModal',
+    'showEmailChangeModal',
+    'showAccountDeletionModal',
+  ]),
+  methods: mapMutations([
+    'togglePasswordChangeModal',
+    'toggleEmailChangeModal',
+    'toggleAccountDeletionModal',
+  ]),
 }
 </script>
-
-<style scoped>
-.card {
-  @apply p-8 rounded-2xl text-dark;
-}
-</style>

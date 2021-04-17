@@ -16,10 +16,6 @@
       <font-awesome-icon :icon="['fa', 'info-circle']" />
       <NuxtLink to="/about/">About</NuxtLink>
     </li>
-    <li v-if="$auth.loggedIn" class="head-option" @click="$auth.logout()">
-      <font-awesome-icon :icon="['fa', 'door-open']" />
-      <span class="inline-block">Log out</span>
-    </li>
   </ul>
 </template>
 

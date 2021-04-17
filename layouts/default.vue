@@ -5,6 +5,7 @@
       <Nuxt />
     </div>
     <Footer />
+    <Sidebar v-if="$auth.loggedIn" />
     <FlashError />
   </div>
 </template>
@@ -13,8 +14,9 @@
 import FlashError from '~/components/layout/FlashError'
 import Header from '~/components/layout/Header'
 import Footer from '~/components/layout/Footer'
+import Sidebar from '~/components/layout/Sidebar'
 export default {
-  components: { Footer, Header, FlashError },
+  components: { Footer, Header, FlashError, Sidebar },
 }
 </script>
 
