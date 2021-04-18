@@ -1,4 +1,9 @@
 export default {
+  server: {
+    port: 8000,
+    host: '0.0.0.0',
+  },
+
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -108,7 +113,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://localhost:4000/api/v1',
+    baseURL: 'http://192.168.0.11:4000/api/v1',
   },
 
   publicRuntimeConfig: {

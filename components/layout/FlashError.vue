@@ -49,25 +49,25 @@ export default {
 }
 
 .error-alert {
-  @apply relative;
-  @apply fixed top-12 left-0 right-0 ml-auto mr-auto;
-  @apply p-1 pb-5 pt-5;
-  @apply bg-secondary;
-  @apply max-w-lg;
-  @apply text-center text-dark font-bold;
-  @apply rounded-2xl;
-  @apply border-2 border-dark;
-  @apply z-50;
+  @apply relative
+  fixed top-12 left-0 right-0 ml-auto mr-auto
+  p-1 pb-5 pt-5
+  bg-secondary
+  max-w-lg
+  text-center text-dark font-bold
+  rounded-2xl
+  border-2 border-dark
+  z-50;
 }
 
 .icon-holder {
-  @apply absolute top-0 left-0 h-full w-24;
-  @apply rounded-bl-xl rounded-tl-xl;
-  @apply border-r-2 border-dark;
+  @apply absolute top-0 left-0 h-full w-24
+  rounded-bl-xl rounded-tl-xl
+  border-r-2 border-dark;
 }
 
 .error-icon {
-  @apply text-dark text-center text-6xl;
-  @apply h-full;
+  @apply text-dark text-center text-6xl
+  h-full;
 }
 </style>

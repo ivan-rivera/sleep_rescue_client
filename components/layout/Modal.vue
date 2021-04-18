@@ -2,15 +2,15 @@
   <div>
     <div
       ref="modal"
-      v-click-outside="clickFn"
+      v-click-outside="toggleFn"
       tabindex="0"
       :class="['sr-modal', 'card-background', modalWidth]"
-      @keydown.esc="clickFn"
+      @keydown.esc="toggleFn"
     >
-      <CloseButton @click.native="clickFn" />
+      <CloseButton @click.native="toggleFn" />
       <slot></slot>
     </div>
-    <div v-if="showScreenBlur" class="blur-screen" />
+    <div class="blur-screen" />
   </div>
 </template>
 
@@ -24,39 +24,35 @@ export default {
       default: '',
       required: false,
     },
-    clickFn: {
-      type: Function,
-      required: true,
-    },
-  },
-  computed: {
-    showScreenBlur() {
-      return this.$store.state.showScreenBlur
-    },
   },
   mounted() {
     this.$refs.modal.focus()
+  },
+  methods: {
+    toggleFn() {
+      this.$emit('toggleModal')
+    },
   },
 }
 </script>
 
 <style lang="scss">
 .sr-modal {
-  @apply fixed top-20 left-6 right-6;
-  @apply focus:outline-none;
-  @apply ml-auto mr-auto;
-  @apply text-dark;
-  @apply border-2 border-dark;
-  @apply shadow-lg;
-  @apply rounded-2xl;
-  @apply z-30;
+  @apply fixed top-20 left-6 right-6
+  focus:outline-none
+  ml-auto mr-auto pt-10
+  text-dark
+  border-2 border-dark
+  shadow-lg
+  rounded-2xl
+  z-30;
 }
 
 .blur-screen {
-  @apply fixed left-0 top-0;
-  @apply z-20;
-  @apply w-screen h-screen;
-  @apply bg-dark opacity-90;
+  @apply fixed left-0 top-0
+  z-20
+  w-screen h-screen
+  bg-dark opacity-90;
 }
 
 .modal-content {

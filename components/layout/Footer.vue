@@ -21,9 +21,9 @@ export default {
 
 <style scoped>
 .footer-group {
-  @apply font-normal text-xs;
-  @apply flex flex-col justify-center items-center;
-  @apply mt-5;
+  @apply font-normal text-xs
+  flex flex-col justify-center items-center
+  mt-5;
 }
 
 .footer-item {

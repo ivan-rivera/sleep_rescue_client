@@ -38,8 +38,8 @@ export default {
 
 <style scoped>
 .header {
-  @apply relative flex flex-row items-center justify-between;
-  @apply pt-2.5 pb-2.5;
+  @apply relative flex flex-row items-center justify-between
+  pt-2.5 pb-2.5;
 }
 
 .logo {

@@ -1,5 +1,5 @@
 <template>
-  <Modal modal-width="max-w-md" :click-fn="toggleSignInModal">
+  <Modal modal-width="max-w-md" @toggleModal="toggleSignInModal">
     <div>
       <div v-if="showSignIn">
         <section class="modal-content">
@@ -160,10 +160,11 @@ export default {
         this.error = null
         this.$auth.redirect('home')
       } catch (error) {
-        if (error.name === 'NetworkError') {
+        const message = error?.response?.data?.error?.message
+        if (message === undefined) {
           this.error = 'Server error, please try later'
         } else {
-          this.error = error.response.data.error.message
+          this.error = message
         }
       } finally {
         this.isLoading = false

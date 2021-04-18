@@ -1,5 +1,5 @@
 <template>
-  <Modal modal-width="max-w-md" :click-fn="toggleEmailChangeModal">
+  <Modal modal-width="max-w-md" @toggleModal="toggleEmailChangeModal">
     <section>
       <h1 class="title-text text-center mb-8 mt-8">Change Email</h1>
       <div v-if="error" class="error-message mb-5">

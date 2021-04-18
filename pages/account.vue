@@ -1,9 +1,11 @@
 <template>
   <div>
-    <h1 class="heading-top text-right mb-10 pr-32">Your Account</h1>
+    <h1 class="heading-top text-center mb-10">Your Account</h1>
     <div class="flex flex-row space-between">
-      <div class="flex flex-col border-2 border-white rounded-3xl p-5">
-        <div class="p-5 text-white text-center">
+      <div
+        class="flex flex-col border-2 border-white rounded-3xl p-5 ml-auto mr-auto lg:mr-0 lg:ml-0"
+      >
+        <div class="pt-5 pb-5 pl-1 pr-1 text-white text-center">
           <h2 class="title-text text-center">About you</h2>
           <div>
             <p>
@@ -17,7 +19,7 @@
             </p>
           </div>
         </div>
-        <div class="w-72 mt-5">
+        <div class="w-64 mt-5">
           <div class="secondary-btn" @click="togglePasswordChangeModal">
             Change my password
           </div>
@@ -29,7 +31,11 @@
           </div>
         </div>
       </div>
-      <img src="images/profile.svg" alt="account" class="ml-auto" />
+      <img
+        src="images/profile.svg"
+        alt="account"
+        class="ml-auto hidden transform lg:block lg:scale-75 xl:scale-100"
+      />
     </div>
     <PasswordChangeModal v-if="showPasswordChangeModal" />
     <EmailChangeModal v-if="showEmailChangeModal" />

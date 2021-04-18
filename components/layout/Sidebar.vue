@@ -137,40 +137,39 @@ export default {
 }
 
 .sr-sidebar {
-  @apply fixed
-  left-0 top-0
+  @apply fixed left-0 top-0
   h-full
   flex flex-col justify-between
-  text-dark text-3xl
+  text-dark text-2xl
   text-left
+  border-dark border-r-2
   bg-white;
   transition: width 500ms;
 }
 
 .sr-sidebar-default {
-  @apply w-20;
+  @apply w-10;
 }
 
 .sr-sidebar-full {
-  @apply w-72;
-  /*  72*/
+  @apply w-56;
 }
 
 .selected-page {
-  @apply bg-dark text-secondary text-4xl
+  @apply bg-dark text-secondary text-3xl
   rounded-bl-3xl rounded-tl-3xl
   pl-4 pt-4 pb-4
   text-center;
 }
 
 .icon-box {
-  @apply w-12;
+  @apply w-8;
 }
 
 .option-holder {
-  @apply pt-2 pb-2 pl-6;
-  @apply mt-2 mb-2;
-  @apply flex flex-row items-center;
+  @apply pt-2 pb-2 pl-2
+  mt-2 mb-2
+  flex flex-row items-center;
 }
 
 .route-desc {

@@ -1,5 +1,5 @@
 <template>
-  <Modal modal-width="max-w-md" :click-fn="togglePasswordChangeModal">
+  <Modal modal-width="max-w-md" @toggleModal="togglePasswordChangeModal">
     <section>
       <h1 class="title-text text-center mb-8 mt-8">Change Password</h1>
       <div v-if="error" class="error-message mb-5">

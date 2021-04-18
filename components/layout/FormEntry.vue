@@ -24,9 +24,9 @@ export default {
 }
 
 .form-icon {
-  @apply bg-dark;
-  @apply rounded-l-3xl;
-  @apply p-2.5;
-  @apply text-white;
+  @apply bg-dark
+  rounded-l-3xl
+  p-2.5
+  text-white;
 }
 </style>

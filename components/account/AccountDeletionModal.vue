@@ -1,5 +1,5 @@
 <template>
-  <Modal modal-width="max-w-md" :click-fn="toggleAccountDeletionModal">
+  <Modal modal-width="max-w-md" @toggleModal="toggleAccountDeletionModal">
     <section>
       <h1 class="title-text text-center mb-8 mt-8">Delete Account</h1>
       <div v-if="error" class="error-message mb-5">
@@ -73,9 +73,9 @@ export default {
 
 <style scoped>
 .warning-notice {
-  @apply text-center text-dark font-bold;
-  @apply bg-secondary;
-  @apply rounded-br-2xl rounded-bl-2xl;
-  @apply pt-2 pb-2;
+  @apply text-center text-dark font-bold
+  bg-secondary
+  rounded-br-2xl rounded-bl-2xl
+  pt-2 pb-2;
 }
 </style>

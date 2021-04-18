@@ -1,12 +1,19 @@
 <template>
-  <div class="full-page">
-    <Header />
-    <div class="page-contents">
-      <Nuxt />
+  <div class="flex flex-row items-center">
+    <div class="w-10" />
+    <div
+      class="full-page relative flex-grow"
+      :class="{ 'ml-12 pr-5': $auth.loggedIn }"
+    >
+      <Header />
+      <div class="page-contents">
+        <Nuxt />
+      </div>
+      <Footer />
+      <FlashError />
     </div>
-    <Footer />
+    <div class="w-10" />
     <Sidebar v-if="$auth.loggedIn" />
-    <FlashError />
   </div>
 </template>
 
@@ -34,15 +41,14 @@ html {
   @apply bg-dark text-white font-oxygen;
   @apply w-screen h-screen;
   @apply flex flex-col;
-  @apply pr-5 pl-5 mb-10 m-auto;
-  @apply md:pr-10 md:pl-10;
-  @apply lg:pl-24 lg:pr-24;
-  @apply xl:pl-36 xl:pr-36;
   @apply 2xl:text-xl;
 }
 
 .full-page {
   @apply mt-5 mb-5;
+  @apply md:pr-10 md:pl-10;
+  @apply lg:pl-24 lg:pr-24;
+  @apply xl:pl-36 xl:pr-36;
 }
 
 .page-contents {

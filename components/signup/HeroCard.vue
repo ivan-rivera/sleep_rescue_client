@@ -37,17 +37,17 @@ export default {
 }
 
 .card-group-primary {
-  @apply lg:block;
-  @apply transform lg:scale-125 transform lg:translate-x-32 lg:top-80 xl:top-64 xl:scale-100 xl:translate-x-0;
+  @apply lg:block
+  transform lg:scale-125 transform lg:translate-x-32 lg:top-80 xl:top-64 xl:scale-100 xl:translate-x-0;
 }
 
 .welcome-card {
-  @apply bg-white;
-  @apply absolute bottom-12;
-  @apply pt-10 pb-10;
-  @apply h-48 w-40 z-10;
-  @apply flex flex-col justify-between items-center;
-  @apply rounded-2xl border-2 border-dark;
+  @apply bg-white
+  absolute bottom-12
+  pt-10 pb-10
+  h-48 w-40 z-10
+  flex flex-col justify-between items-center
+  rounded-2xl border-2 border-dark;
 }
 
 .welcome-card-text {
@@ -55,10 +55,10 @@ export default {
 }
 
 .welcome-card-flip {
-  @apply bg-supplementary;
-  @apply absolute bottom-10;
-  @apply h-48 w-40 z-0;
-  @apply border-2 border-dark rounded-2xl;
-  @apply transform skew-y-6;
+  @apply bg-supplementary
+  absolute bottom-10
+  h-48 w-40 z-0
+  border-2 border-dark rounded-2xl
+  transform skew-y-6;
 }
 </style>

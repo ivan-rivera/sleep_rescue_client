@@ -185,9 +185,10 @@ export default {
   beforeCreate() {
     if (this.$auth.loggedIn) {
       this.$auth.redirect('home')
-    } else {
-      this.$store.commit('clearSignUpState')
     }
+  },
+  mounted() {
+    this.$store.commit('clearSignUpState')
   },
   methods: {
     ...mapMutations({
@@ -247,37 +248,37 @@ export default {
 }
 
 .hero-content {
-  @apply flex flex-col justify-between;
-  @apply max-w-md;
-  @apply mb-5;
+  @apply flex flex-col justify-between
+  max-w-md
+  mb-5;
 }
 
 .hero-text {
-  @apply text-center text-base xl:text-xl;
-  @apply mt-3 mb-3;
+  @apply text-center text-base xl:text-xl
+  mt-3 mb-3;
 }
 
 .disclaimer-text {
-  @apply text-center text-xs 2xl:text-sm;
-  @apply pb-5 pt-5 2xl:pt-16 3xl:pb-16;
+  @apply text-center text-xs 2xl:text-sm
+  pb-5 pt-5 2xl:pt-16 3xl:pb-16;
 }
 
 .signup-disclaimer {
-  @apply text-center;
-  @apply pb-5 ml-5 mr-5;
+  @apply text-center
+  pb-5 ml-5 mr-5;
 }
 
 .welcome-cards {
-  @apply flex flex-row justify-between;
-  @apply max-w-xs;
+  @apply flex flex-row justify-between
+  max-w-xs;
 }
 
 .signup-card {
-  @apply text-dark;
-  @apply rounded-xl;
-  @apply flex flex-col justify-between items-center;
-  @apply max-w-lg 2xl:max-w-xl;
-  @apply p-1.5 pt-10 pb-10 lg:pl-16 lg:pr-16;
+  @apply text-dark
+  rounded-xl
+  flex flex-col justify-between items-center
+  max-w-lg 2xl:max-w-xl
+  p-1.5 pt-10 pb-10 lg:pl-16 lg:pr-16;
 }
 
 .signup-text {
@@ -289,7 +290,7 @@ export default {
 }
 
 .existing-users {
-  @apply text-center;
-  @apply mb-2.5 mt-2.5;
+  @apply text-center
+  mb-2.5 mt-2.5;
 }
 </style>

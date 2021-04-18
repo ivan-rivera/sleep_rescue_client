@@ -20,11 +20,11 @@
 }
 
 .header-btn {
-  @apply relative w-14 h-14;
-  @apply cursor-pointer;
-  @apply flex flex-col items-center justify-center;
-  @apply bg-supplementary rounded-full shadow-md;
-  @apply transition duration-150 hover:bg-secondary;
-  @apply lg:hidden;
+  @apply relative w-14 h-14
+  cursor-pointer
+  flex flex-col items-center justify-center
+  bg-supplementary rounded-full shadow-md
+  transition duration-150 hover:bg-secondary
+  lg:hidden;
 }
 </style>
