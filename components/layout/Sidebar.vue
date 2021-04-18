@@ -18,74 +18,84 @@
       </div>
     </div>
     <div class="flex flex-col justify-between h-72">
-      <NuxtLink to="/dashboard">
+      <NuxtLink title="Dashboard" to="/dashboard">
         <div class="option-holder" :class="isSelected('dashboard')">
           <div class="icon-box">
             <font-awesome-icon :icon="['fa', 'chart-pie']" />
           </div>
           <transition name="fade">
-            <p v-if="expanded" class="route-desc">Dashboard</p>
+            <p v-if="expanded" id="dashboard-desc" class="route-desc">
+              Dashboard
+            </p>
           </transition>
         </div>
       </NuxtLink>
-      <NuxtLink to="/goals">
+      <NuxtLink title="Goals" to="/goals">
         <div class="option-holder" :class="isSelected('goals')">
           <div class="icon-box">
             <font-awesome-icon :icon="['fa', 'trophy']" />
           </div>
           <transition name="fade">
-            <p v-if="expanded" class="route-desc">Goals</p>
+            <p v-if="expanded" id="goals-desc" class="route-desc">Goals</p>
           </transition>
         </div>
       </NuxtLink>
-      <NuxtLink to="/thoughts">
+      <NuxtLink title="Thought Tracker" to="/thoughts">
         <div class="option-holder" :class="isSelected('thoughts')">
           <div class="icon-box">
             <font-awesome-icon :icon="['fa', 'comment-dots']" />
           </div>
           <transition name="fade">
-            <p v-if="expanded" class="route-desc">Thought Checker</p>
+            <p v-if="expanded" id="thoughts-desc" class="route-desc">
+              Thought Checker
+            </p>
           </transition>
         </div>
       </NuxtLink>
-      <NuxtLink to="/isi">
+      <NuxtLink title="Insomnia Severity Index Survey" to="/isi">
         <div class="option-holder" :class="isSelected('isi')">
           <div class="icon-box">
             <font-awesome-icon :icon="['fa', 'clipboard-list']" />
           </div>
           <transition name="fade">
-            <p v-if="expanded" class="route-desc">ISI Survey</p>
+            <p v-if="expanded" id="isi-desc" class="route-desc">ISI Survey</p>
           </transition>
         </div>
       </NuxtLink>
-      <NuxtLink to="/learn">
+      <NuxtLink title="Learning Center" to="/learn">
         <div class="option-holder" :class="isSelected('learn')">
           <div class="icon-box">
             <font-awesome-icon :icon="['fa', 'book-medical']" />
           </div>
           <transition name="fade">
-            <p v-if="expanded" class="route-desc">Learning Center</p>
+            <p v-if="expanded" id="learn-desc" class="route-desc">
+              Learning Center
+            </p>
           </transition>
         </div>
       </NuxtLink>
     </div>
     <div class="mb-10">
-      <NuxtLink to="/account">
+      <NuxtLink title="Account" to="/account">
         <div class="option-holder" :class="isSelected('account')">
           <div class="icon-box">
             <font-awesome-icon :icon="['fa', 'user-circle']" />
           </div>
           <transition name="fade">
-            <p v-if="expanded" class="route-desc">Account</p>
+            <p v-if="expanded" id="account-desc" class="route-desc">Account</p>
           </transition>
         </div>
       </NuxtLink>
-      <div class="cursor-pointer option-holder" @click="$auth.logout()">
+      <div
+        title="Log out"
+        class="cursor-pointer option-holder"
+        @click="$auth.logout()"
+      >
         <div class="icon-box">
           <font-awesome-icon :icon="['fa', 'door-open']" />
         </div>
         <transition name="fade">
-          <p v-if="expanded" class="route-desc">Log out</p>
+          <p v-if="expanded" id="logout-desc" class="route-desc">Log out</p>
         </transition>
       </div>
     </div>
@@ -94,12 +104,10 @@
 
 <script>
 export default {
-  // TODO: transition effects
-  // TODO: hover effects + tooltip
   transition: 'fade',
   data() {
     return {
-      expanded: true,
+      expanded: false,
     }
   },
   mounted() {
@@ -117,7 +125,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .fade-enter-active {
   transition: opacity 0.5s;
   transition-delay: 0.5s;
@@ -135,8 +143,7 @@ export default {
   flex flex-col justify-between
   text-dark text-3xl
   text-left
-  bg-white
-  border-r-2 border-dark;
+  bg-white;
   transition: width 500ms;
 }
 
@@ -175,5 +182,37 @@ export default {
 
 .menu-border {
   @apply border-t-2 border-b-2 border-dark;
+}
+
+@mixin highlight-desc {
+  @apply underline;
+}
+
+#dashboard-desc:hover {
+  @include highlight-desc;
+}
+
+#goals-desc:hover {
+  @include highlight-desc;
+}
+
+#isi-desc:hover {
+  @include highlight-desc;
+}
+
+#thoughts-desc:hover {
+  @include highlight-desc;
+}
+
+#learn-desc:hover {
+  @include highlight-desc;
+}
+
+#logout-desc:hover {
+  @include highlight-desc;
+}
+
+#account-desc:hover {
+  @include highlight-desc;
 }
 </style>
