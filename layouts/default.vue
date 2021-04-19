@@ -31,6 +31,7 @@ export default {
 <style lang="scss">
 html {
   font-size: 16px;
+  min-width: 360px;
   max-width: 1800px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
