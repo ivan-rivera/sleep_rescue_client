@@ -97,7 +97,7 @@ export default {
           type: '',
         },
         refreshToken: {
-          property: 'data.refresh_token',
+          property: 'data.renewal_token',
           maxAge: 60 * 60 * 24 * 90,
           type: '',
         },
