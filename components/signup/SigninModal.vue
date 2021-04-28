@@ -70,13 +70,22 @@
             <font-awesome-icon :icon="['fa', 'exclamation-circle']" />
             {{ error }}
           </div>
-          <form action="" name="signin" method="post" class="form-entry">
+          <div v-if="resetMessage" class="notice-message mb-5">
+            <font-awesome-icon :icon="['fa', 'check-circle']" />
+            {{ resetMessage }}
+          </div>
+          <form
+            action=""
+            name="reset"
+            method="post"
+            class="form-entry"
+            @submit.prevent="reset"
+          >
             <label for="reset-email"><strong>E-mail</strong></label>
             <input
               id="reset-email"
-              v-model="resetForm.user.email"
+              v-model="resetForm.email"
               type="text"
-              placeholder="example@mail.com"
               class="form-input-alternative"
               required
               :pattern="emailPattern"
@@ -92,7 +101,9 @@
             />
           </form>
           <div class="mt-5"></div>
-          <p class="text-center">We'll send you the instructions</p>
+          <p class="text-center">
+            We'll send you the instructions, please check you spam folder!
+          </p>
           <div class="mb-2.5" />
           <div class="mt-5 mb-8 line-divider" />
           <section class="text-center">
@@ -126,6 +137,7 @@ export default {
       isLoading: false,
       showSignIn: true,
       error: null,
+      resetMessage: null,
       loginForm: {
         user: {
           email: 'tester@mail.com',
@@ -133,9 +145,7 @@ export default {
         },
       },
       resetForm: {
-        user: {
-          email: null,
-        },
+        email: null,
       },
     }
   },
@@ -160,15 +170,30 @@ export default {
         this.error = null
         this.$auth.redirect('home')
       } catch (error) {
-        const message = error?.response?.data?.error?.message
-        if (message === undefined) {
-          this.error = 'Server error, please try later'
-        } else {
-          this.error = message
-        }
+        this.catchError(error)
       } finally {
         this.isLoading = false
       }
+    },
+    async reset() {
+      try {
+        this.isLoading = true
+        const response = await this.$axios.$post(
+          'password/reset',
+          this.resetForm
+        )
+        this.resetForm.email = null
+        this.resetMessage = response.data.message
+      } catch (error) {
+        this.catchError(error)
+      } finally {
+        this.isLoading = false
+      }
+    },
+    catchError(error) {
+      this.error =
+        error?.response?.data?.error?.message ??
+        'Server error, please try later'
     },
   },
 }

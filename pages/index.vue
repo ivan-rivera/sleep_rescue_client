@@ -115,6 +115,7 @@
 </template>
 
 <script>
+// TODO: rate limit logins?
 import { mapMutations } from 'vuex'
 import { minLength, sameAs, email, required } from 'vuelidate/lib/validators'
 import { EMAIL_PATTERN } from '~/assets/js/constants'
@@ -208,11 +209,10 @@ export default {
           await this.$auth.loginWith('local', { data: this.registration })
           this.$auth.redirect('home')
         } catch (error) {
-          if (error.name === 'NetworkError') {
-            this.flashError('Our server seems to be down :(')
-          } else {
-            this.flashError(error.response.data.error.message)
-          }
+          const errorMessage =
+            error?.response?.data?.error?.message ??
+            'Our server seems to be down'
+          this.flashError(errorMessage)
         } finally {
           this.isLoading = false
         }
