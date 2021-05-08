@@ -20,7 +20,6 @@
               id="login-email"
               v-model="loginForm.user.email"
               type="text"
-              placeholder="email@example.com"
               class="form-input-alternative"
               required
               :pattern="emailPattern"
@@ -33,7 +32,6 @@
               id="login-password"
               v-model="loginForm.user.password"
               type="password"
-              placeholder="8 alphanumeric characters..."
               class="form-input-alternative"
               pattern="\w{8,}"
               required
@@ -140,8 +138,8 @@ export default {
       resetMessage: null,
       loginForm: {
         user: {
-          email: 'tester@mail.com',
-          password: 'secret123',
+          email: null,
+          password: null,
         },
       },
       resetForm: {

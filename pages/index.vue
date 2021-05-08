@@ -32,7 +32,7 @@
           />
         </section>
       </div>
-      <div class="signup-card card-background">
+      <div class="focus-card card-background">
         <section class="signup-text">
           <div class="title-text text-center">Sign Up For Free</div>
           <div class="signup-subheader">Your recovery begins today</div>
@@ -68,7 +68,7 @@
               oninvalid="setCustomValidity('Your password must contain at least 8 alphanumeric characters')"
             />
           </FormEntry>
-          <FormEntry icon="key">
+          <FormEntry icon="lock">
             <input
               id="password_confirmation"
               ref="password_confirmation"
@@ -205,9 +205,9 @@ export default {
       } else {
         try {
           this.isLoading = true
-          await this.$axios.post('registration', this.registration)
+          await this.$axios.post('user/create', this.registration)
           await this.$auth.loginWith('local', { data: this.registration })
-          this.$auth.redirect('home')
+          this.$nuxt.context.redirect('/confirm')
         } catch (error) {
           const errorMessage =
             error?.response?.data?.error?.message ??
@@ -250,7 +250,8 @@ export default {
 .hero-content {
   @apply flex flex-col justify-between
   max-w-md
-  mb-5;
+  mb-5
+  lg:mr-6 xl:mr-12;
 }
 
 .hero-text {
@@ -271,14 +272,6 @@ export default {
 .welcome-cards {
   @apply flex flex-row justify-between
   max-w-xs;
-}
-
-.signup-card {
-  @apply text-dark
-  rounded-xl
-  flex flex-col justify-between items-center
-  max-w-lg 2xl:max-w-xl
-  p-1.5 pt-10 pb-10 lg:pl-16 lg:pr-16;
 }
 
 .signup-text {

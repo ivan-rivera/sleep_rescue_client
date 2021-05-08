@@ -11,7 +11,7 @@
         name="password-change"
         method="post"
         class="form-entry"
-        @submit="changePassword"
+        @submit.prevent="changePassword"
       >
         <!-- PASSWORD -->
         <label for="password-change-p1"
@@ -19,7 +19,7 @@
         >
         <input
           id="password-change-p1"
-          v-model="form.user.password"
+          v-model="form.current_password"
           type="password"
           class="form-input-alternative"
           required
@@ -31,7 +31,7 @@
         <label for="password-change-p2"><strong>New Password</strong></label>
         <input
           id="password-change-p2"
-          v-model="form.user.new_password"
+          v-model="form.password"
           type="password"
           class="form-input-alternative"
           required
@@ -45,13 +45,15 @@
         >
         <input
           id="password-change-p3"
-          v-model="form.user.new_password_confirmation"
+          ref="password_confirmation"
+          v-model="form.password_confirmation"
           type="password"
           class="form-input-alternative"
           required
           pattern="\w{8,}"
           oninput="setCustomValidity('')"
           oninvalid="setCustomValidity('Must contain at least 8 alphanumeric characters')"
+          @change="checkPasswordEquality"
         />
         <div class="mb-8" />
         <input
@@ -78,15 +80,14 @@ export default {
   components: { Modal },
   data() {
     return {
+      genericError: 'Oops, something went wrong, please try again later',
       isLoading: false,
       error: null,
       success: null,
       form: {
-        user: {
-          password: null,
-          new_password: null,
-          new_password_confirmation: null,
-        },
+        current_password: null,
+        password: null,
+        password_confirmation: null,
       },
     }
   },
@@ -94,21 +95,23 @@ export default {
     buttonLabel() {
       return this.isLoading ? 'Processing...' : 'Change'
     },
+    passwordsMatch() {
+      return this.form.password === this.form.password_confirmation
+    },
   },
   methods: {
     ...mapMutations(['togglePasswordChangeModal']),
-    markSuccess() {
-      this.success = true
-      setTimeout(() => {
-        this.success = null
-      }, 3000)
+    async changePassword() {
+      try {
+        await this.$axios.patch('user', this.form)
+        this.success = true
+      } catch (error) {
+        this.error = this.genericError
+      }
     },
-    changePassword() {
-      // TODO: check 2 passwords match
-      // TODO: check current password
-      // TODO: check for server errors
-      console.log('Change password...')
-      this.markSuccess()
+    checkPasswordEquality() {
+      const validity = this.passwordsMatch ? '' : 'passwords do not match'
+      this.$refs.password_confirmation.setCustomValidity(validity)
     },
   },
 }

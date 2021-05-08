@@ -110,10 +110,6 @@ export default {
       expanded: false,
     }
   },
-  mounted() {
-    const page = this.$route.name
-    console.log(`page: ${page}`)
-  },
   methods: {
     isSelected(page) {
       return this.$route.name === page ? 'selected-page' : ''

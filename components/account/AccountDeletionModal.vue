@@ -11,13 +11,13 @@
         name="delete-account"
         method="post"
         class="form-entry"
-        @submit="deleteAccount"
+        @submit.prevent="deleteAccount"
       >
         <!-- PASSWORD -->
         <label for="account-delete-pass"><strong>Password</strong></label>
         <input
           id="account-delete-pass"
-          v-model="form.user.password"
+          v-model="form.current_password"
           type="password"
           class="form-input-alternative"
           required
@@ -34,6 +34,10 @@
         />
       </form>
       <div class="m-8" />
+      <div v-if="success" class="text-center font-bold mt-8 mb-8">
+        <font-awesome-icon :icon="['fa', 'check-circle']" />
+        Success! You are about to be logged out...
+      </div>
       <div class="warning-notice">
         <font-awesome-icon :icon="['fa', 'exclamation-circle']" />
         <p class="inline-block">This action is irreversible!</p>
@@ -50,8 +54,9 @@ export default {
   data() {
     return {
       error: null,
+      success: false,
       isLoading: false,
-      form: { user: { password: null } },
+      form: { current_password: null },
     }
   },
   computed: {
@@ -61,11 +66,21 @@ export default {
   },
   methods: {
     ...mapMutations(['toggleAccountDeletionModal']),
-    deleteAccount() {
-      // TODO: check current password
-      // TODO: check for server errors
-      // TODO: send to signup page
-      console.log('...')
+    async deleteAccount() {
+      try {
+        await this.$axios.delete('user', { data: this.form })
+        this.success = true
+        this.error = null
+        await setTimeout(() => {
+          this.success = false
+          this.$auth.logout()
+        }, 1000)
+      } catch (error) {
+        this.error =
+          error.response.status === 401
+            ? 'Wrong password'
+            : 'Server Error, please try again later'
+      }
     },
   },
 }

@@ -72,7 +72,7 @@ export default {
 }
 
 .cookie-text {
-  @apply text-base text-dark text-center mr-5 border-r-2 border-dark pr-5;
+  @apply text-base text-dark text-center mr-5;
 }
 
 .acknowledge {

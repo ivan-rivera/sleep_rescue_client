@@ -1,5 +1,6 @@
 export const state = () => ({
   error: null,
+  accountConfirmed: false,
   showSignInModal: false,
   showHeaderModal: false,
   showPasswordChangeModal: false,
@@ -29,5 +30,11 @@ export const mutations = {
   },
   toggleAccountDeletionModal(state) {
     state.showAccountDeletionModal = !state.showAccountDeletionModal
+  },
+  confirmAccount(state) {
+    state.accountConfirmed = true
+  },
+  resetAccount(state) {
+    state.accountConfirmed = false
   },
 }

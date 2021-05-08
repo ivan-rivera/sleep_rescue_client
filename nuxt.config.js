@@ -4,6 +4,8 @@ export default {
     host: '0.0.0.0',
   },
 
+  // TODO: create a new page for logged in users who have not confirmed emails
+
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -67,7 +69,8 @@ export default {
   ],
 
   router: {
-    middleware: ['auth'],
+    // TODO: create a new middleware to check email confirmation
+    middleware: ['auth', 'accountConfirmed'],
   },
 
   auth: {
@@ -113,6 +116,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
+    // TODO: remove v1 from the path, thats the whole point of versioning!
     baseURL: 'http://192.168.0.11:4000/api/v1',
   },
 

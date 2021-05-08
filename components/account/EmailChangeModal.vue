@@ -11,13 +11,13 @@
         name="email-change"
         method="post"
         class="form-entry"
-        @submit="changeEmail"
+        @submit.prevent="changeEmail"
       >
         <!-- PASSWORD -->
         <label for="email-change-p1"><strong>Password</strong></label>
         <input
           id="email-change-p1"
-          v-model="form.user.password"
+          v-model="form.current_password"
           type="password"
           class="form-input-alternative"
           required
@@ -29,7 +29,7 @@
         <label for="email-change-p2"><strong>New Email</strong></label>
         <input
           id="email-change-p2"
-          v-model="form.user.email"
+          v-model="form.email"
           type="email"
           class="form-input-alternative"
           required
@@ -47,7 +47,7 @@
       </form>
       <div v-if="success" class="text-center font-bold mt-8">
         <font-awesome-icon :icon="['fa', 'check-circle']" />
-        Success!
+        Success! Please confirm your new email
       </div>
       <div class="m-8" />
     </section>
@@ -67,10 +67,8 @@ export default {
       success: null,
       isLoading: false,
       form: {
-        user: {
-          password: null,
-          email: null,
-        },
+        current_password: null,
+        email: null,
       },
     }
   },
@@ -81,18 +79,27 @@ export default {
   },
   methods: {
     ...mapMutations(['toggleEmailChangeModal']),
-    markSuccess() {
-      this.success = true
-      setTimeout(() => {
-        this.success = null
-      }, 3000)
-    },
-    changeEmail() {
-      // TODO: check current password
-      // TODO: check that email is not already taken
-      // TODO: check for server errors
-      this.markSuccess()
-      console.log('...')
+    async changeEmail() {
+      try {
+        await this.$axios.patch('user', this.form)
+        this.success = true
+        setTimeout(() => {
+          // fixme: for some reason I get redirected to sign up
+          this.$auth.loginWith('local', {
+            data: {
+              user: {
+                email: this.$auth.user.email,
+                password: this.form.current_password,
+              },
+            },
+          })
+          this.$nuxt.context.redirect('/confirm')
+        }, 5000)
+      } catch (error) {
+        this.error =
+          error?.response?.data?.error?.message ??
+          'Server error, please try again later'
+      }
     },
   },
 }

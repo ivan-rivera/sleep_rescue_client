@@ -3,7 +3,7 @@
     <div class="w-10" />
     <div
       class="full-page relative flex-grow"
-      :class="{ 'ml-12 pr-5': $auth.loggedIn }"
+      :class="{ 'ml-12 pr-5': confirmedUser }"
     >
       <Header />
       <div class="page-contents">
@@ -13,7 +13,7 @@
       <FlashError />
     </div>
     <div class="w-10" />
-    <Sidebar v-if="$auth.loggedIn" />
+    <Sidebar v-if="confirmedUser" />
   </div>
 </template>
 
@@ -25,6 +25,11 @@ import Footer from '~/components/layout/Footer'
 import Sidebar from '~/components/layout/Sidebar'
 export default {
   components: { Footer, Header, FlashError, Sidebar },
+  computed: {
+    confirmedUser() {
+      return this.$auth.loggedIn && !this.$route.name.includes('confirm')
+    },
+  },
 }
 </script>
 

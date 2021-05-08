@@ -20,6 +20,14 @@
   @apply bg-gradient-to-br from-supplementary to-primary;
 }
 
+.focus-card {
+  @apply text-dark
+  rounded-xl
+  flex flex-col justify-between items-center
+  max-w-md
+  p-1.5 pt-10 pb-10 lg:pl-16 lg:pr-16;
+}
+
 // --------------------------------------------------------
 // TEXT
 // --------------------------------------------------------
@@ -76,10 +84,10 @@
 
 .form-input-alternative {
   background-color: transparent;
-  @apply border-b-2 border-dark;
-  @apply focus:outline-none;
-  @apply p-1;
-  @apply text-dark;
+  @apply border-b-2 border-dark
+  focus:outline-none
+  text-dark
+  p-1 ml-auto mr-auto w-3/4 md:w-full;
 }
 
 .error-message {
@@ -115,7 +123,7 @@
   @apply text-dark font-bold text-center;
   @apply shadow-inner;
   @apply hover:bg-secondary;
-  box-shadow: 1px 1px 3px darkblue;
+  box-shadow: 5px 5px 5px #425453;
 }
 
 // --------------------------------------------------------
