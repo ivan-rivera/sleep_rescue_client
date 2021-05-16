@@ -47,7 +47,7 @@
       </form>
       <div v-if="success" class="text-center font-bold mt-8">
         <font-awesome-icon :icon="['fa', 'check-circle']" />
-        Success! Please confirm your new email
+        Success! Please confirm your new email. You will be logged out for now
       </div>
       <div class="m-8" />
     </section>
@@ -81,19 +81,10 @@ export default {
     ...mapMutations(['toggleEmailChangeModal']),
     async changeEmail() {
       try {
-        await this.$axios.patch('user', this.form)
+        await this.$axios.patch('v1/user', this.form)
         this.success = true
         setTimeout(() => {
-          // fixme: for some reason I get redirected to sign up
-          this.$auth.loginWith('local', {
-            data: {
-              user: {
-                email: this.$auth.user.email,
-                password: this.form.current_password,
-              },
-            },
-          })
-          this.$nuxt.context.redirect('/confirm')
+          this.$auth.logout()
         }, 5000)
       } catch (error) {
         this.error =

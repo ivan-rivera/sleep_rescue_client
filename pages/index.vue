@@ -34,7 +34,7 @@
       </div>
       <div class="focus-card card-background">
         <section class="signup-text">
-          <div class="title-text text-center">Sign Up For Free</div>
+          <div class="title-text text-center !text-dark">Sign Up For Free</div>
           <div class="signup-subheader">Your recovery begins today</div>
         </section>
         <form
@@ -205,7 +205,7 @@ export default {
       } else {
         try {
           this.isLoading = true
-          await this.$axios.post('user/create', this.registration)
+          await this.$axios.post('v1/user/create', this.registration)
           await this.$auth.loginWith('local', { data: this.registration })
           this.$nuxt.context.redirect('/confirm')
         } catch (error) {
@@ -232,13 +232,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .welcome-page {
   @apply relative flex flex-col justify-between;
 }
 
 .visible-content {
-  @apply flex flex-col justify-between items-center ml-auto mr-auto lg:ml-0 lg:mr-0;
+  @apply flex flex-col justify-center items-center;
   @screen lg {
     @apply flex-row items-baseline;
   }

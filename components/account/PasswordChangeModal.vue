@@ -103,7 +103,7 @@ export default {
     ...mapMutations(['togglePasswordChangeModal']),
     async changePassword() {
       try {
-        await this.$axios.patch('user', this.form)
+        await this.$axios.patch('v1/user', this.form)
         this.success = true
       } catch (error) {
         this.error = this.genericError

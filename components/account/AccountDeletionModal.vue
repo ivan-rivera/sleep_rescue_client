@@ -1,5 +1,5 @@
 <template>
-  <Modal modal-width="max-w-md" @toggleModal="toggleAccountDeletionModal">
+  <Modal modal-width="max-w-xs" @toggleModal="toggleAccountDeletionModal">
     <section>
       <h1 class="title-text text-center mb-8 mt-8">Delete Account</h1>
       <div v-if="error" class="error-message mb-5">
@@ -68,7 +68,7 @@ export default {
     ...mapMutations(['toggleAccountDeletionModal']),
     async deleteAccount() {
       try {
-        await this.$axios.delete('user', { data: this.form })
+        await this.$axios.delete('v1/user', { data: this.form })
         this.success = true
         this.error = null
         await setTimeout(() => {

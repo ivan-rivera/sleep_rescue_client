@@ -29,7 +29,7 @@
 <script>
 export default {
   async asyncData({ $axios }) {
-    const response = await $axios.get('user')
+    const response = await $axios.get('v1/user')
     const email = response.data.user.email
     const unconfirmedEmail = response.data.user.unconfirmed_email
     return { email, unconfirmedEmail }
@@ -43,7 +43,7 @@ export default {
   methods: {
     async sendEmail() {
       try {
-        const response = await this.$axios.get('confirmation/resend')
+        const response = await this.$axios.get('v1/confirmation/resend')
         this.message = response?.data?.message ?? this.genericError
       } catch (error) {
         this.message = this.genericError
@@ -51,7 +51,7 @@ export default {
     },
     async cancel() {
       try {
-        await this.$axios.get('/user/reset')
+        await this.$axios.get('v1/user/reset')
         await this.$auth.logout()
       } catch (_error) {
         this.message = this.genericError

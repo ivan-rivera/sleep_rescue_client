@@ -3,7 +3,7 @@
     <div class="w-10" />
     <div
       class="full-page relative flex-grow"
-      :class="{ 'ml-12 pr-5': confirmedUser }"
+      :class="{ 'ml-11 mr-5': confirmedUser }"
     >
       <Header />
       <div class="page-contents">
@@ -13,7 +13,7 @@
       <FlashError />
     </div>
     <div class="w-10" />
-    <Sidebar v-if="confirmedUser" />
+    <Sidebar v-if="confirmedUser" class="z-10" />
   </div>
 </template>
 
@@ -27,7 +27,8 @@ export default {
   components: { Footer, Header, FlashError, Sidebar },
   computed: {
     confirmedUser() {
-      return this.$auth.loggedIn && !this.$route.name.includes('confirm')
+      const confirmPath = this?.$route?.name?.includes('confirm') ?? false
+      return this.$auth.loggedIn && !confirmPath
     },
   },
 }
@@ -37,27 +38,26 @@ export default {
 html {
   font-size: 16px;
   min-width: 360px;
-  max-width: 1800px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  @apply bg-dark text-white font-oxygen;
-  @apply w-screen h-screen;
-  @apply flex flex-col;
-  @apply 2xl:text-xl;
+  @apply bg-dark text-white font-oxygen
+  w-screen h-screen
+  flex flex-col
+  2xl:text-xl;
 }
 
 .full-page {
-  @apply mt-5 mb-5;
-  @apply md:pr-10 md:pl-10;
-  @apply lg:pl-24 lg:pr-24;
-  @apply xl:pl-36 xl:pr-36;
+  @apply mt-5 mb-5
+  md:pr-10 md:pl-10
+  lg:pl-24 lg:pr-24
+  xl:pl-36 xl:pr-36;
 }
 
 .page-contents {
-  @apply min-h-page;
+  @apply min-h-page min-w-page;
 }
 </style>

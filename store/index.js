@@ -6,6 +6,7 @@ export const state = () => ({
   showPasswordChangeModal: false,
   showEmailChangeModal: false,
   showAccountDeletionModal: false,
+  showNightFormModal: false,
 })
 
 export const mutations = {
@@ -30,6 +31,9 @@ export const mutations = {
   },
   toggleAccountDeletionModal(state) {
     state.showAccountDeletionModal = !state.showAccountDeletionModal
+  },
+  toggleNightFormModal(state) {
+    state.showNightFormModal = !state.showNightFormModal
   },
   confirmAccount(state) {
     state.accountConfirmed = true

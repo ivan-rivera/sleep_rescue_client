@@ -108,7 +108,7 @@ export default {
     async updatePassword() {
       try {
         const updateResponse = await this.$axios.$patch(
-          `password/update/${this.$route.query?.token}`,
+          `v1/password/update/${this.$route.query?.token}`,
           this.updateForm
         )
         const loginData = {

@@ -4,7 +4,7 @@
       ref="modal"
       v-click-outside="toggleFn"
       tabindex="0"
-      :class="['sr-modal', 'card-background', modalWidth]"
+      :class="['sr-modal']"
       @keydown.esc="toggleFn"
     >
       <CloseButton @click.native="toggleFn" />
@@ -38,14 +38,16 @@ export default {
 
 <style lang="scss">
 .sr-modal {
-  @apply fixed top-20 left-6 right-6
+  @apply fixed top-20 left-6 right-6 overflow-y-scroll overflow-x-hidden
   focus:outline-none
-  ml-auto mr-auto pt-10
+  ml-auto mr-auto pt-10 pb-2.5
   text-dark
-  border-2 border-dark
+  border-2 border-white
+  bg-dark
   shadow-lg
   rounded-2xl
   z-30;
+  max-width: 25rem;
 }
 
 .blur-screen {

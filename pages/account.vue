@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1 class="heading-top text-center mb-10">Your Account</h1>
+    <h1 class="heading-top text-center mb-10">My Account</h1>
     <div class="flex flex-row space-between">
       <div
         class="flex flex-col border-2 border-white rounded-3xl p-5 ml-auto mr-auto lg:mr-0 lg:ml-0"
       >
         <div class="pt-5 pb-5 pl-1 pr-1 text-white text-center">
-          <h2 class="title-text text-center">About you</h2>
+          <h2 class="title-text text-center pb-2.5">About you</h2>
           <div>
             <p>
               Email: <strong>{{ email }}</strong>
@@ -44,9 +44,6 @@
 </template>
 
 <script>
-// TODO: make it responsive
-// TODO: add email and deletion modals
-// TODO: add sidebar
 import { mapMutations, mapState } from 'vuex'
 import PasswordChangeModal from '~/components/account/PasswordChangeModal'
 import EmailChangeModal from '~/components/account/EmailChangeModal'
@@ -54,7 +51,7 @@ import AccountDeletionModal from '~/components/account/AccountDeletionModal'
 export default {
   components: { PasswordChangeModal, EmailChangeModal, AccountDeletionModal },
   async asyncData({ $axios }) {
-    const response = await $axios.$get('user')
+    const response = await $axios.$get('v1/user')
     const email = response.user.email
     const dateJoined = new Date(response.user.inserted_at).toLocaleDateString()
     return { email, dateJoined }

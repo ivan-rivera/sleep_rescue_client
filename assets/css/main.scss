@@ -51,8 +51,8 @@
 }
 
 .title-text {
-  @apply font-bold text-3xl;
-  @apply pb-5;
+  @apply font-bold text-3xl text-supplementary;
+  //@apply pb-5;
 }
 
 .message-header {
@@ -61,9 +61,9 @@
 }
 
 .highlight-text-white {
-  @apply transition duration-150;
-  @apply hover:text-white;
-  @apply cursor-pointer;
+  @apply transition duration-150
+  hover:text-white
+  cursor-pointer;
 }
 
 // --------------------------------------------------------
@@ -71,9 +71,9 @@
 // --------------------------------------------------------
 
 .form-entry {
-  @apply w-72;
-  @apply flex flex-col;
-  @apply ml-auto mr-auto;
+  @apply w-72
+  flex flex-col
+  ml-auto mr-auto;
 }
 
 .form-input {
@@ -83,16 +83,16 @@
 }
 
 .form-input-alternative {
-  background-color: transparent;
-  @apply border-b-2 border-dark
+  @apply bg-white border-2 border-primary
   focus:outline-none
   text-dark
-  p-1 ml-auto mr-auto w-3/4 md:w-full;
+  p-2 ml-auto mr-auto w-3/4 md:w-full;
 }
 
 .error-message {
   @apply w-full p-2.5
   text-center
+  text-dark
   bg-secondary;
 }
 
@@ -102,17 +102,67 @@
   bg-white;
 }
 
+//.dropdown-selector,
+//.dropdown-selector::before,
+//.dropdown-selector::after {
+//  box-sizing: border-box;
+//}
+
+.dropdown-selector {
+  @apply relative bg-dark
+  border border-white
+  rounded-2xl
+  cursor-pointer
+  text-white
+  text-sm
+  font-bold
+  m-2 pt-1 pb-1 pl-1 pr-5;
+  display: flex;
+  align-items: center;
+}
+
+.arrow-selector:after {
+  content: "▾";
+  position: absolute;
+  right: 7.5%;
+  top: 15%;
+  z-index: 1;
+  text-align: center;
+  pointer-events: none;
+}
+
+.vue__time-picker .dropdown, .vue__time-picker-dropdown, .select-list {
+  width: 5rem !important;
+}
+.vue__time-picker .dropdown ul li:not([disabled]).active,
+.vue__time-picker .dropdown ul li:not([disabled]).active:hover,
+.vue__time-picker .dropdown ul li:not([disabled]).active:focus,
+.vue__time-picker-dropdown ul li:not([disabled]).active,
+.vue__time-picker-dropdown ul li:not([disabled]).active:hover,
+.vue__time-picker-dropdown ul li:not([disabled]).active:focus {
+  background-color: #89B0AE !important;
+}
+
 // --------------------------------------------------------
 // BUTTONS
 // --------------------------------------------------------
 
 .dark-btn {
   @include sr-btn;
-  @apply mt-1 mb-1;
-  @apply rounded-3xl;
-  @apply bg-dark;
-  @apply text-white;
-  @apply hover:text-dark hover:bg-secondary;
+  @apply mt-1 mb-1
+  rounded-3xl
+  bg-dark
+  text-white
+  hover:text-dark hover:bg-secondary;
+}
+
+.light-btn {
+  @include sr-btn;
+  @apply mt-1 mb-1
+  rounded-3xl
+  bg-supplementary
+  text-dark
+  hover:text-dark hover:bg-secondary;
 }
 
 .secondary-btn {
@@ -126,6 +176,18 @@
   box-shadow: 5px 5px 5px #425453;
 }
 
+.action-btn {
+  @apply cursor-pointer
+  bg-supplementary
+  rounded-2xl
+  shadow-md
+  text-dark
+  m-2 pl-2 pr-2 pt-1 pb-1
+  transition duration-150
+  hover:bg-secondary;
+  max-height: 2rem;
+}
+
 // --------------------------------------------------------
 // MISC ELEMENTS
 // --------------------------------------------------------
@@ -136,4 +198,104 @@
   @apply w-56;
   @apply rounded;
   @apply border-4 border-primary;
+}
+
+// --------------------------------------------------------
+// GLOBALS
+// --------------------------------------------------------
+
+select {
+  appearance: none;
+  outline: none;
+  background-color: none;
+  border: none;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  @apply bg-dark;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number']:focus {
+  outline: none;
+}
+
+// --------------------------------------------------------
+// OVERWRITTEN
+// --------------------------------------------------------
+
+
+.vdp-datepicker__calendar {
+  @apply ml-auto mr-auto
+  text-white rounded-2xl;
+  background-color: #555b6e !important;
+  border-color: #faf9f9 !important;
+  border-width: 0 !important;
+}
+.vdp-datepicker__calendar header .up:not(.disabled):hover,
+.vdp-datepicker__calendar .cell:not(.blank):not(.disabled).year:hover,
+.vdp-datepicker__calendar .cell:not(.blank):not(.disabled).month:hover,
+.vdp-datepicker__calendar .cell:not(.blank):not(.disabled).day:hover {
+  background-color: transparent !important;
+  border-color: #faf9f9 !important;
+  @apply rounded-2xl;
+}
+.vdp-datepicker__calendar .cell.selected {
+  background-color: transparent !important;
+  border-color: #faf9f9 !important;
+  color: #ffd6ba;
+  @apply rounded-2xl;
+}
+.vdp-datepicker__calendar header .next:not(.disabled):hover,
+.vdp-datepicker__calendar header .prev:not(.disabled):hover {
+  background-color: transparent !important;
+}
+.prev::after {
+  border-right-color: #faf9f9 !important;
+}
+.next::after {
+  border-left-color: #faf9f9 !important;
+}
+.vdp-datepicker__calendar .disabled {
+  color: #faf9f9 !important;
+  opacity: 25%;
+}
+.vue__time-picker {
+  width: inherit !important;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.controls {
+  //display: none !important;
+  //color: red;
+}
+.vue__time-picker .controls {
+  right: 10px !important;
+}
+.dropdown-btn {
+  color: #faf9f9 !important;
+  left: 0 !important;
+}
+.display-time {
+  width: 7em !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-color: #faf9f9 !important;
+  @apply text-white rounded-2xl bg-dark text-left;
 }

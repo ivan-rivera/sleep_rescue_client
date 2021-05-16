@@ -5,9 +5,11 @@
         <img src="images/logo.svg" alt="logo" />
       </NuxtLink>
     </div>
-    <HeaderNavigation class="hidden lg:block" />
-    <HeaderButton @click.native="toggleHeaderModal" />
-    <HeaderModal v-if="$store.state.showHeaderModal" />
+    <div>
+      <HeaderNavigation class="hidden xl:block" />
+      <HeaderButton @click.native="toggleHeaderModal" />
+      <HeaderModal v-if="$store.state.showHeaderModal" />
+    </div>
   </header>
 </template>
 
@@ -38,8 +40,9 @@ export default {
 
 <style scoped>
 .header {
-  @apply relative flex flex-row items-center justify-between
-  pt-2.5 pb-2.5;
+  @apply flex items-center justify-between
+  pt-2.5 pb-2.5 ml-auto mr-auto;
+  max-width: 1000px;
 }
 
 .logo {

@@ -2,7 +2,7 @@
   <Modal modal-width="max-w-md" @toggleModal="toggleSignInModal">
     <div>
       <div v-if="showSignIn">
-        <section class="modal-content">
+        <section class="modal-content text-white">
           <h1 class="title-text text-center mb-8 mt-8">Sign In</h1>
           <div v-if="error" class="error-message mb-5">
             <font-awesome-icon :icon="['fa', 'exclamation-circle']" />
@@ -40,7 +40,7 @@
             />
             <div class="mb-8" />
             <input
-              class="dark-btn w-full"
+              class="light-btn w-full"
               type="submit"
               name="sign in"
               :class="isLoading ? 'animate-pulse' : ''"
@@ -48,21 +48,17 @@
             />
           </form>
           <div class="mb-2.5" />
-          <div class="mt-5 mb-5 line-divider" />
+          <div class="mt-5 mb-5 line-divider !border-secondary opacity-50" />
           <section class="text-center">
             <p>Forgot your password?</p>
-            <p>
-              <u
-                ><strong class="highlight-text-white" @click="switchModal"
-                  >Reset it here</strong
-                ></u
-              >
+            <p class="cursor-pointer">
+              <u><strong @click="switchModal">Reset it here</strong></u>
             </p>
           </section>
         </section>
       </div>
       <div v-if="!showSignIn">
-        <section class="modal-content">
+        <section class="modal-content text-white">
           <h1 class="title-text text-center mb-8 mt-8">Reset Password</h1>
           <div v-if="error" class="error-message mb-5">
             <font-awesome-icon :icon="['fa', 'exclamation-circle']" />
@@ -92,7 +88,7 @@
             />
             <div class="mb-8" />
             <input
-              class="dark-btn w-full"
+              class="light-btn w-full"
               type="submit"
               name="reset"
               :value="buttonLabel"
@@ -103,14 +99,12 @@
             We'll send you the instructions, please check you spam folder!
           </p>
           <div class="mb-2.5" />
-          <div class="mt-5 mb-8 line-divider" />
+          <div class="mt-5 mb-8 line-divider !border-secondary opacity-50" />
           <section class="text-center">
             <p>Do you want to try another password?</p>
             <p>
               <u
-                ><strong
-                  class="highlight-text-white"
-                  @click="showSignIn = !showSignIn"
+                ><strong @click="showSignIn = !showSignIn"
                   >Back to sign in</strong
                 ></u
               >
@@ -177,7 +171,7 @@ export default {
       try {
         this.isLoading = true
         const response = await this.$axios.$post(
-          'password/reset',
+          'v1/password/reset',
           this.resetForm
         )
         this.resetForm.email = null

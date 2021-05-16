@@ -16,6 +16,9 @@ module.exports = {
       minHeight: {
         page: '70vh',
       },
+      minWidth: {
+        page: '55vw',
+      },
       keyframes: {
         reveal: {
           '0%': { opacity: 0 },

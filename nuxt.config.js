@@ -47,6 +47,9 @@ export default {
   plugins: [
     { src: '~/plugins/Vuelidate', ssr: false },
     { src: '~/plugins/vClickOutside', ssr: false },
+    { src: '~/plugins/vuejs-datepicker', ssr: false, mode: 'client' },
+    { src: '~/plugins/vue2-timepicker', ssr: false },
+    { src: '~/plugins/vue-chart', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -69,7 +72,6 @@ export default {
   ],
 
   router: {
-    // TODO: create a new middleware to check email confirmation
     middleware: ['auth', 'accountConfirmed'],
   },
 
@@ -79,7 +81,7 @@ export default {
     redirect: {
       login: '/',
       logout: '/',
-      home: '/account',
+      home: '/dashboard',
     },
     strategies: {
       cookie: {
@@ -105,10 +107,10 @@ export default {
           type: '',
         },
         endpoints: {
-          login: { url: '/session', method: 'post' },
-          logout: { url: '/session', method: 'delete' },
-          refresh: { url: '/session/renew', method: 'post' },
-          user: { url: '/user', method: 'get', propertyName: 'user' },
+          login: { url: '/v1/session', method: 'post' },
+          logout: { url: '/v1/session', method: 'delete' },
+          refresh: { url: '/v1/session/renew', method: 'post' },
+          user: { url: '/v1/user', method: 'get', propertyName: 'user' },
         },
       },
     },
@@ -117,7 +119,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // TODO: remove v1 from the path, thats the whole point of versioning!
-    baseURL: 'http://192.168.0.11:4000/api/v1',
+    baseURL: 'http://192.168.0.11:4000/api',
   },
 
   publicRuntimeConfig: {

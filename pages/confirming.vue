@@ -71,7 +71,7 @@ export default {
     } else {
       try {
         const response = await this.$axios.get(
-          `confirmation/token/${this.$route.query?.token}`
+          `v1/confirmation/token/${this.$route.query?.token}`
         )
         this.email = response.data.email
         this.error =
