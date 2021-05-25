@@ -118,7 +118,7 @@
         </div>
         <div class="w-full border-b-2 border-white"></div>
         <div class="w-full flex justify-between pt-2 pl-5">
-          <div v-if="showSummary" class="self-center">
+          <div v-if="inputsAreValid" class="self-center">
             <div v-if="sleptBool" class="text-right text-xs">
               <p>Hours slept: {{ hoursAsleep }} hrs, {{ minsAsleep }} mins.</p>
               <p>Hours in bed: {{ hoursInBed }} hrs, {{ minsInBed }} mins.</p>
@@ -129,7 +129,7 @@
             </div>
           </div>
           <div
-            v-if="!showSummary"
+            v-if="!inputsAreValid"
             class="text-xs font-bold text-secondary self-center"
           >
             <p>Error: please check your inputs</p>
@@ -165,6 +165,7 @@
 import { mapMutations } from 'vuex'
 import Modal from '~/components/layout/Modal'
 export default {
+  // TODO: submit button should be conditional on inputs being correct
   components: { Modal },
   data() {
     return {
@@ -195,7 +196,7 @@ export default {
     }
   },
   computed: {
-    showSummary() {
+    inputsAreValid() {
       return this.efficiency > 0 && this.upDateTime > this.awakeDateTime
     },
     buttonLabel() {
@@ -256,23 +257,25 @@ export default {
   methods: {
     ...mapMutations(['toggleNightFormModal']),
     submitNight() {
-      try {
-        this.isLoading = true
-        const nightData = {
-          slept: this.sleptLastNight === '0',
-          sleep_attempt_timestamp: this.sleepDateTime.getTime() / 1000,
-          falling_asleep_duration: this.timeToFallAsleep,
-          night_awakenings_duration: this.midNightAwakenings,
-          final_awakening_timestamp: this.awakeDateTime.getTime() / 1000,
-          up_timestamp: this.upDateTime.getTime() / 1000,
-          rating: parseInt(this.rating) + 1,
+      if (this.inputsAreValid) {
+        try {
+          this.isLoading = true
+          const nightData = {
+            slept: this.sleptLastNight === '0',
+            sleep_attempt_timestamp: this.sleepDateTime.getTime() / 1000,
+            falling_asleep_duration: this.timeToFallAsleep,
+            night_awakenings_duration: this.midNightAwakenings,
+            final_awakening_timestamp: this.awakeDateTime.getTime() / 1000,
+            up_timestamp: this.upDateTime.getTime() / 1000,
+            rating: parseInt(this.rating) + 1,
+          }
+          console.log(nightData)
+          // this.$axios.post('night/create', nightData)
+        } catch (error) {
+          this.error = true
+        } finally {
+          this.isLoading = false
         }
-        console.log(nightData)
-        // this.$axios.post('night/create', nightData)
-      } catch (error) {
-        this.error = true
-      } finally {
-        this.isLoading = false
       }
     },
     pickToggle() {
@@ -290,6 +293,7 @@ export default {
       return timeDiff / scale
     },
     constructDate(date, time) {
+      // TODO: MAKE THIS OUTPUT A UTC DATE
       const cleanDate = date.toISOString().split('T')[0].replaceAll('-', '/')
       const timestamp = `${time.hh}:${time.mm} ${time.A}`
       return new Date(`${cleanDate} ${timestamp}`)
