@@ -1,5 +1,5 @@
 <template>
-  <Modal modal-width="" @toggleModal="toggleNightFormModal">
+  <Modal modal-width="" @toggleModal="toggleState">
     <form
       action=""
       name="nightSubmission"
@@ -21,6 +21,10 @@
         />
       </no-ssr>
       <div v-if="pickMade" class="text-white text-center pb-2">
+        <div class="font-bold text-white pt-5 pb-5">
+          Night of the {{ pickedDate.toISOString().split('T')[0] }}
+        </div>
+        <div class="border-t-2 border-white w-full pb-2" />
         <div class="back-btn" @click="pickToggle">
           <font-awesome-icon :icon="['fa', 'chevron-left']" />
           Go back
@@ -116,9 +120,9 @@
             </select>
           </span>
         </div>
-        <div class="w-full border-b-2 border-white"></div>
-        <div class="w-full flex justify-between pt-2 pl-5">
-          <div v-if="inputsAreValid" class="self-center">
+        <div class="w-full border-b-2 border-white pt-5"></div>
+        <div class="w-full flex justify-between pt-4">
+          <div v-if="inputsAreValid" class="self-center pl-10">
             <div v-if="sleptBool" class="text-right text-xs">
               <p>Hours slept: {{ hoursAsleep }} hrs, {{ minsAsleep }} mins.</p>
               <p>Hours in bed: {{ hoursInBed }} hrs, {{ minsInBed }} mins.</p>
@@ -130,16 +134,17 @@
           </div>
           <div
             v-if="!inputsAreValid"
-            class="text-xs font-bold text-secondary self-center"
+            class="text-xs font-bold text-secondary self-center text-center w-full"
           >
             <p>Error: please check your inputs</p>
           </div>
           <input
-            class="action-btn w-28"
+            class="action-btn w-28 mr-1"
             type="submit"
             name="submitNight"
             :value="buttonLabel"
             :class="isLoading ? 'animate-pulse' : ''"
+            :hidden="!inputsAreValid"
           />
         </div>
         <div
@@ -162,10 +167,9 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import Modal from '~/components/layout/Modal'
 export default {
-  // TODO: submit button should be conditional on inputs being correct
   components: { Modal },
   data() {
     return {
@@ -197,7 +201,7 @@ export default {
   },
   computed: {
     inputsAreValid() {
-      return this.efficiency > 0 && this.upDateTime > this.awakeDateTime
+      return this.efficiency > 0 && this.upDateTime >= this.awakeDateTime
     },
     buttonLabel() {
       return this.isLoading ? 'Processing...' : 'Submit'
@@ -256,11 +260,19 @@ export default {
   },
   methods: {
     ...mapMutations(['toggleNightFormModal']),
-    submitNight() {
+    ...mapState(['showNightFormModal']),
+    toggleState() {
+      if (this.showNightFormModal) {
+        this.$emit('closingNightModal')
+      }
+      this.toggleNightFormModal()
+    },
+    async submitNight() {
       if (this.inputsAreValid) {
         try {
           this.isLoading = true
-          const nightData = {
+          const date = this.pickedDate.toISOString().split('T')[0]
+          const night = {
             slept: this.sleptLastNight === '0',
             sleep_attempt_timestamp: this.sleepDateTime.getTime() / 1000,
             falling_asleep_duration: this.timeToFallAsleep,
@@ -269,10 +281,19 @@ export default {
             up_timestamp: this.upDateTime.getTime() / 1000,
             rating: parseInt(this.rating) + 1,
           }
-          console.log(nightData)
-          // this.$axios.post('night/create', nightData)
+          await this.$axios.patch('v1/night', {
+            date,
+            night,
+          })
+          this.success = true
+          setTimeout(() => {
+            this.success = false
+          }, 3000)
         } catch (error) {
           this.error = true
+          setTimeout(() => {
+            this.error = false
+          }, 3000)
         } finally {
           this.isLoading = false
         }
@@ -293,10 +314,12 @@ export default {
       return timeDiff / scale
     },
     constructDate(date, time) {
-      // TODO: MAKE THIS OUTPUT A UTC DATE
       const cleanDate = date.toISOString().split('T')[0].replaceAll('-', '/')
       const timestamp = `${time.hh}:${time.mm} ${time.A}`
-      return new Date(`${cleanDate} ${timestamp}`)
+      const rawDateTime = new Date(`${cleanDate} ${timestamp}`)
+      return new Date(
+        rawDateTime.getTime() - rawDateTime.getTimezoneOffset() * 60000
+      )
     },
   },
 }

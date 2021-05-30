@@ -2,7 +2,17 @@
   <div>
     <h1 class="heading-top text-center mb-10">My Progress</h1>
     <div v-if="!dataLoaded" class="text-xl text-center">Loading...</div>
-    <div v-if="dataLoaded">
+    <div v-if="error">
+      <p class="text-xl font-bold text-center text-secondary">
+        Oops, it looks like our server might be down, please try again later
+      </p>
+      <img
+        src="images/warning.svg"
+        alt="error"
+        class="absolute m-auto top-0 bottom-0 left-0 right-0 opacity-50 behind"
+      />
+    </div>
+    <div v-if="dataLoaded && !error">
       <div v-if="!dataExists" class="relative">
         <div class="empty-card-text">
           Not sure where to start? Check out our
@@ -11,6 +21,15 @@
           </NuxtLink>
         </div>
         <img class="first-night-card" src="images/metrics.svg" alt="metrics" />
+        <div class="text-center w-full">
+          <div
+            class="ml-auto mr-auto action-btn w-48"
+            @click="toggleNightFormModal"
+          >
+            <font-awesome-icon :icon="['fa', 'pen']" />
+            Add your first night
+          </div>
+        </div>
       </div>
       <div v-if="dataExists">
         <div class="selector-controls">
@@ -22,7 +41,7 @@
           </div>
           <div class="flex flex-row ml-auto mr-auto sm:ml-0 sm:mr-0">
             <div class="dropdown-selector arrow-selector">
-              <select v-model="periodSelection">
+              <select v-model="periodSelection" @change="updateSleepData">
                 <option value="0">Last 7 days</option>
                 <option value="1">Last 14 days</option>
                 <option value="2">Last month</option>
@@ -76,249 +95,63 @@
           </div>
         </div>
       </div>
-      <NighFormModal v-if="showNightFormModal" />
+      <NighFormModal
+        v-if="showNightFormModal"
+        @closingNightModal="updateSleepData"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import { mapMutations, mapState } from 'vuex'
-import { DATE_FORMAT } from '~/assets/js/constants'
 import NighFormModal from '~/components/dashboard/NightFormModal'
+
+function avgArray(array) {
+  return array.reduce((a, b) => a + b) / array.length
+}
+
+async function getSleepData(axios, period) {
+  const nightsRaw = await axios.get(`v1/night/${period}`)
+  const nightsData = nightsRaw.data.data
+  const extract = (value, scale = 1) =>
+    Object.keys(nightsData).map((k) => nightsData[k][value] / scale)
+
+  const hoursAsleep = extract('mins_slept', 60)
+  const hoursAwake = extract('mins_awake', 60)
+  const rating = extract('rating', 10)
+  const efficiency = extract('efficiency')
+
+  return {
+    dataExists: Object.keys(nightsData).length > 0,
+    dates: Object.keys(nightsData)
+      .map((d) => new Date(d))
+      .map((d) => d.toISOString().split('T')[0]),
+    chartData: { hoursAsleep, hoursAwake, rating, efficiency },
+    summary: {
+      hoursAsleep: avgArray(hoursAsleep),
+      hoursAwake: avgArray(hoursAwake),
+      rating: avgArray(rating),
+      efficiency: avgArray(efficiency),
+    },
+  }
+}
+
 export default {
   components: { NighFormModal },
-  asyncData({ $axios }) {
-    const barChartData = {
-      labels: [
-        '2021/05/01',
-        // '2021/05/02',
-        '2021/05/03',
-        // '2021/05/04',
-        '2021/05/05',
-        // '2021/05/06',
-        '2021/05/07',
-        '2021/05/08',
-        '2021/05/09',
-        '2021/05/10',
-        '2021/05/11',
-        '2021/05/12',
-        '2021/05/13',
-        '2021/05/14',
-        '2021/05/15',
-        '2021/05/16',
-        '2021/05/17',
-        '2021/05/18',
-        '2021/05/19',
-        '2021/05/20',
-        '2021/05/21',
-        '2021/05/22',
-        '2021/05/23',
-        '2021/05/24',
-        '2021/05/25',
-        '2021/05/26',
-        '2021/05/27',
-        '2021/05/28',
-        '2021/05/29',
-        '2021/05/30',
-      ].map((d) => new Date(d)),
-      datasets: [
-        {
-          backgroundColor: '#89B0AE',
-          label: 'Hours Asleep',
-          data: [
-            5.68,
-            // 5.6,
-            6.38,
-            // 6.38,
-            6.14,
-            // 7.02,
-            7.2,
-            6.86,
-            7.3,
-            6.62,
-            6.34,
-            6.56,
-            5.8,
-            5.66,
-            6.72,
-            6.16,
-            5.96,
-            6.56,
-            7.4,
-            6.82,
-            7.36,
-            5.76,
-            7.38,
-            5.6,
-            6.64,
-            7.06,
-            6.82,
-            6.98,
-            5.78,
-            6.34,
-          ],
-        },
-        {
-          backgroundColor: '#BEE3DB',
-          label: 'Hours Awake',
-          data: [
-            1.335,
-            // 0.735,
-            0.435,
-            // 0.93,
-            0.39,
-            // 0.165,
-            0.045,
-            1.41,
-            1.02,
-            0.81,
-            0.09,
-            0.645,
-            1.35,
-            0.615,
-            1.065,
-            0.33,
-            0.09,
-            1.2,
-            0.96,
-            0.015,
-            0.075,
-            1.23,
-            1.02,
-            1.11,
-            0.795,
-            1.485,
-            0.075,
-            0.615,
-            0.63,
-            1.215,
-          ],
-        },
-      ],
-    }
-    const lineChartData = {
-      labels: [
-        '2021/05/01',
-        // '2021/05/02',
-        '2021/05/03',
-        // '2021/05/04',
-        '2021/05/05',
-        // '2021/05/06',
-        '2021/05/07',
-        '2021/05/08',
-        '2021/05/09',
-        '2021/05/10',
-        '2021/05/11',
-        '2021/05/12',
-        '2021/05/13',
-        '2021/05/14',
-        '2021/05/15',
-        '2021/05/16',
-        '2021/05/17',
-        '2021/05/18',
-        '2021/05/19',
-        '2021/05/20',
-        '2021/05/21',
-        '2021/05/22',
-        '2021/05/23',
-        '2021/05/24',
-        '2021/05/25',
-        '2021/05/26',
-        '2021/05/27',
-        '2021/05/28',
-        '2021/05/29',
-        '2021/05/30',
-      ].map((d) => new Date(d)),
-      datasets: [
-        {
-          backgroundColor: '#89B0AE',
-          borderColor: '#89B0AE',
-          fill: false,
-          label: 'Rating',
-          data: [
-            0.6,
-            // 0.5,
-            0.6,
-            // 0.5,
-            0.6,
-            // 0.6,
-            0.6,
-            0.6,
-            0.8,
-            0.4,
-            0.2,
-            0.3,
-            0.3,
-            0.5,
-            0.6,
-            0.6,
-            0.6,
-            0.6,
-            0.7,
-            0.7,
-            0.5,
-            0.5,
-            0.8,
-            0.9,
-            0.5,
-            0.4,
-            0.5,
-            0.7,
-            0.6,
-            0.5,
-          ],
-        },
-        {
-          backgroundColor: '#BEE3DB',
-          borderColor: '#BEE3DB',
-          fill: false,
-          label: 'Efficiency',
-          data: [
-            0.76,
-            // 0.74,
-            0.87,
-            // 0.71,
-            0.89,
-            // 0.91,
-            0.97,
-            0.83,
-            0.81,
-            0.81,
-            0.78,
-            0.82,
-            0.83,
-            0.89,
-            0.91,
-            0.81,
-            0.71,
-            0.84,
-            0.96,
-            0.75,
-            0.75,
-            0.85,
-            0.89,
-            0.91,
-            0.79,
-            0.77,
-            0.79,
-            0.87,
-            0.88,
-            0.79,
-          ],
-        },
-      ],
-    }
-    return { barChartData, lineChartData }
-  },
   data() {
     return {
-      dataExists: true,
+      dataLoaded: false,
+      dataExists: false,
+      error: false,
       chartSelection: '0',
       periodSelection: '0',
-      avgHoursSlept: 6.5,
-      avgMinsAwake: 47,
-      avgEfficiency: 0.79,
-      avgRating: 0.71,
+      summary: {
+        hoursAsleep: 0,
+        hoursAwake: 0,
+        efficiency: 0,
+        rating: 0,
+      },
       lineChartOptions: {
         responsive: true,
         maintainAspectRatio: false,
@@ -328,6 +161,9 @@ export default {
             {
               type: 'time',
               offset: true,
+              time: {
+                unit: 'day',
+              },
               ticks: {
                 fontSize: 12,
                 fontColor: '#FAF9F9',
@@ -363,10 +199,6 @@ export default {
         },
         tooltips: {
           callbacks: {
-            title(tooltipItem, data) {
-              const rawDate = data.labels[tooltipItem[0].index]
-              return rawDate.toLocaleDateString('en-GB', DATE_FORMAT)
-            },
             label(tooltipItem, data) {
               const selection = data.datasets[tooltipItem.datasetIndex]
               const dataLabel = selection.label
@@ -383,11 +215,15 @@ export default {
           xAxes: [
             {
               type: 'time',
+              time: {
+                unit: 'day',
+              },
               stacked: true,
               offset: true,
               ticks: {
                 fontSize: 12,
                 fontColor: '#FAF9F9',
+                autoSkip: false,
               },
               gridLines: {
                 display: false,
@@ -416,10 +252,6 @@ export default {
         },
         tooltips: {
           callbacks: {
-            title(tooltipItem, data) {
-              const rawDate = data.labels[tooltipItem[0].index]
-              return rawDate.toLocaleDateString('en-GB', DATE_FORMAT)
-            },
             label(tooltipItem, data) {
               const selection = data.datasets[tooltipItem.datasetIndex]
               const dataLabel = selection.label
@@ -438,37 +270,38 @@ export default {
   },
   computed: {
     ...mapState(['showNightFormModal']),
-    dataLoaded() {
-      return this.barChartData !== undefined && this.lineChartData !== undefined
-    },
     nDaySummary() {
       switch (this.periodSelection) {
         case '0':
-          return 7
+          return '7'
         case '1':
-          return 14
+          return '14'
         case '2':
-          return 30
+          return '30'
         case '3':
-          return 90
+          return '90'
         case '4':
-          return 180
+          return '180'
         default:
-          return 0
+          return '7'
       }
     },
     avgEfficiencyFmt() {
-      return this.formatter(this.avgEfficiency * 100, '%')
+      return this.formatter(Math.round(this.summary.efficiency * 100), '%')
     },
     avgRatingFmt() {
-      return this.formatter(this.avgRating * 100, '%')
+      return this.formatter(Math.round(this.summary.rating * 100), '%')
     },
     avgHoursSleptFmt() {
-      return this.formatter(this.avgHoursSlept, ' hrs.')
+      return this.formatter(this.summary.hoursAsleep.toFixed(1), ' hrs.')
     },
     avgMinsAwakeFmt() {
-      return this.formatter(this.avgMinsAwake, ' mins.')
+      const minsAwake = this.summary.hoursAwake * 60
+      return this.formatter(minsAwake.toFixed(0), ' mins.')
     },
+  },
+  async mounted() {
+    await this.updateSleepData()
   },
   methods: {
     ...mapMutations(['toggleNightFormModal']),
@@ -476,12 +309,54 @@ export default {
       const value = `${input}${suffix}`
       return input ? value : '--'
     },
+    async updateSleepData() {
+      try {
+        this.dataLoaded = false
+        this.sleepData = await getSleepData(this.$axios, this.nDaySummary)
+        this.summary = this.sleepData.summary
+        this.dataExists = this.sleepData.dataExists
+        this.barChartData = {
+          labels: this.sleepData.dates,
+          datasets: [
+            {
+              backgroundColor: '#89B0AE',
+              label: 'Hours Asleep',
+              data: this.sleepData.chartData.hoursAsleep,
+            },
+            {
+              backgroundColor: '#BEE3DB',
+              label: 'Hours Awake',
+              data: this.sleepData.chartData.hoursAwake,
+            },
+          ],
+        }
+        this.lineChartData = {
+          labels: this.sleepData.dates,
+          datasets: [
+            {
+              backgroundColor: '#89B0AE',
+              borderColor: '#89B0AE',
+              fill: false,
+              label: 'Rating',
+              data: this.sleepData.chartData.rating,
+            },
+            {
+              backgroundColor: '#BEE3DB',
+              borderColor: '#BEE3DB',
+              fill: false,
+              label: 'Efficiency',
+              data: this.sleepData.chartData.efficiency,
+            },
+          ],
+        }
+      } catch (e) {
+        this.error = true
+      } finally {
+        this.dataLoaded = true
+      }
+    },
   },
 }
-// TODO:
-//  - Backend: create a night schema, hook it up to questionnaire  (+tests/seeds)
-//  - Test with missing days
-//  - Force page refresh upon questionnaire submission
 </script>
 
 <style scoped>
