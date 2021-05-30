@@ -12,7 +12,7 @@
         class="absolute m-auto top-0 bottom-0 left-0 right-0 opacity-50 behind"
       />
     </div>
-    <div v-if="dataLoaded && !error">
+    <div v-if="dataLoaded && !error" class="chart-container">
       <div v-if="!dataExists" class="relative">
         <div class="empty-card-text">
           Not sure where to start? Check out our
@@ -393,5 +393,10 @@ export default {
   sm:flex-row
   justify-between;
   min-width: 310px;
+}
+.chart-container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
