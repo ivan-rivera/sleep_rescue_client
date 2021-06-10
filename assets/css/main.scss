@@ -182,7 +182,8 @@
   rounded-2xl
   shadow-md
   text-dark
-  mt-2 mb-2 pl-2 pr-2 pt-1 pb-1
+  text-center
+  mt-2 mb-2 pl-1 pr-2 pt-1 pb-1
   transition duration-150
   hover:bg-secondary;
   max-height: 2rem;
@@ -198,6 +199,10 @@
   @apply w-56;
   @apply rounded;
   @apply border-4 border-primary;
+}
+
+.behind {
+  z-index: -1;
 }
 
 // --------------------------------------------------------

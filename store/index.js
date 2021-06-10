@@ -1,5 +1,6 @@
 export const state = () => ({
   error: null,
+  goalToDelete: null,
   accountConfirmed: false,
   showSignInModal: false,
   showHeaderModal: false,
@@ -7,11 +8,16 @@ export const state = () => ({
   showEmailChangeModal: false,
   showAccountDeletionModal: false,
   showNightFormModal: false,
+  showGoalsModal: false,
+  showDeleteGoalModal: false,
 })
 
 export const mutations = {
   setError(state, error) {
     state.error = error
+  },
+  setGoalToDelete(state, goalId) {
+    state.goalToDelete = goalId
   },
   toggleSignInModal(state) {
     state.showSignInModal = !state.showSignInModal
@@ -34,6 +40,12 @@ export const mutations = {
   },
   toggleNightFormModal(state) {
     state.showNightFormModal = !state.showNightFormModal
+  },
+  toggleGoalsModal(state) {
+    state.showGoalsModal = !state.showGoalsModal
+  },
+  toggleDeleteGoalModal(state) {
+    state.showDeleteGoalModal = !state.showDeleteGoalModal
   },
   confirmAccount(state) {
     state.accountConfirmed = true

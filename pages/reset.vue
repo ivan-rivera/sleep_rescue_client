@@ -140,8 +140,4 @@ export default {
   rounded-3xl
   text-dark;
 }
-
-.behind {
-  z-index: -1;
-}
 </style>
