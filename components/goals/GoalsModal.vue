@@ -87,10 +87,10 @@
             v-model="ratingThreshold"
             class="selection-value"
           >
-            <option value="0">70%</option>
-            <option value="1">75%</option>
-            <option value="2">80%</option>
-            <option value="3">85%</option>
+            <option value="0">50%</option>
+            <option value="1">60%</option>
+            <option value="2">70%</option>
+            <option value="3">80%</option>
           </select>
         </span>
       </div>
@@ -172,20 +172,20 @@ export default {
           return 'Unknown'
       }
     },
-    durationName() {
+    durationValue() {
       switch (this.durationSelection) {
         case '0':
-          return '1 week'
+          return 7 // '1 week'
         case '1':
-          return '2 weeks'
+          return 14 // '2 weeks'
         case '2':
-          return '1 month'
+          return 30 // '1 month'
         case '3':
-          return '3 months'
+          return 90 // '3 months'
         case '4':
-          return '6 months'
+          return 180 // '6 months'
         default:
-          return 'unknown'
+          return 999 // 'unknown'
       }
     },
     sleepThresholdName() {
@@ -249,13 +249,13 @@ export default {
     ratingThresholdName() {
       switch (this.ratingThreshold) {
         case '0':
-          return 0.7
+          return 0.5
         case '1':
-          return 0.75
+          return 0.6
         case '2':
-          return 0.8
+          return 0.7
         case '3':
-          return 0.85
+          return 0.8
         default:
           return 0
       }
@@ -279,7 +279,7 @@ export default {
     constructedGoal() {
       return {
         metric: this.metricName,
-        duration: this.durationName,
+        duration: this.durationValue,
         threshold: this.thresholdName,
       }
     },

@@ -26,7 +26,7 @@
             <font-awesome-icon :icon="['fa', 'trash-alt']" />
           </td>
           <td class="pl-2.5">{{ goal.metric }}</td>
-          <td class="pl-1 lg:pl-10">{{ goal.duration }}</td>
+          <td class="pl-1 lg:pl-10">{{ durationLabel(goal.duration) }}</td>
           <td class="pl-1 lg:pl-10">
             {{ greaterOrLess(goal.metric) }}
             {{ resolveMetric(goal.metric, goal.threshold) }}
@@ -98,9 +98,10 @@
 </template>
 
 <script>
+// TODO: add a note about 50% of data for the period requirement
 // TODO: create API endpoints
 // TODO: create 3 seed goals for all new users
-// TODO: test the page flow: delete all goals, create new goal, reach limit, try dups
+// TODO: test the page flow: delete all goals, create new goal, reach limit, try dups, goals with no night records
 // TODO: Fix the goddamn modals!
 import { mapMutations, mapState } from 'vuex'
 import GoalsModal from '~/components/goals/GoalsModal'
@@ -115,37 +116,42 @@ export default {
         {
           id: 1,
           metric: 'Sleep duration',
-          duration: '2 weeks',
+          duration: 14,
           threshold: 6,
           actual: 5.834435332,
+          completed: 10,
         },
         {
           id: 2,
           metric: 'Time to fall asleep',
-          duration: '1 month',
+          duration: 30,
           threshold: 30,
           actual: 38,
+          completed: 20,
         },
         {
           id: 3,
           metric: 'Efficiency',
-          duration: '3 months',
+          duration: 90,
           threshold: 0.8,
           actual: 0.833332212,
+          completed: 60,
         },
         {
           id: 4,
           metric: 'Rating',
-          duration: '6 months',
+          duration: 180,
           threshold: 0.8,
           actual: 0.8112311,
+          completed: 150,
         },
         {
           id: 5,
           metric: 'Time awake at night',
-          duration: '3 months',
+          duration: 90,
           threshold: 60,
           actual: 70,
+          completed: 80,
         },
       ],
     }
@@ -158,6 +164,22 @@ export default {
   },
   methods: {
     ...mapMutations(['toggleGoalsModal', 'toggleDeleteGoalModal']),
+    durationLabel(durationValue) {
+      switch (durationValue) {
+        case 7:
+          return '1 week'
+        case 14:
+          return '2 weeks'
+        case 30:
+          return '1 month'
+        case 90:
+          return '3 months'
+        case 180:
+          return '6 months'
+        default:
+          return 'unknown'
+      }
+    },
     formatActual(value) {
       return Number.isInteger(value)
         ? value
