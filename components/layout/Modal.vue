@@ -40,7 +40,7 @@ export default {
 .sr-modal {
   @apply fixed top-20 left-6 right-6 overflow-y-scroll overflow-x-hidden
   focus:outline-none
-  ml-auto mr-auto pt-10 pb-2.5
+  ml-auto mr-auto pt-10 pb-5
   text-dark
   border-2 border-white
   bg-dark

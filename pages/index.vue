@@ -252,7 +252,7 @@ export default {
   @apply flex flex-col justify-between
   max-w-md
   mb-5
-  lg:mr-6 xl:mr-12;
+  lg:mr-6 xl:mr-36;
 }
 
 .hero-text {

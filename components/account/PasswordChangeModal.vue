@@ -10,7 +10,7 @@
         action=""
         name="password-change"
         method="post"
-        class="form-entry"
+        class="form-entry text-white"
         @submit.prevent="changePassword"
       >
         <!-- PASSWORD -->
@@ -57,7 +57,7 @@
         />
         <div class="mb-8" />
         <input
-          class="dark-btn w-full"
+          class="light-btn w-full"
           type="submit"
           name="change-password"
           :value="buttonLabel"

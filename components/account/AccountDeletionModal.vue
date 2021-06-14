@@ -10,7 +10,7 @@
         action=""
         name="delete-account"
         method="post"
-        class="form-entry"
+        class="form-entry text-white"
         @submit.prevent="deleteAccount"
       >
         <!-- PASSWORD -->
@@ -27,7 +27,7 @@
         />
         <div class="mb-8" />
         <input
-          class="dark-btn w-full"
+          class="light-btn w-full"
           type="submit"
           name="change-email"
           :value="buttonLabel"
@@ -90,7 +90,6 @@ export default {
 .warning-notice {
   @apply text-center text-dark font-bold
   bg-secondary
-  rounded-br-2xl rounded-bl-2xl
   pt-2 pb-2;
 }
 </style>

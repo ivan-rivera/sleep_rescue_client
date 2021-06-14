@@ -15,7 +15,7 @@
               Joined on: <strong>{{ dateJoined }}</strong>
             </p>
             <p>
-              Nights recorded: <strong>{{ temp.nightsRecorded }}</strong>
+              Nights recorded: <strong>{{ nightsRecorded }}</strong>
             </p>
           </div>
         </div>
@@ -54,14 +54,11 @@ export default {
     const response = await $axios.$get('v1/user')
     const email = response.user.email
     const dateJoined = new Date(response.user.inserted_at).toLocaleDateString()
-    return { email, dateJoined }
+    const nightsRecorded = response.nights
+    return { email, dateJoined, nightsRecorded }
   },
   data() {
     return {
-      temp: {
-        // todo: pull these from the backend via asyncData
-        nightsRecorded: 30,
-      },
       modal: {
         password: false,
         email: false,

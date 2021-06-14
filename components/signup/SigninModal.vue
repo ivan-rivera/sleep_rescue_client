@@ -48,7 +48,6 @@
             />
           </form>
           <div class="mb-2.5" />
-          <div class="mt-5 mb-5 line-divider !border-secondary opacity-50" />
           <section class="text-center">
             <p>Forgot your password?</p>
             <p class="cursor-pointer">
@@ -99,7 +98,6 @@
             We'll send you the instructions, please check you spam folder!
           </p>
           <div class="mb-2.5" />
-          <div class="mt-5 mb-8 line-divider !border-secondary opacity-50" />
           <section class="text-center">
             <p>Do you want to try another password?</p>
             <p>
