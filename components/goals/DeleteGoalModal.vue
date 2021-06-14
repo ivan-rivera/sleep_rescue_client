@@ -27,8 +27,11 @@ export default {
     ...mapMutations(['toggleDeleteGoalModal']),
     async confirmDelete() {
       try {
-        await this.$axios.delete(`v1/goal/${this.goalToDelete}`)
+        await this.$axios.delete(`v1/goal`, {
+          data: { id: this.goalToDelete },
+        })
         this.$store.commit('setGoalToDelete', null)
+        this.$emit('dataUpdated')
         this.toggleDeleteGoalModal()
       } catch (e) {
         this.error = true

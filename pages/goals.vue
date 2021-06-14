@@ -1,108 +1,123 @@
 <template>
   <div>
     <h1 class="heading-top text-center mb-10">My Goals</h1>
-    <p
-      class="mb-5 text-xs text-center md:text-base md:mb-10 lg:text-xl max-w-5xl ml-auto mr-auto"
-    >
-      This is the space to set and track sleep goals. Make sure that you set
-      realistic goals as, for example, your expected sleep duration will change
-      with age.
-    </p>
-    <div v-if="goalsExist">
-      <table class="goals-table">
-        <tr>
-          <th class="pl-0"></th>
-          <th class="pl-2.5">My average</th>
-          <th class="pl-1 lg:pl-10">Over last</th>
-          <th class="pl-1 lg:pl-10">Should be</th>
-          <th class="pl-2.5 lg:pl-12"></th>
-          <th class="pl-5 pr-5 hidden sm:table-cell">Actual</th>
-        </tr>
-        <tr v-for="goal in goals" :key="goal.id">
-          <td
-            class="pl-0 text-center delete-goal"
-            @click="toggleDeleteGoalModalWithId(goal.id)"
-          >
-            <font-awesome-icon :icon="['fa', 'trash-alt']" />
-          </td>
-          <td class="pl-2.5">{{ goal.metric }}</td>
-          <td class="pl-1 lg:pl-10">{{ durationLabel(goal.duration) }}</td>
-          <td class="pl-1 lg:pl-10">
-            {{ greaterOrLess(goal.metric) }}
-            {{ resolveMetric(goal.metric, goal.threshold) }}
-          </td>
-          <td class="pl-2.5 lg:pl-12 text-center">
-            <font-awesome-icon
-              :icon="[
-                'fa',
-                statusMarker(goal.metric, goal.threshold, goal.actual),
-              ]"
+    <div v-if="loading" class="text-xl text-center">Loading...</div>
+    <div v-if="!loading">
+      <p
+        class="mb-5 text-xs text-center md:text-base md:mb-10 lg:text-xl max-w-5xl ml-auto mr-auto"
+      >
+        This is the space to set and track sleep goals. Make sure that you set
+        realistic goals as, for example, your expected sleep duration will
+        change with age.
+      </p>
+      <div v-if="goalsExist">
+        <table class="goals-table">
+          <tr>
+            <th class="pl-0"></th>
+            <th class="pl-2.5">My average</th>
+            <th class="pl-1 lg:pl-10">Over last</th>
+            <th class="pl-1 lg:pl-5 pr-1 lg:pr-5">Should be</th>
+            <th class="pl-2.5 lg:pl-5"></th>
+            <th class="pl-5 hidden sm:table-cell">Actual</th>
+            <th class="pl-5 hidden sm:table-cell">Logged nights</th>
+          </tr>
+          <tr v-for="goal in goals" :key="goal.id">
+            <td
+              class="pl-0 text-center delete-goal"
+              @click="toggleDeleteGoalModalWithId(goal.id)"
+            >
+              <font-awesome-icon :icon="['fa', 'trash-alt']" />
+            </td>
+            <td class="pl-2.5">{{ goal.metric }}</td>
+            <td class="pl-1 lg:pl-10">{{ durationLabel(goal.duration) }}</td>
+            <td class="pl-1 lg:pl-5 pr-1 lg:pr-5">
+              {{ greaterOrLess(goal.metric) }}
+              {{ resolveMetric(goal.metric, goal.threshold) }}
+            </td>
+            <td class="pl-2.5 lg:pl-5 text-center border-l-2 border-white">
+              <font-awesome-icon
+                :icon="['fa', statusMarker(goal)]"
+                :class="
+                  goalAchieved(goal) ? 'text-supplementary' : 'text-secondary'
+                "
+              />
+            </td>
+            <td
+              class="pl-5 hidden sm:table-cell text-secondary"
+              :class="{
+                '!text-supplementary': actualBetterThanThreshold(goal),
+                'opacity-50': !loggedAllNights(goal),
+              }"
+            >
+              {{ formatActual(goal) }}
+            </td>
+            <td
+              class="pl-5 hidden sm:table-cell"
               :class="
-                goalAchieved(goal.metric, goal.threshold, goal.actual)
-                  ? 'text-supplementary'
-                  : 'text-secondary'
+                loggedAllNights(goal) ? 'text-supplementary' : 'text-secondary'
               "
-            />
-          </td>
-          <td
-            class="pl-5 hidden sm:table-cell"
-            :class="
-              goalAchieved(goal.metric, goal.threshold, goal.actual)
-                ? 'text-supplementary'
-                : 'text-secondary'
-            "
-          >
-            {{ formatActual(goal.actual) }}
-          </td>
-        </tr>
-      </table>
-      <div class="button-or-message mt-10">
-        <div v-if="goals.length <= goalLimit" class="goal-creation">
+            >
+              {{ goal.completed }} / {{ goal.duration }}
+            </td>
+          </tr>
+        </table>
+        <div class="button-or-message mt-10">
+          <div v-if="!goalLimitReached" class="goal-creation">
+            <div
+              class="ml-auto mr-auto action-btn w-28 lg:text-lg lg:w-32 lg:!pb-8"
+              @click="toggleGoalsModal"
+            >
+              <font-awesome-icon :icon="['fa', 'pen']" />
+              Add goal
+            </div>
+          </div>
           <div
-            class="ml-auto mr-auto action-btn w-28 lg:text-lg lg:w-32 lg:!pb-8"
-            @click="toggleGoalsModal"
+            v-if="goalLimitReached"
+            class="text-xs italic text-center text-secondary pb-5 pt-5 w-full"
           >
-            <font-awesome-icon :icon="['fa', 'pen']" />
-            Add goal
+            Goal limit reached!
           </div>
         </div>
-        <div
-          v-if="goals.length > goalLimit"
-          class="text-xs italic text-center text-secondary pb-5 pt-5 w-full"
+        <p
+          class="mt-5 text-xs text-center md:text-base lg:text-xl max-w-5xl ml-auto mr-auto"
         >
-          Goal limit reached!
+          To achieve a goal, you need to have logged
+          <span class="font-bold text-secondary">all nights</span> for the
+          period of interest.
+        </p>
+        <p class="text-xs text-center italic mt-5 sm:hidden">
+          Tip: the desktop version of this site allows you to see your actual
+          results for each goal.
+        </p>
+      </div>
+      <div v-if="!goalsExist">
+        <p class="text-center text-lg text-supplementary font-bold mb-2">
+          You have not defined any goals for yourself yet!
+        </p>
+        <div class="ml-auto mr-auto action-btn w-28" @click="toggleGoalsModal">
+          <font-awesome-icon :icon="['fa', 'pen']" />
+          Add goal
         </div>
+        <img
+          src="images/goals.svg"
+          alt="goals"
+          class="absolute m-auto top-44 bottom-0 left-0 right-0 opacity-50 behind"
+        />
       </div>
-      <p class="text-xs text-center italic mt-5 sm:hidden">
-        Tip: the desktop version of this site allows you to see your actual
-        results for each goal.
-      </p>
+      <GoalsModal
+        v-if="showGoalsModal"
+        :existing-goals="goals"
+        @dataUpdated="updateGoals"
+      ></GoalsModal>
+      <DeleteGoalModal
+        v-if="showDeleteGoalModal"
+        @dataUpdated="updateGoals"
+      ></DeleteGoalModal>
     </div>
-    <div v-if="!goalsExist">
-      <p class="text-center text-lg text-supplementary font-bold mb-2">
-        You have not defined any goals for yourself yet!
-      </p>
-      <div class="ml-auto mr-auto action-btn w-28" @click="toggleGoalsModal">
-        <font-awesome-icon :icon="['fa', 'pen']" />
-        Add goal
-      </div>
-      <img
-        src="images/goals.svg"
-        alt="goals"
-        class="absolute m-auto top-44 bottom-0 left-0 right-0 opacity-50 behind"
-      />
-    </div>
-    <GoalsModal v-if="showGoalsModal" :existing-goals="goals"></GoalsModal>
-    <DeleteGoalModal v-if="showDeleteGoalModal"></DeleteGoalModal>
   </div>
 </template>
 
 <script>
-// TODO: add a note about 50% of data for the period requirement
-// TODO: create API endpoints
-// TODO: create 3 seed goals for all new users
-// TODO: test the page flow: delete all goals, create new goal, reach limit, try dups, goals with no night records
-// TODO: Fix the goddamn modals!
 import { mapMutations, mapState } from 'vuex'
 import GoalsModal from '~/components/goals/GoalsModal'
 import DeleteGoalModal from '~/components/goals/DeleteGoalModal'
@@ -111,56 +126,21 @@ export default {
   data() {
     return {
       goalLimit: 10,
-      goals: [
-        // temporary
-        {
-          id: 1,
-          metric: 'Sleep duration',
-          duration: 14,
-          threshold: 6,
-          actual: 5.834435332,
-          completed: 10,
-        },
-        {
-          id: 2,
-          metric: 'Time to fall asleep',
-          duration: 30,
-          threshold: 30,
-          actual: 38,
-          completed: 20,
-        },
-        {
-          id: 3,
-          metric: 'Efficiency',
-          duration: 90,
-          threshold: 0.8,
-          actual: 0.833332212,
-          completed: 60,
-        },
-        {
-          id: 4,
-          metric: 'Rating',
-          duration: 180,
-          threshold: 0.8,
-          actual: 0.8112311,
-          completed: 150,
-        },
-        {
-          id: 5,
-          metric: 'Time awake at night',
-          duration: 90,
-          threshold: 60,
-          actual: 70,
-          completed: 80,
-        },
-      ],
+      goals: [],
+      loading: true,
     }
   },
   computed: {
     ...mapState(['showGoalsModal', 'showDeleteGoalModal']),
+    goalLimitReached() {
+      return this.goals.length > this.goalLimit
+    },
     goalsExist() {
       return this.goals.length > 0
     },
+  },
+  async mounted() {
+    await this.updateGoals()
   },
   methods: {
     ...mapMutations(['toggleGoalsModal', 'toggleDeleteGoalModal']),
@@ -180,12 +160,17 @@ export default {
           return 'unknown'
       }
     },
-    formatActual(value) {
-      return Number.isInteger(value)
-        ? value
-        : value <= 1
-        ? `${value.toFixed(2) * 100}%`
-        : value.toFixed(1)
+    formatActual(goal) {
+      if (goal.actual == null) {
+        return '--'
+      } else {
+        const estimate = Number.isInteger(goal.actual)
+          ? goal.actual
+          : goal.actual <= 1
+          ? `${(goal.actual * 100).toFixed(0)}%`
+          : goal.actual.toFixed(1)
+        return this.loggedAllNights(goal) ? estimate : `${estimate}?`
+      }
     },
     toggleDeleteGoalModalWithId(id) {
       this.$store.commit('setGoalToDelete', id)
@@ -210,13 +195,33 @@ export default {
           return `${value.toFixed(2) * 100}%`
       }
     },
-    goalAchieved(metric, threshold, actual) {
-      return this.greaterOrLess(metric) === '>'
-        ? threshold < actual
-        : threshold > actual
+    loggedAllNights(goal) {
+      return goal.completed === goal.duration
     },
-    statusMarker(metric, threshold, actual) {
-      return this.goalAchieved(metric, threshold, actual) ? 'check' : 'times'
+    actualBetterThanThreshold(goal) {
+      if (goal.actual !== undefined) {
+        return this.greaterOrLess(goal.metric) === '>'
+          ? goal.threshold < goal.actual
+          : goal.threshold > goal.actual
+      } else {
+        return false
+      }
+    },
+    goalAchieved(goal) {
+      return this.loggedAllNights(goal) && this.actualBetterThanThreshold(goal)
+    },
+    statusMarker(goal) {
+      return this.goalAchieved(goal) ? 'check' : 'times'
+    },
+    async updateGoals() {
+      try {
+        this.loading = true
+        const response = await this.$axios.get('v1/goal')
+        this.goals = response.data.goals
+      } catch (e) {
+      } finally {
+        this.loading = false
+      }
     },
   },
 }

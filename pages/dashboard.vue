@@ -114,26 +114,42 @@ function avgArray(array) {
 async function getSleepData(axios, period) {
   const nightsRaw = await axios.get(`v1/night/${period}`)
   const nightsData = nightsRaw.data.data
-  const extract = (value, scale = 1) =>
-    Object.keys(nightsData).map((k) => nightsData[k][value] / scale)
+  const dataExists = Object.keys(nightsData).length > 0
+  if (!dataExists) {
+    const nullCollection = {
+      hoursAsleep: null,
+      hoursAwake: null,
+      rating: null,
+      efficiency: null,
+    }
+    return {
+      dataExists,
+      dates: null,
+      chartData: nullCollection,
+      summary: nullCollection,
+    }
+  } else {
+    const extract = (value, scale = 1) =>
+      Object.keys(nightsData).map((k) => nightsData[k][value] / scale)
 
-  const hoursAsleep = extract('mins_slept', 60)
-  const hoursAwake = extract('mins_awake', 60)
-  const rating = extract('rating', 10)
-  const efficiency = extract('efficiency')
+    const hoursAsleep = extract('mins_slept', 60)
+    const hoursAwake = extract('mins_awake', 60)
+    const rating = extract('rating', 10)
+    const efficiency = extract('efficiency')
 
-  return {
-    dataExists: Object.keys(nightsData).length > 0,
-    dates: Object.keys(nightsData)
-      .map((d) => new Date(d))
-      .map((d) => d.toISOString().split('T')[0]),
-    chartData: { hoursAsleep, hoursAwake, rating, efficiency },
-    summary: {
-      hoursAsleep: avgArray(hoursAsleep),
-      hoursAwake: avgArray(hoursAwake),
-      rating: avgArray(rating),
-      efficiency: avgArray(efficiency),
-    },
+    return {
+      dataExists: Object.keys(nightsData).length > 0,
+      dates: Object.keys(nightsData)
+        .map((d) => new Date(d))
+        .map((d) => d.toISOString().split('T')[0]),
+      chartData: { hoursAsleep, hoursAwake, rating, efficiency },
+      summary: {
+        hoursAsleep: avgArray(hoursAsleep),
+        hoursAwake: avgArray(hoursAwake),
+        rating: avgArray(rating),
+        efficiency: avgArray(efficiency),
+      },
+    }
   }
 }
 
@@ -350,6 +366,7 @@ export default {
           ],
         }
       } catch (e) {
+        console.log(e)
         this.error = true
       } finally {
         this.dataLoaded = true

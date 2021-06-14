@@ -1,5 +1,5 @@
 <template>
-  <Modal modal-width="" @toggleModal="toggleGoalsModal">
+  <Modal modal-width="" @toggleModal="toggleWithUpdate">
     <h1 class="title-text text-center mt-8 mb-8">Create a new goal</h1>
     <form
       action=""
@@ -125,7 +125,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import Modal from '~/components/layout/Modal'
 export default {
   components: { Modal },
@@ -150,6 +150,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['showGoalsModal']),
     greaterOrLess() {
       return ['0', '3', '4'].includes(this.metricSelection) ? 'greater' : 'less'
     },
@@ -293,10 +294,16 @@ export default {
   },
   methods: {
     ...mapMutations(['toggleGoalsModal']),
+    toggleWithUpdate() {
+      if (this.showGoalsModal) {
+        this.$emit('dataUpdated')
+      }
+      this.toggleGoalsModal()
+    },
     async createGoal() {
       try {
         this.isLoading = true
-        await this.$axios.put('v1/goal', this.constructedGoal)
+        await this.$axios.post('v1/goal', this.constructedGoal)
         this.success = true
         setTimeout(() => {
           this.success = false
