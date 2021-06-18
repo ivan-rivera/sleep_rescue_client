@@ -2,16 +2,7 @@
   <div>
     <h1 class="heading-top text-center mb-10">My Progress</h1>
     <div v-if="!dataLoaded" class="text-xl text-center">Loading...</div>
-    <div v-if="error">
-      <p class="text-xl font-bold text-center text-secondary">
-        Oops, it looks like our server might be down, please try again later
-      </p>
-      <img
-        src="images/warning.svg"
-        alt="error"
-        class="absolute m-auto top-0 bottom-0 left-0 right-0 opacity-50 behind"
-      />
-    </div>
+    <Error v-if="error" />
     <div v-if="dataLoaded && !error" class="chart-container">
       <div v-if="!dataExists" class="relative">
         <div class="empty-card-text">
@@ -106,6 +97,7 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import NighFormModal from '~/components/dashboard/NightFormModal'
+import Error from '~/components/layout/Error'
 
 function avgArray(array) {
   return array.reduce((a, b) => a + b) / array.length
@@ -154,7 +146,7 @@ async function getSleepData(axios, period) {
 }
 
 export default {
-  components: { NighFormModal },
+  components: { NighFormModal, Error },
   data() {
     return {
       dataLoaded: false,

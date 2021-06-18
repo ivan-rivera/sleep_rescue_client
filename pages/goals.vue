@@ -2,7 +2,8 @@
   <div>
     <h1 class="heading-top text-center mb-10">My Goals</h1>
     <div v-if="loading" class="text-xl text-center">Loading...</div>
-    <div v-if="!loading">
+    <Error v-if="error" />
+    <div v-if="!loading & !error">
       <p
         class="mb-5 text-xs text-center md:text-base md:mb-10 lg:text-xl max-w-5xl ml-auto mr-auto"
       >
@@ -119,15 +120,17 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex'
+import Error from '~/components/layout/Error'
 import GoalsModal from '~/components/goals/GoalsModal'
 import DeleteGoalModal from '~/components/goals/DeleteGoalModal'
 export default {
-  components: { GoalsModal, DeleteGoalModal },
+  components: { Error, GoalsModal, DeleteGoalModal },
   data() {
     return {
       goalLimit: 10,
       goals: [],
       loading: true,
+      error: false,
     }
   },
   computed: {

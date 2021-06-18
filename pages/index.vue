@@ -115,8 +115,6 @@
 </template>
 
 <script>
-// TODO: QA! Review all modals, all pages, etc
-// TODO: pay special attention to 4K devices + HD TVs -- make sure it looks ok
 import { mapMutations } from 'vuex'
 import { minLength, sameAs, email, required } from 'vuelidate/lib/validators'
 import { EMAIL_PATTERN } from '~/assets/js/constants'
