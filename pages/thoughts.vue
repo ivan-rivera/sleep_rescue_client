@@ -13,7 +13,7 @@
         v-if="!thoughtsExist"
         src="images/thoughts.svg"
         alt="thoughts"
-        class="opacity-50 behind mb-5"
+        class="opacity-50 behind mb-5 ml-auto mr-auto"
       />
       <div v-if="thoughtsExist">
         <table class="thought-table">
@@ -27,10 +27,10 @@
               <font-awesome-icon :icon="['fa', 'trash-alt']" />
             </td>
             <td class="thought-table-row text-secondary pr-2">
-              {{ record.thought }}
+              {{ record.negative_thought }}
             </td>
             <td class="thought-table-row text-supplementary pl-2">
-              {{ record.counterThought }}
+              {{ record.counter_thought }}
             </td>
           </tr>
         </table>
@@ -69,7 +69,6 @@ import Error from '~/components/layout/Error'
 import DeleteThoughtModal from '~/components/thoughts/DeleteThoughtModal'
 import CreateThoughtModal from '~/components/thoughts/CreateThoughtModal'
 export default {
-  // TODO: backend -- schema, get/create functions + controller, router, tests
   components: { Error, DeleteThoughtModal, CreateThoughtModal },
   data() {
     return {
@@ -97,10 +96,11 @@ export default {
       this.$store.commit('setThoughtToDelete', id)
       this.toggleDeleteThoughtModal()
     },
-    updateThoughts() {
+    async updateThoughts() {
       this.loading = true
       try {
-        const result = this.$axios.get('v1/thought')
+        const result = await this.$axios.get('v1/thought')
+        console.log(result.data.thoughts)
         this.records = result.data.thoughts
       } catch (e) {
         this.error = true

@@ -55,7 +55,7 @@
       <div>
         <div v-if="!allowedToSubmit" class="stop-submit">
           <font-awesome-icon :icon="['fa', 'exclamation-circle']" />
-          Your text is too long!
+          Text must be between 10 and 150 characters
         </div>
         <div v-if="allowedToSubmit" class="w-full text-center">
           <input
@@ -68,6 +68,20 @@
         </div>
       </div>
     </form>
+    <div
+      v-if="success"
+      class="text-center text-supplementary font-bold mt-5 p-2"
+    >
+      <font-awesome-icon :icon="['fa', 'check-circle']" />
+      Success!
+    </div>
+    <div
+      v-if="error"
+      class="text-center bg-secondary text-dark font-bold mt-5 p-2"
+    >
+      <font-awesome-icon :icon="['fa', 'exclamation-circle']" />
+      Submission failed, try again later
+    </div>
   </Modal>
 </template>
 
@@ -75,16 +89,15 @@
 import { mapMutations } from 'vuex'
 import Modal from '~/components/layout/Modal'
 export default {
-  // TODO: add "chars left"
-  // TODO: change colour when limit is approaching
-  // TODO: add warning when limit exceeded and hide the submit button
   components: { Modal },
   data() {
     return {
       isLoading: false,
+      success: false,
       negativeThought: null,
       counterThought: null,
-      charLimit: 150,
+      maxLength: 150,
+      minLength: 10,
     }
   },
   computed: {
@@ -92,25 +105,32 @@ export default {
       return this.isLoading ? 'Processing...' : 'Submit'
     },
     allowedToSubmit() {
-      return !this.negativeExceeded && !this.counterExceeded
+      return (
+        !this.negativeExceeded &&
+        !this.counterExceeded &&
+        this.negativeThought != null &&
+        this.counterThought != null &&
+        this.negativeThought.length >= this.minLength &&
+        this.counterThought.length >= this.minLength
+      )
     },
     negativeCharsLeft() {
-      return this.displayCharsMessage(this.negativeThought, this.charLimit)
+      return this.displayCharsMessage(this.negativeThought, this.maxLength)
     },
     negativeApproachingLimit() {
-      return this.approachingCharLimit(this.negativeThought, this.charLimit)
+      return this.approachingCharLimit(this.negativeThought, this.maxLength)
     },
     negativeExceeded() {
-      return this.charLimitExceeded(this.negativeThought, this.charLimit)
+      return this.charLimitExceeded(this.negativeThought, this.maxLength)
     },
     counterCharsLeft() {
-      return this.displayCharsMessage(this.counterThought, this.charLimit)
+      return this.displayCharsMessage(this.counterThought, this.maxLength)
     },
     counterApproachingLimit() {
-      return this.approachingCharLimit(this.counterThought, this.charLimit)
+      return this.approachingCharLimit(this.counterThought, this.maxLength)
     },
     counterExceeded() {
-      return this.charLimitExceeded(this.counterThought, this.charLimit)
+      return this.charLimitExceeded(this.counterThought, this.maxLength)
     },
   },
   methods: {
@@ -135,13 +155,29 @@ export default {
     charLimitExceeded(thought, limit) {
       return thought == null ? false : thought.length > limit
     },
-    createThought() {
-      if (!this.negativeExceeded && this.counterExceeded) {
-        this.$emit('dataUpdated')
-        this.$axios.$post('v1/thought', {
-          negative_thought: this.negativeThought,
-          counter_thought: this.counterThought,
-        })
+    async createThought() {
+      if (this.allowedToSubmit) {
+        this.isLoading = true
+        try {
+          await this.$axios.$post('v1/thought', {
+            negative_thought: this.negativeThought,
+            counter_thought: this.counterThought,
+          })
+          this.$emit('dataUpdated')
+          this.success = true
+          this.negativeThought = null
+          this.counterThought = null
+          setTimeout(() => {
+            this.success = false
+          }, 3000)
+        } catch (e) {
+          this.error = true
+          setTimeout(() => {
+            this.error = false
+          }, 3000)
+        } finally {
+          this.isLoading = false
+        }
       }
     },
   },
