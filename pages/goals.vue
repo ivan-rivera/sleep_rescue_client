@@ -222,6 +222,7 @@ export default {
         const response = await this.$axios.get('v1/goal')
         this.goals = response.data.goals
       } catch (e) {
+        this.error = true
       } finally {
         this.loading = false
       }

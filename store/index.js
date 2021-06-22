@@ -13,6 +13,7 @@ export const state = () => ({
   showDeleteGoalModal: false,
   showDeleteThoughtModal: false,
   showCreateThoughtModal: false,
+  showIsiCreateModal: false,
 })
 
 export const mutations = {
@@ -58,6 +59,9 @@ export const mutations = {
   },
   toggleCreateThoughtModal(state) {
     state.showCreateThoughtModal = !state.showCreateThoughtModal
+  },
+  toggleIsiCreateModal(state) {
+    state.showIsiCreateModal = !state.showIsiCreateModal
   },
   confirmAccount(state) {
     state.accountConfirmed = true
