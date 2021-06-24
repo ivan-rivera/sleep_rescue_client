@@ -4,7 +4,7 @@
     <div v-if="loading" class="text-xl text-center">Loading...</div>
     <Error v-if="error" />
     <div v-if="!loading & !error">
-      <p class="text-center text-xs">
+      <p class="text-center text-xs sm:text-base">
         <a
           href="https://www.myhealth.va.gov/mhv-portal-web/insomnia-severity-index"
           class="text-secondary font-bold hover:underline"
@@ -15,30 +15,29 @@
         severity of insomnia. Consider completing this questionnaire once every
         few months to self-reflect and observe how your answers change.
       </p>
-      <div v-if="results.length > 0 && results.length <= 10">
+      <div v-if="results.length > 0">
         <table class="isi-table">
           <tr class="table-header">
-            <th class="pr-5">Date</th>
+            <th class="pl-5"></th>
+            <th class="pr-12">Date</th>
             <th class="pr-5">Score</th>
             <th class="">Classification</th>
           </tr>
           <tr v-for="result in results" :key="result.id">
+            <td
+              class="pl-0 text-center delete-result pr-2"
+              @click="toggleDeleteIsiModalWithId(result.id)"
+            >
+              <font-awesome-icon :icon="['fa', 'trash-alt']" />
+            </td>
             <td class="pr-5">{{ result.date }}</td>
             <td class="pr-5">{{ result.score }}</td>
             <td class="">{{ result.classification }}</td>
           </tr>
         </table>
       </div>
-      <div v-if="results.length > 10">
-        <h3 class="text-center font-bold text-xl mt-10">Your ISI Results</h3>
-        <line-chart
-          :data="lineChartData"
-          :options="lineChartOptions"
-          class="w-72 sm:w-full lg:w-4/5 ml-auto mr-auto sm:ml-0 sm:mr-0 mt-5 mb-5"
-        />
-      </div>
       <img
-        v-if="results.length == 0"
+        v-if="results.length === 0"
         src="images/isi.svg"
         alt="survey"
         class="opacity-50 behind mb-5 ml-auto mr-auto"
@@ -52,107 +51,71 @@
       </div>
     </div>
     <IsiCreateModal v-if="showIsiCreateModal" @dataUpdated="updateResults" />
+    <IsiDeleteModal v-if="showIsiDeleteModal" @dataUpdated="updateResults" />
   </div>
 </template>
 
 <script>
-// TODO: colour classification (table)
-// TODO: chart -> add header
-// TODO: chart -> add y-axis title
 import { mapMutations, mapState } from 'vuex'
 import IsiCreateModal from '~/components/isi/IsiCreateModal'
+import IsiDeleteModal from '~/components/isi/IsiDeleteModal'
 import Error from '~/components/layout/Error'
 export default {
-  components: { Error, IsiCreateModal },
+  components: { Error, IsiCreateModal, IsiDeleteModal },
   data() {
     return {
       loading: true,
       error: false,
       results: [],
-      lineChartOptions: {
-        responsive: true,
-        maintainAspectRatio: true,
-        type: 'line',
-        scales: {
-          xAxes: [
-            {
-              type: 'time',
-              offset: true,
-              time: {
-                unit: 'day',
-              },
-              ticks: {
-                fontSize: 10,
-                fontColor: '#FAF9F9',
-              },
-              gridLines: {
-                display: false,
-              },
-            },
-          ],
-          yAxes: [
-            {
-              ticks: {
-                fontSize: 12,
-                fontColor: '#FAF9F9',
-                beginAtZero: true,
-                max: 28,
-              },
-              gridLines: {
-                display: false,
-              },
-            },
-          ],
-        },
-        legend: {
-          display: false,
-        },
-      },
     }
   },
   computed: {
-    ...mapState(['showIsiCreateModal']),
+    ...mapState(['showIsiCreateModal', 'showIsiDeleteModal']),
   },
   mounted() {
     this.updateResults()
   },
   methods: {
-    ...mapMutations(['toggleIsiCreateModal']),
-    updateLineChartData() {
-      this.lineChartData = {
-        labels: this.results.map((v) => v.date),
-        datasets: [
-          {
-            backgroundColor: '#BEE3DB',
-            borderColor: '#89B0AE',
-            fill: false,
-            label: 'Score',
-            data: this.results.map((v) => v.score),
-          },
-        ],
-      }
+    ...mapMutations(['toggleIsiCreateModal', 'toggleIsiDeleteModal']),
+    toggleDeleteIsiModalWithId(id) {
+      this.$store.commit('setResultToDelete', id)
+      this.toggleIsiDeleteModal()
     },
-    updateResults() {
+    async updateResults() {
       try {
-        // await this.results = this.$axios.get('v1/isi') // parse dates
-        this.results = [
-          { id: 1, date: '2020-11-01', score: 16, classification: 'Moderate' },
-          { id: 2, date: '2020-12-21', score: 17, classification: 'Moderate' },
-          { id: 3, date: '2021-01-01', score: 18, classification: 'Moderate' },
-          { id: 4, date: '2021-02-01', score: 19, classification: 'Severe' },
-          { id: 5, date: '2021-04-01', score: 25, classification: 'Severe' },
-          { id: 6, date: '2021-04-15', score: 21, classification: 'Severe' },
-          { id: 7, date: '2021-04-25', score: 20, classification: 'Severe' },
-          { id: 8, date: '2021-05-15', score: 17, classification: 'Moderate' },
-          { id: 9, date: '2021-06-01', score: 15, classification: 'Moderate' },
-          { id: 10, date: '2021-07-01', score: 12, classification: 'Mild' },
-          { id: 11, date: '2021-07-07', score: 13, classification: 'Mild' },
-        ]
-        this.updateLineChartData()
+        const rawResults = await this.$axios.get('v1/isi')
+        this.results = rawResults.data.isis.map((r) => {
+          const score = this.calculateScore(r)
+          const classification = this.classifyResult(score)
+          return { id: r.id, date: r.date, score, classification }
+        })
       } catch (e) {
         this.error = true
       } finally {
         this.loading = false
+      }
+    },
+    calculateScore(result) {
+      return (
+        result.falling_asleep +
+        result.staying_asleep +
+        result.early_wake_up +
+        result.sleep_pattern +
+        result.noticeable +
+        result.worried +
+        result.interference
+      )
+    },
+    classifyResult(score) {
+      switch (true) {
+        case score < 7:
+          return 'Insignificant'
+        case score > 7 && score < 15:
+          return 'Sub-threshold'
+        case score > 14 && score < 21:
+          return 'Clinical'
+        case score > 21:
+          return 'Severe'
       }
     },
   },
@@ -161,9 +124,13 @@ export default {
 
 <style scoped>
 .isi-table {
-  @apply ml-auto mr-auto mt-5 mb-5;
+  @apply ml-auto mr-auto mt-5 mb-5 text-xs sm:text-base;
 }
 .table-header {
   @apply border-b-2 border-white;
+}
+.delete-result {
+  @apply text-supplementary cursor-pointer
+  transition duration-150 hover:text-secondary;
 }
 </style>

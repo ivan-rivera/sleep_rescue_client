@@ -1,8 +1,8 @@
 <template>
-  <Modal modal-width="" class="pb-10" @toggleModal="toggleCreateThoughtModal">
-    <h1 class="title-text text-center mt-8 mb-8">Survey</h1>
-    <p>
-      Please base your answers on
+  <Modal modal-width="" class="pb-2" @toggleModal="toggleIsiCreateModal">
+    <h1 class="title-text text-center mt-2 mb-2">Survey</h1>
+    <p class="text-secondary text-center mb-5">
+      Base your answers on
       <span class="underline">the last 2 weeks</span>
     </p>
     <form
@@ -42,7 +42,7 @@
         </div>
         <div class="question-cell">
           <div class="question-text">Waking up too early</div>
-          <span class="dropdown-selector arrow-selector">
+          <span class="dropdown-selector arrow-selector text-xs">
             <select v-model="earlyWakeUp" class="select-round">
               <option value="0">0 (None)</option>
               <option value="1">1 (Mild)</option>
@@ -54,7 +54,7 @@
         </div>
       </div>
       <div class="question-group">
-        <h3 class="group-title">Answer the following questions:</h3>
+        <h3 class="group-title mt-5">Answer the following questions:</h3>
         <div class="question-cell">
           <div class="question-text">
             How satisfied are you with your sleep pattern?
@@ -75,11 +75,11 @@
           </div>
           <span class="dropdown-selector arrow-selector">
             <select v-model="noticeable" class="select-round">
-              <option value="0">Not at all noticeable</option>
+              <option value="0">Not at all</option>
               <option value="1">A little</option>
               <option value="2">Somewhat</option>
               <option value="3">Noticeable</option>
-              <option value="4">Very noticeable</option>
+              <option value="4">Very much</option>
             </select>
           </span>
         </div>
@@ -89,7 +89,7 @@
           </div>
           <span class="dropdown-selector arrow-selector">
             <select v-model="worried" class="select-round">
-              <option value="0">Not at all worried</option>
+              <option value="0">Not at all</option>
               <option value="1">A little</option>
               <option value="2">Somewhat</option>
               <option value="3">Worried</option>
@@ -104,33 +104,35 @@
           </div>
           <span class="dropdown-selector arrow-selector">
             <select v-model="interference" class="select-round">
-              <option value="0">Not at all interfering</option>
+              <option value="0">Not at all</option>
               <option value="1">A little</option>
               <option value="2">Somewhat</option>
               <option value="3">Worried</option>
-              <option value="4">Very much interfering</option>
+              <option value="4">Very much</option>
             </select>
           </span>
         </div>
       </div>
-      <input
-        class="action-btn w-28"
-        type="submit"
-        name="submit-thought"
-        :value="buttonLabel"
-        :class="isLoading ? 'animate-pulse' : ''"
-      />
+      <div class="w-full text-center">
+        <input
+          class="action-btn w-28"
+          type="submit"
+          name="submit-thought"
+          :value="buttonLabel"
+          :class="isLoading ? 'animate-pulse' : ''"
+        />
+      </div>
     </form>
     <div
       v-if="success"
-      class="text-center text-supplementary font-bold mt-5 p-2"
+      class="text-center text-supplementary font-bold mt-2 p-2"
     >
       <font-awesome-icon :icon="['fa', 'check-circle']" />
       Success!
     </div>
     <div
       v-if="error"
-      class="text-center bg-secondary text-dark font-bold mt-5 p-2"
+      class="text-center bg-secondary text-dark font-bold mt-2 p-2"
     >
       <font-awesome-icon :icon="['fa', 'exclamation-circle']" />
       Submission failed, try again later
@@ -141,7 +143,6 @@
 <script>
 import { mapMutations } from 'vuex'
 import Modal from '~/components/layout/Modal'
-
 export default {
   components: { Modal },
   data() {
@@ -164,20 +165,19 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(['toggleCreateThoughtModal']),
-    createIsi() {
+    ...mapMutations(['toggleIsiCreateModal']),
+    async createIsi() {
       try {
         this.isLoading = true
-        console.log('POST')
-        // this.$axios.$post('v1/isi', {
-        //   falling_asleep: parseInt(this.fallingAsleep),
-        //   staying_asleep: parseInt(this.stayingAsleep),
-        //   early_wake_up: parseInt(this.earlyWakeUp),
-        //   sleep_pattern: parseInt(this.sleepPattern),
-        //   noticeable: parseInt(this.noticeable),
-        //   worried: parseInt(this.worried),
-        //   interference: parseInt(this.interference),
-        // })
+        await this.$axios.patch('v1/isi', {
+          falling_asleep: parseInt(this.fallingAsleep),
+          staying_asleep: parseInt(this.stayingAsleep),
+          early_wake_up: parseInt(this.earlyWakeUp),
+          sleep_pattern: parseInt(this.sleepPattern),
+          noticeable: parseInt(this.noticeable),
+          worried: parseInt(this.worried),
+          interference: parseInt(this.interference),
+        })
         this.$emit('dataUpdated')
         this.success = true
         setTimeout(() => {
@@ -198,14 +198,16 @@ export default {
 
 <style scoped>
 .question-group {
+  @apply pr-2 pl-2;
 }
 .group-title {
-  @apply text-center italic text-lg;
+  @apply text-center italic text-sm text-white mb-1;
 }
 .question-cell {
-  @apply flex flex-row items-center;
+  @apply flex flex-row items-center justify-between text-white text-xs;
 }
 .question-text {
   @apply text-left;
+  max-width: 150px;
 }
 </style>
