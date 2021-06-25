@@ -19,7 +19,7 @@
             cols="12"
             rows="3"
             placeholder="If I don't get at least 6 hours of sleep, I won't be able to function tomorrow..."
-            pattern="\w{10,}"
+            minlength="10"
             oninput="setCustomValidity('')"
             oninvalid="setCustomValidity('A thought must be at least 10 characters long')"
           ></textarea>
@@ -40,7 +40,7 @@
             cols="12"
             rows="3"
             placeholder="If I don't get 6 hours of sleep, then I'll be tired but I'll get by and I'll fall asleep faster tomorrow..."
-            pattern="\w{10,}"
+            minlength="10"
             oninput="setCustomValidity('')"
             oninvalid="setCustomValidity('A thought must be at least 10 characters long')"
           ></textarea>

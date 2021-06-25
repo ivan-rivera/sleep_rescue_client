@@ -1,9 +1,93 @@
 <template>
-  <div>CONTACT</div>
+  <div>
+    <h1 class="heading-top text-center mb-10">Contact Us</h1>
+    <p class="text-center mb-10">
+      If you have any comments, suggestions or if you'd just like to chat, then
+      use the below form to send us a message
+    </p>
+    <form
+      action=""
+      name="contact"
+      method="post"
+      class="ml-auto mr-auto max-w-3xl flex flex-col items-center"
+      @submit.prevent="sendForm"
+    >
+      <textarea
+        id="contact-text"
+        v-model="contactText"
+        class="contact-text-form"
+        name="contact-text"
+        minlength="20"
+        cols=""
+        rows=""
+        oninput="setCustomValidity('')"
+        oninvalid="setCustomValidity('A thought must be at least 20 characters long')"
+      ></textarea>
+      <input
+        class="action-btn w-28 ml-auto"
+        type="submit"
+        name="submit-contact"
+        :value="buttonLabel"
+        :class="isLoading ? 'animate-pulse' : ''"
+      />
+    </form>
+    <div
+      v-if="success"
+      class="text-center text-supplementary font-bold mt-5 p-2"
+    >
+      <font-awesome-icon :icon="['fa', 'check-circle']" />
+      Message sent!
+    </div>
+    <div v-if="error" class="text-center text-secondary font-bold mt-5 p-2">
+      <font-awesome-icon :icon="['fa', 'exclamation-circle']" />
+      Submission failed, try again later
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   auth: false,
+  data() {
+    return {
+      error: false,
+      success: false,
+      isLoading: false,
+      contactText: null,
+    }
+  },
+  computed: {
+    buttonLabel() {
+      return this.isLoading ? 'Processing...' : 'Submit'
+    },
+  },
+  methods: {
+    async sendForm() {
+      try {
+        this.isLoading = true
+        await this.$axios.post('v1/contact', {
+          user: this.$nuxt.$auth.loggedIn ? this.$nuxt.$auth.user.email : null,
+          text: this.contactText,
+        })
+        setTimeout(() => {
+          this.success = false
+        }, 5000)
+      } catch (e) {
+        this.error = true
+        setTimeout(() => {
+          this.error = false
+        }, 5000)
+      } finally {
+        this.isLoading = false
+      }
+    },
+  },
 }
 </script>
+
+<style scoped>
+.contact-text-form {
+  @apply ml-auto mr-auto w-full rounded-t-2xl rounded-bl-2xl bg-primary p-2 text-dark;
+  min-height: 150px;
+}
+</style>
