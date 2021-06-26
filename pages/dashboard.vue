@@ -35,6 +35,7 @@
             class="w-72 sm:w-full lg:w-4/5 ml-auto mr-auto sm:ml-0 sm:mr-0 relative"
           >
             <img
+              v-if="!dataExists"
               class="no-records-card"
               src="images/metrics.svg"
               alt="metrics"

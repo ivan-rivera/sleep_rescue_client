@@ -18,7 +18,6 @@
 </template>
 
 <script>
-// TODO: look into route transitions
 import FlashError from '~/components/layout/FlashError'
 import Header from '~/components/layout/Header'
 import Footer from '~/components/layout/Footer'

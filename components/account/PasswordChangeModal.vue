@@ -73,7 +73,6 @@
 </template>
 
 <script>
-// TODO: test it
 import { mapMutations } from 'vuex'
 import Modal from '~/components/layout/Modal'
 export default {
