@@ -87,62 +87,6 @@
 import { mapMutations, mapState } from 'vuex'
 import NighFormModal from '~/components/dashboard/NightFormModal'
 import Error from '~/components/layout/Error'
-
-const nullCollection = {
-  hoursAsleep: null,
-  hoursAwake: null,
-  rating: null,
-  efficiency: null,
-}
-
-function avgArray(array) {
-  return array.reduce((a, b) => a + b) / array.length
-}
-
-function getDateRange(n, anchor = new Date()) {
-  const dates = []
-  for (let i = 0; i < n; i++) {
-    const currentDate = new Date(anchor)
-    dates.push(currentDate.toISOString().split('T')[0])
-    anchor.setDate(anchor.getDate() - 1)
-  }
-  return dates
-}
-
-function fillFrame(data, n, anchor = new Date()) {
-  const frame = {}
-  const dateRange = getDateRange(n, anchor)
-  dateRange.forEach((d) => (frame[d] = data[d] ?? nullCollection))
-  return frame
-}
-
-async function getSleepData(axios, period) {
-  const nightsRaw = await axios.get(`v1/night/${period}`)
-  const nightsData = nightsRaw.data.data
-  const dataExists = Object.keys(nightsData).length > 0
-  const filledFrame = fillFrame(nightsData, period)
-  const extract = (value, scale = 1) =>
-    Object.keys(filledFrame).map((k) => filledFrame[k][value] / scale)
-
-  const hoursAsleep = extract('mins_slept', 60)
-  const hoursAwake = extract('mins_awake', 60)
-  const rating = extract('rating', 10)
-  const efficiency = extract('efficiency')
-  return {
-    dataExists,
-    dates: Object.keys(filledFrame)
-      .map((d) => new Date(d))
-      .map((d) => d.toISOString().split('T')[0]),
-    chartData: { hoursAsleep, hoursAwake, rating, efficiency },
-    summary: {
-      hoursAsleep: avgArray(hoursAsleep.filter((k) => !!k)),
-      hoursAwake: avgArray(hoursAwake.filter((k) => !!k)),
-      rating: avgArray(rating.filter((k) => !!k)),
-      efficiency: avgArray(efficiency.filter((k) => !!k)),
-    },
-  }
-}
-
 export default {
   components: { NighFormModal, Error },
   data() {
@@ -157,6 +101,12 @@ export default {
         hoursAwake: 0,
         efficiency: 0,
         rating: 0,
+      },
+      nullCollection: {
+        hoursAsleep: null,
+        hoursAwake: null,
+        rating: null,
+        efficiency: null,
       },
       lineChartOptions: {
         responsive: true,
@@ -320,16 +270,58 @@ export default {
   },
   methods: {
     ...mapMutations(['toggleNightFormModal']),
+    avgArray(array) {
+      return array.reduce((a, b) => a + b) / array.length
+    },
+    getDateRange(n, anchor = new Date()) {
+      const dates = []
+      for (let i = 0; i < n; i++) {
+        const currentDate = new Date(anchor)
+        dates.push(currentDate.toISOString().split('T')[0])
+        anchor.setDate(anchor.getDate() - 1)
+      }
+      return dates
+    },
+    fillFrame(data, n, anchor = new Date()) {
+      const frame = {}
+      const dateRange = this.getDateRange(n, anchor)
+      dateRange.forEach((d) => (frame[d] = data[d] ?? this.nullCollection))
+      return frame
+    },
     formatter(input, suffix) {
       const value = `${input}${suffix}`
       return input ? value : '--'
     },
+    async getSleepData(axios, period) {
+      const nightsRaw = await axios.get(`v1/night/${period}`)
+      const nightsData = nightsRaw.data.data
+      const dataExists = Object.keys(nightsData).length > 0
+      const filledFrame = this.fillFrame(nightsData, period)
+      const extract = (value, scale = 1) =>
+        Object.keys(filledFrame).map((k) => filledFrame[k][value] / scale)
+      const hoursAsleep = extract('mins_slept', 60)
+      const hoursAwake = extract('mins_awake', 60)
+      const rating = extract('rating', 10)
+      const efficiency = extract('efficiency')
+      return {
+        dataExists,
+        dates: Object.keys(filledFrame)
+          .map((d) => new Date(d))
+          .map((d) => d.toISOString().split('T')[0]),
+        chartData: { hoursAsleep, hoursAwake, rating, efficiency },
+        summary: {
+          hoursAsleep: this.avgArray(hoursAsleep.filter((k) => !!k)),
+          hoursAwake: this.avgArray(hoursAwake.filter((k) => !!k)),
+          rating: this.avgArray(rating.filter((k) => !!k)),
+          efficiency: this.avgArray(efficiency.filter((k) => !!k)),
+        },
+      }
+    },
     async updateSleepData() {
       try {
         this.dataLoaded = false
-        this.sleepData = await getSleepData(this.$axios, this.nDaySummary)
+        this.sleepData = await this.getSleepData(this.$axios, this.nDaySummary)
         this.summary = this.sleepData.summary
-        console.log(this.summary)
         this.dataExists = this.sleepData.dataExists
         this.barChartData = {
           labels: this.sleepData.dates,
@@ -366,7 +358,6 @@ export default {
           ],
         }
       } catch (e) {
-        console.log(e)
         this.error = true
       } finally {
         this.dataLoaded = true
