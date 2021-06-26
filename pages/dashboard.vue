@@ -1,28 +1,10 @@
 <template>
   <div>
-    <h1 class="heading-top text-center mb-10">My Progress</h1>
+    <h1 class="heading-top text-center mb-10">My Diary</h1>
     <div v-if="!dataLoaded" class="text-xl text-center">Loading...</div>
     <Error v-if="error" />
     <div v-if="dataLoaded && !error" class="chart-container">
-      <div v-if="!dataExists" class="relative">
-        <div class="empty-card-text">
-          Not sure where to start? Check out our
-          <NuxtLink class="text-secondary font-bold underline" to="learn">
-            Learning Center
-          </NuxtLink>
-        </div>
-        <img class="first-night-card" src="images/metrics.svg" alt="metrics" />
-        <div class="text-center w-full">
-          <div
-            class="ml-auto mr-auto action-btn w-48"
-            @click="toggleNightFormModal"
-          >
-            <font-awesome-icon :icon="['fa', 'pen']" />
-            Add your first night
-          </div>
-        </div>
-      </div>
-      <div v-if="dataExists">
+      <div>
         <div class="selector-controls">
           <div class="text-center ml-auto mr-auto sm:ml-0 sm:mr-0">
             <div class="action-btn w-32" @click="toggleNightFormModal">
@@ -49,7 +31,14 @@
           </div>
         </div>
         <div class="flex flex-col lg:flex-row justify-between">
-          <div class="w-72 sm:w-full lg:w-4/5 ml-auto mr-auto sm:ml-0 sm:mr-0">
+          <div
+            class="w-72 sm:w-full lg:w-4/5 ml-auto mr-auto sm:ml-0 sm:mr-0 relative"
+          >
+            <img
+              class="no-records-card"
+              src="images/metrics.svg"
+              alt="metrics"
+            />
             <bar-chart
               v-if="chartSelection === '0'"
               :data="barChartData"
@@ -99,49 +88,58 @@ import { mapMutations, mapState } from 'vuex'
 import NighFormModal from '~/components/dashboard/NightFormModal'
 import Error from '~/components/layout/Error'
 
+const nullCollection = {
+  hoursAsleep: null,
+  hoursAwake: null,
+  rating: null,
+  efficiency: null,
+}
+
 function avgArray(array) {
   return array.reduce((a, b) => a + b) / array.length
+}
+
+function getDateRange(n, anchor = new Date()) {
+  const dates = []
+  for (let i = 0; i < n; i++) {
+    const currentDate = new Date(anchor)
+    dates.push(currentDate.toISOString().split('T')[0])
+    anchor.setDate(anchor.getDate() - 1)
+  }
+  return dates
+}
+
+function fillFrame(data, n, anchor = new Date()) {
+  const frame = {}
+  const dateRange = getDateRange(n, anchor)
+  dateRange.forEach((d) => (frame[d] = data[d] ?? nullCollection))
+  return frame
 }
 
 async function getSleepData(axios, period) {
   const nightsRaw = await axios.get(`v1/night/${period}`)
   const nightsData = nightsRaw.data.data
   const dataExists = Object.keys(nightsData).length > 0
-  if (!dataExists) {
-    const nullCollection = {
-      hoursAsleep: null,
-      hoursAwake: null,
-      rating: null,
-      efficiency: null,
-    }
-    return {
-      dataExists,
-      dates: null,
-      chartData: nullCollection,
-      summary: nullCollection,
-    }
-  } else {
-    const extract = (value, scale = 1) =>
-      Object.keys(nightsData).map((k) => nightsData[k][value] / scale)
+  const filledFrame = fillFrame(nightsData, period)
+  const extract = (value, scale = 1) =>
+    Object.keys(filledFrame).map((k) => filledFrame[k][value] / scale)
 
-    const hoursAsleep = extract('mins_slept', 60)
-    const hoursAwake = extract('mins_awake', 60)
-    const rating = extract('rating', 10)
-    const efficiency = extract('efficiency')
-
-    return {
-      dataExists: Object.keys(nightsData).length > 0,
-      dates: Object.keys(nightsData)
-        .map((d) => new Date(d))
-        .map((d) => d.toISOString().split('T')[0]),
-      chartData: { hoursAsleep, hoursAwake, rating, efficiency },
-      summary: {
-        hoursAsleep: avgArray(hoursAsleep),
-        hoursAwake: avgArray(hoursAwake),
-        rating: avgArray(rating),
-        efficiency: avgArray(efficiency),
-      },
-    }
+  const hoursAsleep = extract('mins_slept', 60)
+  const hoursAwake = extract('mins_awake', 60)
+  const rating = extract('rating', 10)
+  const efficiency = extract('efficiency')
+  return {
+    dataExists,
+    dates: Object.keys(filledFrame)
+      .map((d) => new Date(d))
+      .map((d) => d.toISOString().split('T')[0]),
+    chartData: { hoursAsleep, hoursAwake, rating, efficiency },
+    summary: {
+      hoursAsleep: avgArray(hoursAsleep.filter((k) => !!k)),
+      hoursAwake: avgArray(hoursAwake.filter((k) => !!k)),
+      rating: avgArray(rating.filter((k) => !!k)),
+      efficiency: avgArray(efficiency.filter((k) => !!k)),
+    },
   }
 }
 
@@ -234,7 +232,7 @@ export default {
                 autoSkip: false,
               },
               gridLines: {
-                display: false,
+                display: true,
               },
             },
           ],
@@ -246,7 +244,8 @@ export default {
                 fontColor: '#FAF9F9',
               },
               gridLines: {
-                display: false,
+                display: true,
+                zeroLineColor: '#FAF9F9',
               },
             },
           ],
@@ -295,17 +294,25 @@ export default {
       }
     },
     avgEfficiencyFmt() {
-      return this.formatter(Math.round(this.summary.efficiency * 100), '%')
+      return isNaN(this.summary.efficiency) || this.summary.efficiency == null
+        ? '--'
+        : this.formatter(Math.round(this.summary.efficiency * 100), '%')
     },
     avgRatingFmt() {
-      return this.formatter(Math.round(this.summary.rating * 100), '%')
+      return isNaN(this.summary.rating) || this.summary.rating == null
+        ? '--'
+        : this.formatter(Math.round(this.summary.rating * 100), '%')
     },
     avgHoursSleptFmt() {
-      return this.formatter(this.summary.hoursAsleep.toFixed(1), ' hrs.')
+      return isNaN(this.summary.hoursAsleep) || this.summary.hoursAsleep == null
+        ? '--'
+        : this.formatter(this.summary.hoursAsleep.toFixed(1), ' hrs.')
     },
     avgMinsAwakeFmt() {
       const minsAwake = this.summary.hoursAwake * 60
-      return this.formatter(minsAwake.toFixed(0), ' mins.')
+      return isNaN(this.summary.hoursAwake) || this.summary.hoursAwake == null
+        ? '--'
+        : this.formatter(minsAwake.toFixed(0), ' mins.')
     },
   },
   async mounted() {
@@ -322,6 +329,7 @@ export default {
         this.dataLoaded = false
         this.sleepData = await getSleepData(this.$axios, this.nDaySummary)
         this.summary = this.sleepData.summary
+        console.log(this.summary)
         this.dataExists = this.sleepData.dataExists
         this.barChartData = {
           labels: this.sleepData.dates,
@@ -376,8 +384,8 @@ export default {
   w-full
   z-10;
 }
-.first-night-card {
-  @apply opacity-50 ml-auto mr-auto;
+.no-records-card {
+  @apply opacity-50 ml-auto mr-auto absolute left-0 right-0 top-12;
   z-index: -1;
 }
 .stat-summary {
