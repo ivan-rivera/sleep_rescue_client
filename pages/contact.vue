@@ -23,13 +23,18 @@
         oninput="setCustomValidity('')"
         oninvalid="setCustomValidity('A thought must be at least 20 characters long')"
       ></textarea>
-      <input
-        class="action-btn w-28 ml-auto"
-        type="submit"
-        name="submit-contact"
-        :value="buttonLabel"
-        :class="isLoading ? 'animate-pulse' : ''"
-      />
+      <div class="flex flex-row justify-between w-full">
+        <NuxtLink :to="home_path">
+          <div class="action-btn w-28 !bg-white font-bold">Back</div>
+        </NuxtLink>
+        <input
+          class="action-btn w-28"
+          type="submit"
+          name="submit-contact"
+          :value="buttonLabel"
+          :class="isLoading ? 'animate-pulse' : ''"
+        />
+      </div>
     </form>
     <div
       v-if="success"
@@ -46,10 +51,12 @@
 </template>
 
 <script>
+import { HOME_PATH } from 'assets/js/constants'
 export default {
   auth: false,
   data() {
     return {
+      home_path: HOME_PATH,
       error: false,
       success: false,
       isLoading: false,
