@@ -177,7 +177,7 @@ export default {
       pickedDate: null,
       success: false,
       error: false,
-      rating: '0',
+      rating: '4',
       sleptLastNight: '0',
       timeToFallAsleep: 15,
       midNightAwakenings: 15,
