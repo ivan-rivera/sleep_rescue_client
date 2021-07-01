@@ -14,3 +14,17 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-poor-sleep',
+        name: 'Is Poor Sleep Hurting You?',
+        content: 'Find our what effect poor sleep is having on your health',
+      },
+    ],
+  },
+}
+</script>

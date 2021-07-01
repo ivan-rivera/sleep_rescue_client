@@ -14,3 +14,18 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-medical',
+        name: 'Medical Conditions',
+        content:
+          'What medical conditions may interfere with your sleep and cause insomnia',
+      },
+    ],
+  },
+}
+</script>

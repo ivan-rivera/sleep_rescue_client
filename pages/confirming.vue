@@ -85,6 +85,16 @@ export default {
     }
     this.ready = true
   },
+  head: {
+    title: 'Account Confirmed!',
+    meta: [
+      {
+        hid: 'sleep-rescue-account-confirmed',
+        name: 'Account Confirmed',
+        content: 'Account confirmation page for SleepRescue.org',
+      },
+    ],
+  },
   computed: {
     buttonLabel() {
       return this.isLoading ? 'Processing...' : 'Continue'

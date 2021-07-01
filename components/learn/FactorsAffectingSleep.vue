@@ -14,3 +14,18 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-factors-affecting-sleep',
+        name: 'Factors Affecting Sleep',
+        content:
+          'Learn what factors negatively influence your sleep and what you can do about it',
+      },
+    ],
+  },
+}
+</script>

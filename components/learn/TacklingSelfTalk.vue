@@ -14,3 +14,18 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-intrusive-thoughts',
+        name: 'Countering Negative Self-Talk',
+        content:
+          'Effect of intrusive negative thoughts and how to deal with them',
+      },
+    ],
+  },
+}
+</script>

@@ -85,6 +85,16 @@ export default {
       },
     }
   },
+  head: {
+    title: 'Password Reset',
+    meta: [
+      {
+        hid: 'sleep-rescue-pass-reset',
+        name: 'Reset your account password',
+        content: 'Password reset page',
+      },
+    ],
+  },
   computed: {
     buttonLabel() {
       return this.isLoading ? 'Processing...' : 'Continue'

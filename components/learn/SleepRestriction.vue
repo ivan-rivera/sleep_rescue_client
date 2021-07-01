@@ -14,3 +14,18 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-sleep-restriction',
+        name: 'Sleep Restriction Therapy',
+        content:
+          'What is Sleep Restriction Therapy and how you can use it to beat insomnia',
+      },
+    ],
+  },
+}
+</script>

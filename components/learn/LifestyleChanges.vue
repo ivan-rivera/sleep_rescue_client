@@ -14,3 +14,18 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-lifestyle',
+        name: 'Lifestyle Changes',
+        content:
+          'What lifestyle changes your can introduce to improve your sleep quality',
+      },
+    ],
+  },
+}
+</script>

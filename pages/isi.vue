@@ -69,6 +69,17 @@ export default {
       results: [],
     }
   },
+  head: {
+    title: 'Insomnia Severity Index Survey',
+    meta: [
+      {
+        hid: 'sleep-rescue-isi',
+        name: 'Insomnia Severity Index Survey',
+        content:
+          'Insomnia severity index survey -- track your results over time',
+      },
+    ],
+  },
   computed: {
     ...mapState(['showIsiCreateModal', 'showIsiDeleteModal']),
   },

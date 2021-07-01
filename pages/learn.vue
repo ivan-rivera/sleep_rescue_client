@@ -188,6 +188,17 @@ export default {
       ],
     }
   },
+  head: {
+    title: 'Learning Center',
+    meta: [
+      {
+        hid: 'learning-center',
+        name: 'Learning Center: main hub',
+        content:
+          'Everything you need to know to apply Cognitive Behavioural Therapy (CBT-i) to improve your sleep',
+      },
+    ],
+  },
   computed: {
     titles() {
       const flatSections = this.sections.map((s) => s.content.flat()).flat()

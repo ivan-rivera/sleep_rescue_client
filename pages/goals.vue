@@ -133,6 +133,16 @@ export default {
       error: false,
     }
   },
+  head: {
+    title: 'Goals',
+    meta: [
+      {
+        hid: 'sleep-rescue-goals',
+        name: 'Sleep improvement goals',
+        content: 'Set and manage goals related to the quality of your sleep',
+      },
+    ],
+  },
   computed: {
     ...mapState(['showGoalsModal', 'showDeleteGoalModal']),
     goalLimitReached() {

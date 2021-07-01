@@ -63,6 +63,16 @@ export default {
       contactText: null,
     }
   },
+  head: {
+    title: 'Contact Us',
+    meta: [
+      {
+        hid: 'sleep-rescue-contact',
+        name: 'Contact SleepRescue.org admins',
+        content: 'Get in touch with SleepRescue.org admins',
+      },
+    ],
+  },
   computed: {
     buttonLabel() {
       return this.isLoading ? 'Processing...' : 'Submit'

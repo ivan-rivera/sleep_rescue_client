@@ -14,3 +14,18 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-pills',
+        name: 'Sleeping Pills and Natural Remedies',
+        content:
+          'Pros and cons of sleeping pills and natural remedies on your long-terms sleep quality',
+      },
+    ],
+  },
+}
+</script>

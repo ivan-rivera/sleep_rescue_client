@@ -66,6 +66,16 @@ export default {
       },
     }
   },
+  head: {
+    title: 'Account',
+    meta: [
+      {
+        hid: 'sleep-rescue-account',
+        name: 'Sleep Rescue Account Management',
+        content: 'Sleep Rescue account management and controls',
+      },
+    ],
+  },
   computed: mapState([
     'showPasswordChangeModal',
     'showEmailChangeModal',

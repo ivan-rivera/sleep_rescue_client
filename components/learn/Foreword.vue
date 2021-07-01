@@ -80,3 +80,17 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-foreword',
+        name: 'Foreword',
+        content: 'What you can expect to learn on SleepRescue.org',
+      },
+    ],
+  },
+}
+</script>

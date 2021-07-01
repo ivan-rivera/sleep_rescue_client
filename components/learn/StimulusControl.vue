@@ -14,3 +14,18 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-stimulus-control',
+        name: 'Stimulus Control',
+        content:
+          'What is Stimulus Control and how it can aide your recovery from insomnia',
+      },
+    ],
+  },
+}
+</script>

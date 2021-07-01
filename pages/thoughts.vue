@@ -78,6 +78,17 @@ export default {
       records: null,
     }
   },
+  head: {
+    title: 'Thought Tracker',
+    meta: [
+      {
+        hid: 'sleep-rescue-thought-tracker',
+        name: 'Negative Thought Tracker',
+        content:
+          'Record your negative thoughts and counter them with rational argumentation',
+      },
+    ],
+  },
   computed: {
     ...mapState(['showDeleteThoughtModal', 'showCreateThoughtModal']),
     thoughtsExist() {

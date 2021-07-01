@@ -14,3 +14,18 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-types-of-insomnia',
+        name: 'Types of Insomnia',
+        content:
+          'Understanding different types of insomnia, how they manifest themselves and how to deal with them',
+      },
+    ],
+  },
+}
+</script>

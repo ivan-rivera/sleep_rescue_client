@@ -14,3 +14,17 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-reasons-we-cannot-sleep',
+        name: 'Reasons we cannot sleep',
+        content: 'Reasons why we struggle to fall asleep and stay asleep',
+      },
+    ],
+  },
+}
+</script>

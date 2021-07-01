@@ -14,3 +14,18 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-expectation-management',
+        name: 'Expectation Management',
+        content:
+          'Set your expectations straight before starting Cognitive Behavioural Therapy for insomnia',
+      },
+    ],
+  },
+}
+</script>

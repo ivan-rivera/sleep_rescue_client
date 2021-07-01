@@ -14,3 +14,18 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-bedroom',
+        name: 'Your Bedroom',
+        content:
+          'Managing your relationship with your bedroom to improve the quality of your sleep',
+      },
+    ],
+  },
+}
+</script>

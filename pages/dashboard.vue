@@ -226,6 +226,16 @@ export default {
       },
     }
   },
+  head: {
+    title: 'Progress',
+    meta: [
+      {
+        hid: 'sleep-rescue-progress',
+        name: 'Track Your Sleep Improvements',
+        content: 'Sleep diary and a dashboard with your sleep improvements',
+      },
+    ],
+  },
   computed: {
     ...mapState(['showNightFormModal']),
     nDaySummary() {

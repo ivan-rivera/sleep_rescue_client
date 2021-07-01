@@ -14,3 +14,17 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  head: {
+    meta: [
+      {
+        hid: 'sleep-rescue-about-sleep',
+        name: 'Let us talk about sleep',
+        content: 'Everything you need to know about sleep',
+      },
+    ],
+  },
+}
+</script>

@@ -40,6 +40,16 @@ export default {
       message: null,
     }
   },
+  head: {
+    title: 'Confirm Your Account',
+    meta: [
+      {
+        hid: 'sleep-rescue-account-confirmation',
+        name: 'Confirm Your Sleep Rescue Account',
+        content: 'Account confirmation page for SleepRescue.org',
+      },
+    ],
+  },
   methods: {
     async sendEmail() {
       try {
