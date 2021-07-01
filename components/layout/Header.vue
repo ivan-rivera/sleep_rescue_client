@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="logo">
-      <NuxtLink :to="home_path">
+      <NuxtLink :to="homePath">
         <img src="images/logo.svg" alt="logo" />
       </NuxtLink>
     </div>
@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      home_path: HOME_PATH,
+      homePath: HOME_PATH,
     }
   },
   methods: {
@@ -41,7 +41,7 @@ export default {
 <style scoped>
 .header {
   @apply flex items-center justify-between
-  pt-2.5 pb-2.5 ml-auto mr-auto;
+  pb-5 ml-auto mr-auto;
   max-width: 1200px;
 }
 

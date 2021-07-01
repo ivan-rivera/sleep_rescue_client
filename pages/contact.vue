@@ -24,7 +24,7 @@
         oninvalid="setCustomValidity('A thought must be at least 20 characters long')"
       ></textarea>
       <div class="flex flex-row justify-between w-full">
-        <NuxtLink :to="home_path">
+        <NuxtLink :to="homePath">
           <div class="action-btn w-28 !bg-white font-bold">Back</div>
         </NuxtLink>
         <input
@@ -56,7 +56,7 @@ export default {
   auth: false,
   data() {
     return {
-      home_path: HOME_PATH,
+      homePath: HOME_PATH,
       error: false,
       success: false,
       isLoading: false,

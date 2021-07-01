@@ -21,7 +21,7 @@
 
 <style scoped>
 .head-option {
-  @apply lg:inline p-5 text-supplementary
+  @apply xl:inline p-5 text-supplementary
   transition duration-150 hover:bg-white rounded-xl hover:text-dark;
 }
 </style>

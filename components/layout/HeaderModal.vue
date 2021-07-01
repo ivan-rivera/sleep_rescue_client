@@ -19,7 +19,7 @@ export default {
 
 <style scoped>
 .head-modal {
-  @apply lg:hidden absolute inline
+  @apply xl:hidden absolute inline
   border-2 border-white rounded-2xl
   right-0 top-24 w-48 z-10 bg-dark;
 }

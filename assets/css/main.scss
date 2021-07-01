@@ -44,7 +44,7 @@
 
 .heading-sub {
   @apply text-lg text-supplementary;
-  @apply mb-5;
+  @apply mb-2.5;
   @screen md {
     @apply text-2xl;
   }
@@ -64,6 +64,10 @@
   @apply transition duration-150
   hover:text-white
   cursor-pointer;
+}
+
+.md-h1 {
+  @apply text-supplementary;
 }
 
 // --------------------------------------------------------

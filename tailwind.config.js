@@ -28,10 +28,29 @@ module.exports = {
       screens: {
         '3xl': '1750px',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: '#FAF9F9', // white
+            h1: {
+              color: '#BEE3DB', // light green
+            },
+            h2: {
+              color: '#BEE3DB', // light green
+            },
+            a: {
+              color: '#89B0AE', // light green
+              '&hover': {
+                color: '#BEE3DB', // light green
+              },
+            },
+          },
+        },
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }

@@ -11,7 +11,15 @@
           <div class="hero-text">
             Sleep is not a privilege, yet so many of us are struggling with
             insomnia. Sleep Rescue offers resources for self-guided Cognitive
-            Behavioural Therapy for insomnia.
+            Behavioural Therapy for insomnia (CBT-i).
+          </div>
+          <div class="text-center text-sm pt-2 pb-2">
+            <p>
+              Not ready to sign up? Check out our
+              <span class="font-bold text-dark bg-secondary rounded-2xl p-2"
+                ><NuxtLink to="/learn">Learning Center</NuxtLink></span
+              >
+            </p>
           </div>
         </section>
         <section class="welcome-cards">
@@ -260,7 +268,7 @@ export default {
 
 .disclaimer-text {
   @apply text-center text-xs 2xl:text-sm
-  pb-5 pt-5 2xl:pt-16 3xl:pb-16;
+  pb-5 pt-10 2xl:pt-16 3xl:pb-16;
 }
 
 .signup-disclaimer {
