@@ -8,7 +8,16 @@ export default {
   target: 'static',
 
   generate: {
-    exclude: [/^\/account/],
+    exclude: [
+      '/account',
+      '/confirm',
+      '/confirming',
+      '/dashboard',
+      '/goals',
+      '/isi',
+      '/reset',
+      '/thoughts',
+    ],
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -22,8 +31,8 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
-        hid: 'description',
-        name: 'description',
+        hid: 'sleep-rescue',
+        name: 'Sleep Rescue',
         content:
           'Self guided Cognitive Behavioural Therapy (CBT-i) for insomniacs and those who suffer from sleep problems',
       },
