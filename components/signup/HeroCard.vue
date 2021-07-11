@@ -38,7 +38,7 @@ export default {
 
 .card-group-primary {
   @apply lg:block
-  transform lg:translate-x-32 transform lg:-translate-y-12 lg:top-80 xl:top-64 xl:scale-100 xl:translate-x-0;
+  transform lg:translate-x-32 lg:top-64 xl:scale-100 xl:translate-x-0;
 }
 
 .welcome-card {

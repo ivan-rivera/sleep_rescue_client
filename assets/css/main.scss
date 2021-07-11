@@ -70,6 +70,14 @@
   @apply text-supplementary;
 }
 
+.web-link {
+  @apply text-secondary hover:underline;
+}
+
+.text-highlight {
+  @apply font-bold text-supplementary;
+}
+
 // --------------------------------------------------------
 // FORMS
 // --------------------------------------------------------
@@ -207,6 +215,11 @@
 
 .behind {
   z-index: -1;
+}
+
+.centralize {
+  @apply ml-auto mr-auto;
+  max-width: 1250px;
 }
 
 // --------------------------------------------------------

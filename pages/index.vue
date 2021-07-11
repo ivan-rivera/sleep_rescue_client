@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome-page">
+  <div class="welcome-page centralize">
     <div class="visible-content">
       <div class="hero-content">
         <!-- left/top: text and cards -->

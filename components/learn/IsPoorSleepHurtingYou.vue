@@ -1,16 +1,28 @@
 <template>
   <div>
-    <h1>This is a title</h1>
+    <h1>Is poor sleep hurting you?</h1>
     <p>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the
-      1500s, when an unknown printer took a galley of type and scrambled it to
-      make a type specimen book. It has survived not only five centuries, but
-      also the leap into electronic typesetting, remaining essentially
-      unchanged. It was popularised in the 1960s with the release of Letraset
-      sheets containing Lorem Ipsum passages, and more recently with desktop
-      publishing software like Aldus PageMaker including versions of Lorem
-      Ipsum.
+      As we've just learnt, sleep is vital to our well-being, so if you don't
+      get enough of it, then is it really going have a profound, irreversible
+      negative effect on your health?
+    </p>
+    <p>
+      While many studies do show that lifelong insomnia can indeed negatively
+      affect your health, we recommend that you
+      <span class="underline">do not</span> look into this research. It may be
+      assess "what you are in for", but you are not going to gain anything but
+      unnecessary stress by learning about all the negative health consequences
+      associated with long-term sleep deprivation. Remember that in most cases,
+      primary insomnia is a psychological disorder that is often fulled by
+      stress and anxiety. Short term consequences of insomnia are bad enough to
+      drive its sufferers to take action. The mere fact that you have visited
+      our website suggests that you are doing your best to overcome your
+      insomnia. Hopefully by completing CBT-i you will not need to worry about
+      sleep deprivation damaging your health.
+    </p>
+    <p>
+      What you need to know now is that insomnia is a curable disorder and we
+      hope to help you overcome it.
     </p>
   </div>
 </template>

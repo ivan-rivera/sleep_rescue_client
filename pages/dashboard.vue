@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="centralize">
     <h1 class="heading-top text-center mb-10">My Diary</h1>
     <div v-if="!dataLoaded" class="text-xl text-center">Loading...</div>
     <Error v-if="error" />
@@ -76,6 +76,13 @@
           </div>
         </div>
       </div>
+      <p class="italic text-sm text-center mt-5">
+        Be sure to check out our
+        <NuxtLink class="text-secondary hover:underline" to="/learn"
+          >Learning Center</NuxtLink
+        >, especially the section on Sleep Restriction which provides
+        instructions on how to schedule your sleep.
+      </p>
       <NighFormModal
         v-if="showNightFormModal"
         @closingNightModal="updateSleepData"
@@ -282,7 +289,9 @@ export default {
   methods: {
     ...mapMutations(['toggleNightFormModal']),
     avgArray(array) {
-      return array.reduce((a, b) => a + b) / array.length
+      return array.length === 0
+        ? null
+        : array.reduce((a, b) => a + b) / array.length
     },
     getDateRange(n, anchor = new Date()) {
       const dates = []

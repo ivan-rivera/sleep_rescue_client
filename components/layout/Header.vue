@@ -42,7 +42,7 @@ export default {
 .header {
   @apply flex items-center justify-between
   pb-5 ml-auto mr-auto;
-  max-width: 1200px;
+  max-width: 1300px;
 }
 
 .logo {

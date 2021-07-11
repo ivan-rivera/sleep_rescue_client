@@ -6,7 +6,8 @@
         <li
           class="class-subsection-header"
           :class="{
-            'font-bold underline': subsection.id === selectedPage,
+            'font-bold text-dark lg:text-secondary':
+              subsection.id === selectedPage,
           }"
           @click="select(subsection.id)"
         >

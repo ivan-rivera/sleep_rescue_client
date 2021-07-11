@@ -39,9 +39,10 @@ module.exports = {
               color: '#BEE3DB', // light green
             },
             a: {
-              color: '#89B0AE', // light green
-              '&hover': {
-                color: '#BEE3DB', // light green
+              color: '#FFD6BA',
+              'text-decoration': 'none',
+              '&:hover': {
+                'text-decoration': 'underline',
               },
             },
           },

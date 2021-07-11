@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="centralize">
     <h1 class="heading-top text-center mb-10">Email Confirmation</h1>
     <div v-if="!ready" class="title-text text-center mt-24">Loading...</div>
     <div v-if="ready" class="text-2xl text-center mt-28 mb-28">

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="centralize">
     <h1 class="heading-top text-center mb-10">Insomnia Severity Index</h1>
     <div v-if="loading" class="text-xl text-center">Loading...</div>
     <Error v-if="error" />

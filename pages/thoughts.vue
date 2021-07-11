@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="centralize">
     <h1 class="heading-top text-center mb-10">Thought Tracker</h1>
     <div v-if="loading" class="text-xl text-center">Loading...</div>
     <Error v-if="error" />
@@ -111,7 +111,6 @@ export default {
       this.loading = true
       try {
         const result = await this.$axios.get('v1/thought')
-        console.log(result.data.thoughts)
         this.records = result.data.thoughts
       } catch (e) {
         this.error = true

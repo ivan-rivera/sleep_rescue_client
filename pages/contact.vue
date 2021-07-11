@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="centralize">
     <h1 class="heading-top text-center mb-10">Contact Us</h1>
     <p class="text-center mb-10">
       If you have any comments, suggestions or if you'd just like to chat, then

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="centralize">
     <h1 class="heading-top text-center mb-10">My Account</h1>
     <div class="flex flex-row space-between">
       <div

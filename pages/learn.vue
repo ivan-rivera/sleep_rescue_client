@@ -1,26 +1,26 @@
 <template>
-  <div>
+  <div class="centralize">
     <div v-if="loading" class="text-xl text-center">Loading...</div>
     <div
       v-if="!loading"
-      class="flex flex-col lg:flex-row relative max-w-6xl justify-between"
+      class="flex flex-col lg:flex-row relative max-w-6xl justify-between centralize"
     >
       <div class="flex flex-col">
         <div class="learning-content prose-sm sm:prose">
           <Foreword v-if="selectedPage === 1" />
-          <LetsTalkAboutSleep v-if="selectedPage === 2" />
+          <WhatIsSleep v-if="selectedPage === 2" />
           <FactorsAffectingSleep v-if="selectedPage === 3" />
-          <ReasonsWeCannotSleep v-if="selectedPage === 4" />
-          <IsPoorSleepHurtingYou v-if="selectedPage === 5" />
-          <TypesOfInsomnia v-if="selectedPage === 6" />
-          <MedicalConditions v-if="selectedPage === 7" />
-          <SleepingPills v-if="selectedPage === 8" />
+          <IsPoorSleepHurtingYou v-if="selectedPage === 4" />
+          <TypesOfInsomnia v-if="selectedPage === 5" />
+          <MedicalConditions v-if="selectedPage === 6" />
+          <SleepingPills v-if="selectedPage === 7" />
+          <WhatIsCbti v-if="selectedPage === 8" />
           <ExpectationManagement v-if="selectedPage === 9" />
           <TacklingSelfTalk v-if="selectedPage === 10" />
-          <SleepRestriction v-if="selectedPage === 11" />
-          <StimulusControl v-if="selectedPage === 12" />
-          <YourBedroom v-if="selectedPage === 13" />
-          <LifestyleChanges v-if="selectedPage === 14" />
+          <LifestyleChanges v-if="selectedPage === 11" />
+          <YourBedroom v-if="selectedPage === 12" />
+          <StimulusControl v-if="selectedPage === 13" />
+          <SleepRestriction v-if="selectedPage === 14" />
         </div>
         <div class="hidden lg:flex lg:flex-row justify-between pr-5">
           <div
@@ -112,14 +112,10 @@
 </template>
 
 <script>
-// TODO: open it up to unauthenticated users and conditionally display sign up
-// TODO: decorate with metadata (for each component)
-// TODO: write up!
 import ContentList from '~/components/learn/ContentList'
 import Foreword from '~/components/learn/Foreword'
-import LetsTalkAboutSleep from '~/components/learn/LetsTalkAboutSleep'
+import WhatIsSleep from '~/components/learn/WhatIsSleep'
 import FactorsAffectingSleep from '~/components/learn/FactorsAffectingSleep'
-import ReasonsWeCannotSleep from '~/components/learn/ReasonsWeCannotSleep'
 import IsPoorSleepHurtingYou from '~/components/learn/IsPoorSleepHurtingYou'
 import TypesOfInsomnia from '~/components/learn/TypesOfInsomnia'
 import MedicalConditions from '~/components/learn/MedicalConditions'
@@ -130,14 +126,14 @@ import SleepRestriction from '~/components/learn/SleepRestriction'
 import StimulusControl from '~/components/learn/StimulusControl'
 import YourBedroom from '~/components/learn/YourBedroom'
 import LifestyleChanges from '~/components/learn/LifestyleChanges'
+import WhatIsCbti from '~/components/learn/WhatIsCbti'
 export default {
   auth: false,
   components: {
     ContentList,
     Foreword,
-    LetsTalkAboutSleep,
+    WhatIsSleep,
     FactorsAffectingSleep,
-    ReasonsWeCannotSleep,
     IsPoorSleepHurtingYou,
     TypesOfInsomnia,
     MedicalConditions,
@@ -148,6 +144,7 @@ export default {
     StimulusControl,
     YourBedroom,
     LifestyleChanges,
+    WhatIsCbti,
   },
   data() {
     return {
@@ -164,25 +161,25 @@ export default {
           id: 2,
           title: 'Understanding Insomnia',
           content: [
-            { title: 'Let us talk about sleep', id: 2 },
+            { title: 'What is sleep?', id: 2 },
             { title: 'Factors affecting sleep', id: 3 },
-            { title: 'Reasons we cannot sleep', id: 4 },
-            { title: 'Is poor sleep hurting you?', id: 5 },
-            { title: 'Types of insomnia', id: 6 },
-            { title: 'Medical conditions', id: 7 },
-            { title: 'Sleeping pills and natural remedies', id: 8 },
+            { title: 'Is poor sleep hurting you?', id: 4 },
+            { title: 'Types of insomnia', id: 5 },
+            { title: 'Medical conditions', id: 6 },
+            { title: 'Sleeping pills and natural remedies', id: 7 },
           ],
         },
         {
           id: 3,
           title: 'CBT-i',
           content: [
+            { title: 'What is CBT-i?', id: 8 },
             { title: 'Expectation management', id: 9 },
             { title: 'Tackling self-talk', id: 10 },
-            { title: 'Sleep restriction', id: 11 },
-            { title: 'Stimulus control', id: 12 },
-            { title: 'Your bedroom', id: 13 },
-            { title: 'Lifestyle changes', id: 14 },
+            { title: 'Lifestyle changes', id: 11 },
+            { title: 'Your bedroom', id: 12 },
+            { title: 'Stimulus control', id: 13 },
+            { title: 'Sleep restriction', id: 14 },
           ],
         },
       ],

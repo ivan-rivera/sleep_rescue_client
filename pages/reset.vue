@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="centralize">
     <div class="heading-top text-center mb-10">Password Reset</div>
     <div v-if="!ready" class="title-text text-center mt-24">
       Loading your file...

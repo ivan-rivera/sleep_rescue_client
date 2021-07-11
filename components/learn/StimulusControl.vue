@@ -1,16 +1,34 @@
 <template>
   <div>
-    <h1>This is a title</h1>
+    <h1>Stimulus Control</h1>
     <p>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the
-      1500s, when an unknown printer took a galley of type and scrambled it to
-      make a type specimen book. It has survived not only five centuries, but
-      also the leap into electronic typesetting, remaining essentially
-      unchanged. It was popularised in the 1960s with the release of Letraset
-      sheets containing Lorem Ipsum passages, and more recently with desktop
-      publishing software like Aldus PageMaker including versions of Lorem
-      Ipsum.
+      Remember when we said that you should only use your bedroom for sleep and
+      sex?
+      <a
+        href="https://stanfordhealthcare.org/medical-treatments/c/cognitive-behavioral-therapy-insomnia/procedures/stimulus-control.html"
+        >Stimulus Control</a
+      >
+      build on this idea further. Stimulus control aims to strengthen the
+      association between bed and sleep. Much like
+      <a href="https://www.verywellmind.com/pavlovs-dogs-2794989"
+        >Pavlov's dogs learnt to salivate in response to a certain stimulus</a
+      >, we can learn to become sleepy when we are in bed.
+    </p>
+    <p>
+      How does Stimulus Control aim to develop the desired connection between
+      sleep and your bedroom? It suggests several initiatives some of which
+      overlap with sleep restriction which will be covered in the next section,
+      however, the main idea behind Stimulus Control that you should take away
+      is that you should only go to bed when you are sleepy (note: sleepy and
+      tired are not the same). This applies even when you are already in bed. If
+      you cannot fall asleep for longer than 20 minutes or so (don't look at the
+      clock, just guess), then get up and leave the bedroom for at least 10
+      minutes and only return when you are sleepy. Feel free to listen to a
+      podcast, meditate or do something else that is relaxing and preferably
+      does not involve looking at a bright screen. It may be counter-intuitive
+      to get out of bed, but this is a well-researched method for dealing with
+      insomnia and it is highly effective even though you will probably not
+      appreciate it immediately.
     </p>
   </div>
 </template>
