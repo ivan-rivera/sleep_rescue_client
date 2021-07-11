@@ -15,8 +15,9 @@
           </div>
           <div class="text-center text-sm pt-2 pb-2">
             <p>
-              Not ready to sign up? Check out our
-              <span class="font-bold text-dark bg-secondary rounded-2xl p-2"
+              Feel free to explore our
+              <span
+                class="font-bold text-dark bg-secondary rounded-2xl p-2 shadow-md"
                 ><NuxtLink to="/learn">Learning Center</NuxtLink></span
               >
             </p>

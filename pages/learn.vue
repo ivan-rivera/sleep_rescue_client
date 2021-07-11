@@ -220,7 +220,10 @@ export default {
   },
   methods: {
     getSelectedPage() {
-      return parseInt(localStorage.getItem('selectedPage'))
+      const previouslySelected = localStorage.getItem('selectedPage')
+      return previouslySelected === null
+        ? this.selectedPage
+        : parseInt(previouslySelected)
     },
     select(id) {
       this.selectedPage = id
