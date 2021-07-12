@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Expectation management</h1>
+    <h1 class="md-h1">Expectation management</h1>
     <p>
       Before we talk about the details of CBT-i, it is important to address your
       expectations.

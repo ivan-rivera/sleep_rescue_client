@@ -6,7 +6,7 @@
       class="flex flex-col lg:flex-row relative max-w-6xl justify-between centralize"
     >
       <div class="flex flex-col">
-        <div class="learning-content prose-sm sm:prose">
+        <div class="learning-content prose">
           <Foreword v-if="selectedPage === 1" />
           <WhatIsSleep v-if="selectedPage === 2" />
           <FactorsAffectingSleep v-if="selectedPage === 3" />
@@ -260,8 +260,7 @@ export default {
 }
 .active-nav-btn {
   @apply cursor-pointer
-  transition duration-150
-  hover:bg-secondary hover:text-dark;
+  transition duration-150;
 }
 .nav-last {
   @apply rounded-l-2xl w-24;
@@ -296,5 +295,9 @@ export default {
 .slide-leave-to {
   overflow: hidden;
   max-height: 0;
+}
+.prose-sm:a {
+  text-decoration: none;
+  @apply text-secondary hover:underline;
 }
 </style>

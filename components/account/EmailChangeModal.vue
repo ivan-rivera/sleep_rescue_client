@@ -39,7 +39,7 @@
         />
         <div class="mb-8" />
         <input
-          class="light-btn w-full"
+          class="light-btn"
           type="submit"
           name="change-email"
           :value="buttonLabel"

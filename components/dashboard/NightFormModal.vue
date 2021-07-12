@@ -6,7 +6,7 @@
       method="post"
       @submit.prevent="submitNight"
     >
-      <h1 class="title-text text-center mt-8">Record a Night</h1>
+      <h1 class="title-text text-center mt-2">Record a Night</h1>
       <no-ssr v-if="!pickMade">
         <p class="text-white text-center text-xs pt-5 pb-5">
           Select the date of the night you slept. If you went to bed after
@@ -21,10 +21,10 @@
         />
       </no-ssr>
       <div v-if="pickMade" class="text-white text-center pb-2">
-        <div class="font-bold text-white pt-5 pb-5">
+        <div class="font-bold text-white pt-2 pb-2">
           Night of the {{ pickedDate.toISOString().split('T')[0] }}
         </div>
-        <div class="border-t-2 border-white w-full pb-2" />
+        <div class="border-t-2 border-white w-full" />
         <div class="back-btn" @click="pickToggle">
           <font-awesome-icon :icon="['fa', 'chevron-left']" />
           Go back
@@ -122,7 +122,7 @@
         </div>
         <div class="w-full border-b-2 border-white pt-5"></div>
         <div class="w-full flex justify-between pt-4">
-          <div v-if="inputsAreValid" class="self-center pl-10">
+          <div v-if="inputsAreValid" class="self-center pl-5">
             <div v-if="sleptBool" class="text-right text-xs">
               <p>Hours slept: {{ hoursAsleep }} hrs, {{ minsAsleep }} mins.</p>
               <p>Hours in bed: {{ hoursInBed }} hrs, {{ minsInBed }} mins.</p>
@@ -149,14 +149,14 @@
         </div>
         <div
           v-if="error"
-          class="text-center bg-secondary text-dark font-bold mt-5 p-2"
+          class="text-center bg-secondary text-dark font-bold mt-2 p-1"
         >
           <font-awesome-icon :icon="['fa', 'exclamation-circle']" />
           Submission failed, please try again later
         </div>
         <div
           v-if="success"
-          class="text-center text-supplementary font-bold mt-5 p-2"
+          class="text-center text-supplementary font-bold mt-2 p-1"
         >
           <font-awesome-icon :icon="['fa', 'check-circle']" />
           Success!
@@ -336,7 +336,7 @@ export default {
   @apply flex-grow text-right;
 }
 .back-btn {
-  @apply text-center p-5
+  @apply text-center p-2.5
   hover:font-bold hover:text-secondary
   cursor-pointer;
 }

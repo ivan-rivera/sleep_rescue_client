@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Your bedroom</h1>
+    <h1 class="md-h1">Your bedroom</h1>
     <p>
       In the previous section we spoke about lifestyle changes that you should
       consider in order to improve your sleep. In this section we are continuing

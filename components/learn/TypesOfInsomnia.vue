@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h1>Types of insomnia</h1>
+    <h1 class="md-h1">Types of insomnia</h1>
     <p>
-      There are several ways to classify insomnia. For example, some people
-      suffer from <span class="text-highlight">short-term insomnia</span> which
+      There are
+      <a href="https://www.sleepfoundation.org/insomnia/types-of-insomnia"
+        >several ways to classify insomnia</a
+      >. For example, some people suffer from <em>short-term insomnia</em> which
       may go away after a week or two, but we presume that our readers suffer
-      from <span class="text-highlight">chronic insomnia</span> that refuses to
-      go away.
+      from <em>chronic insomnia</em> that refuses to go away.
     </p>
     <p>
       Insomnia can also be categorised into
-      <span class="text-highlight">primary</span> and
-      <span class="text-highlight">secondary</span> types. Secondary insomnia is
+      <em>primary</em> and <em>secondary</em> types. Secondary insomnia is
       caused by an underlying medical condition and we talk more about this in
       the following section. While secondary insomnia is a symptom of another
       condition, primary insomnia is the root problem itself and it is not
@@ -19,14 +19,12 @@
     </p>
     <p>
       Another way of classifying insomnia is by the way it is experienced.
-      <span class="text-highlight">Sleep onset insomnia</span> is insomnia
-      characterised by one's inability to fall asleep at night.
-      <span class="text-highlight">Sleep maintenance insomnia</span>, on the
-      other hand is characterised by one's inability to stay asleep. There is
-      also an
-      <span class="text-highlight">early morning awakening insomnia</span> where
-      a sufferer wakes up for the last time too early and is unable to get back
-      to sleep. It is not uncommon to suffer from a combination of these.
+      <em>Sleep onset insomnia</em> is insomnia characterised by one's inability
+      to fall asleep at night. <em>Sleep maintenance insomnia</em>, on the other
+      hand is characterised by one's inability to stay asleep. There is also an
+      <em>early morning awakening insomnia</em> where a sufferer wakes up for
+      the last time too early and is unable to get back to sleep. It is not
+      uncommon to suffer from a combination of these.
     </p>
     <p>
       You can read more about classifications of insomnia

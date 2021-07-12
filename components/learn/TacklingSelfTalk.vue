@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Tackling self talk</h1>
+    <h1 class="md-h1">Tackling self talk</h1>
     <p>
       As we've just learnt, the <em>cognitive</em> part of CBT-i is concerned
       with our thoughts and emotions. In order for you to recover, you need to
@@ -35,7 +35,7 @@
         average persons sleep well every night is unrealistic.
       </li>
       <li>
-        <span class="text-highlight">Exaggeration:</span>poor sleep can mess
+        <span class="text-highlight">Exaggeration:</span> poor sleep can mess
         with your emotions. When people get emotional, they tend to exaggerate
         the situation. Consider the aforementioned example of expecting to be
         tormented by insomnia for the rest of your life. It is more realistic to
@@ -43,7 +43,7 @@
         condition.
       </li>
       <li>
-        <span class="text-highlight">Catastrophizing:</span>In one of the
+        <span class="text-highlight">Catastrophizing:</span> in one of the
         earlier sections we spoke about the negative effects of insomnia on your
         long-term well-being and our advice was not to concern yourself with it
         because this is one of the topics that people tend to catastrophize.

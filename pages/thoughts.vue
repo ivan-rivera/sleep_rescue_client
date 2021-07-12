@@ -127,7 +127,8 @@ export default {
   @apply text-center text-xs sm:text-base md:text-lg ml-auto mr-auto mt-2 mb-10;
 }
 .thought-table-header {
-  @apply font-bold border-b-2 border-white mb-1;
+  @apply border-b-2 border-white mb-1;
+  min-width: 125px;
 }
 .thought-table-row {
   @apply align-top pb-2.5 border-b border-white;

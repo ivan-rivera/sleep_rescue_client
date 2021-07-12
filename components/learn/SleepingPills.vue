@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Sleeping pills and natural remedies</h1>
+    <h1 class="md-h1">Sleeping pills and natural remedies</h1>
     <p>
       Sadly, there are no magic pills that would help us sleep with no strings
       attached. Modern pharmacological sleeping pills are usually designed for

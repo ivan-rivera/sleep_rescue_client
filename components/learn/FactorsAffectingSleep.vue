@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Factors affecting sleep</h1>
+    <h1 class="md-h1">Factors affecting sleep</h1>
     <p>
       There are
       <a

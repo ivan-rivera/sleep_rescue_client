@@ -7,7 +7,7 @@
     </div>
     <div>
       <HeaderNavigation class="hidden xl:block" />
-      <HeaderButton @click.native="toggleHeaderModal" />
+      <HeaderButton class="no-highlights" @click.native="toggleHeaderModal" />
       <HeaderModal v-if="$store.state.showHeaderModal" />
     </div>
   </header>

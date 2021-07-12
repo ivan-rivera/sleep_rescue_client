@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>What is sleep?</h1>
+    <h1 class="md-h1">What is sleep?</h1>
     <p>We all need to sleep.</p>
     <p>
       Contrary to what many people think, sleep is an active process and the

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Is poor sleep hurting you?</h1>
+    <h1 class="md-h1">Is poor sleep hurting you?</h1>
     <p>
       As we've just learnt, sleep is vital to our well-being, so if you don't
       get enough of it, then is it really going have a profound, irreversible

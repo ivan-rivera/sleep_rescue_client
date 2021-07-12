@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Stimulus Control</h1>
+    <h1 class="md-h1">Stimulus Control</h1>
     <p>
       Remember when we said that you should only use your bedroom for sleep and
       sex?

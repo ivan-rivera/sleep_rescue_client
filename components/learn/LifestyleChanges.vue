@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Lifestyle changes</h1>
+    <h1 class="md-h1">Lifestyle changes</h1>
     <p>
       Assuming that you've read and internalised previous section on tackling
       negative thoughts, we can now begin addressing the behavioural components

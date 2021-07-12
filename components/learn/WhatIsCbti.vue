@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>What is CBT-i?</h1>
+    <h1 class="md-h1">What is CBT-i?</h1>
     <p>
       <a
         href="https://www.mayoclinic.org/diseases-conditions/insomnia/in-depth/insomnia-treatment/art-20046677"

@@ -75,7 +75,7 @@
 }
 
 .text-highlight {
-  @apply font-bold text-supplementary;
+  @apply font-bold underline;
 }
 
 // --------------------------------------------------------
@@ -98,7 +98,7 @@
   @apply bg-white border-2
   focus:outline-none
   text-dark
-  p-2 ml-auto mr-auto w-3/4 md:w-full;
+  p-2 ml-auto mr-auto w-full md:w-full;
 }
 
 .error-message {
@@ -205,6 +205,16 @@
 // MISC ELEMENTS
 // --------------------------------------------------------
 
+.no-highlights {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .line-divider {
   @apply self-center;
   @apply mb-5;
@@ -256,6 +266,20 @@ input[type=number]::-webkit-outer-spin-button {
 
 input[type='number']:focus {
   outline: none;
+}
+
+button,
+textarea,
+input,
+select,
+a{
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 // --------------------------------------------------------

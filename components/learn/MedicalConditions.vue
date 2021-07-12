@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Medical conditions and poor sleep</h1>
+    <h1 class="md-h1">Medical conditions and poor sleep</h1>
     <p>
       In the previous section we distinguished between primary and secondary
       insomnia and noted that in the case of secondary insomnia, sleep problems

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Sleep restriction</h1>
+    <h1 class="md-h1">Sleep restriction</h1>
     <p>
       <a
         href="https://stanfordhealthcare.org/medical-treatments/c/cognitive-behavioral-therapy-insomnia/procedures/sleep-restriction.html"
