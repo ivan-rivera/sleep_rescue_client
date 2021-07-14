@@ -12,7 +12,9 @@
         records your email address, a hashed version of your password (one-way
         encryption) as well as all the data that you choose to save (nightly
         records, goals, ISI surveys and thoughts). This data is stored in a
-        protected, 3rd-party database.
+        protected, 3rd-party database. We also use Google Analytics to track
+        aggregate-level events such as daily registrations, total unique
+        visitors and similar metrics.
       </p>
       <p>
         SleepRescue.org will not, under circumstances either sell or share your

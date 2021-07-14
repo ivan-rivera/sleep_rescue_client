@@ -30,7 +30,7 @@
             id="login-password"
             v-model="password"
             type="password"
-            class="form-input-alternative"
+            class="form-input-alternative mt-2.5"
             pattern="\w{8,}"
             required
             oninput="setCustomValidity('')"

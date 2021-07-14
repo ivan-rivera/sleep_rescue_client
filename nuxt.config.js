@@ -125,12 +125,12 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://192.168.0.11:4000/api',
+    baseURL: process.env.SR_BACKEND_BASE_URL || 'http://192.168.0.11:4000/api',
   },
 
   publicRuntimeConfig: {
     axios: {
-      baseURL: process.env.BROWSER_BASE_URL,
+      baseURL: process.env.SR_BACKEND_BASE_URL,
     },
   },
 
