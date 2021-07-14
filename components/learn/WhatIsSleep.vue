@@ -22,7 +22,7 @@
     </p>
     <ul>
       <li>
-        <span class="text-highlight">Stage 1:</span> This stage only lasts a
+        <span class="text-highlight">Stage 1:</span> this stage only lasts a
         matter of minutes and if you are awoken during this phase, then you
         might claim that you were not asleep at all.
       </li>

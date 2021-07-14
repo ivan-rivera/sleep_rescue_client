@@ -20,8 +20,8 @@
         >Antihistamines</a
       >
       which are commonly used to treat allergies can help to induce sleep. Note
-      that even those these drugs require no prescription, they too come with
-      side effects and should not be ued for an extended period of time. Other
+      that even though these drugs require no prescription, they too come with
+      side effects and should not be used for an extended period of time. Other
       drugs that do not require you to see a doctor (large doses may still
       require a prescription) include
       <a
@@ -49,7 +49,7 @@
         >non-benzodiazepines</a
       >
       (non-BZ). While both of these are psychoactive drugs used to treat
-      insomnia, anxiety panic attacks and related disorders, non-BZ drugs are
+      insomnia, anxiety, panic attacks and related disorders, non-BZ drugs are
       newer and presumably
       <a
         href="https://www.sciencedirect.com/topics/medicine-and-dentistry/nonbenzodiazepine"

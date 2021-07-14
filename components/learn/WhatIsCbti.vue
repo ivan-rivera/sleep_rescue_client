@@ -7,7 +7,7 @@
         >CBT-i</a
       >
       stands for Cognitive Behavioural Therapy for insomnia and it is considered
-      to an extremely effective and
+      to be an extremely effective and
       <a
         href="https://www.sciencedirect.com/science/article/abs/pii/S1087079218301965"
         >well-studied</a

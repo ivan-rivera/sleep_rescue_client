@@ -17,10 +17,10 @@
         visitors and similar metrics.
       </p>
       <p>
-        SleepRescue.org will not, under circumstances either sell or share your
-        data with any other organisation. If you would like to remove all your
-        data from the website's database, then you can delete your account which
-        would permanently erase all of your records.
+        SleepRescue.org will not, under any circumstances either sell or share
+        your data with any other organisation. If you would like to remove all
+        your data from the website's database, then you can delete your account
+        which would permanently erase all of your records.
       </p>
     </div>
     <NuxtLink :to="homePath">

@@ -12,7 +12,7 @@
       use the <NuxtLink to="/thoughts">thought tracker</NuxtLink> to record
       negative thoughts. You will also need to record their rational
       counterparts. For example, if you catch yourself thinking "my poor sleep
-      will torment me for the rest of my life", they you'll need to analyse this
+      will torment me for the rest of my life", then you'll need to analyse this
       thought from a more rational perspective. You may then conclude that "this
       is a very common conditions and many people either completely recover or
       find an effective way to manage their sleep, so I can do it too".
@@ -32,7 +32,7 @@
         However, it is important to remember that these so-called normal people
         also struggle with sleep from time to time, especially as they get
         older, they just don't think anything of it. Therefore, assuming that an
-        average persons sleep well every night is unrealistic.
+        average person sleeps well every night is unrealistic.
       </li>
       <li>
         <span class="text-highlight">Exaggeration:</span> poor sleep can mess
@@ -56,7 +56,7 @@
       </li>
       <li>
         <span class="text-highlight">Hopelessness:</span> one of the ways that
-        hopelessness manifests itself in people's negative thoughts is thought
+        hopelessness manifests itself in people's negative thoughts is through
         the notion of being not in control. This is simply false. There are many
         factors that are within your control. For example, you can (and
         definitely should) seek medical attention, you can give CBT-i the best

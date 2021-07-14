@@ -16,7 +16,8 @@
       <li>
         <span class="text-highlight"
           >Invest in quality mattress and pillows:</span
-        >As the previous point states, you should be comfortable in bed and if
+        >
+        as the previous point states, you should be comfortable in bed and if
         your current bed is not giving you the comfort you need, then consider
         upgrading. Perhaps you might even consider getting a
         <a

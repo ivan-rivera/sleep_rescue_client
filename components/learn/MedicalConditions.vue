@@ -104,7 +104,7 @@
           >hypersomnia</a
         >
         is described by excessive sleepiness and the desire to sleep longer than
-        normal. Treatment of these conditions required medication to manage the
+        normal. Treatment of these conditions requires medication to manage the
         symptoms.
       </li>
     </ul>
@@ -112,10 +112,10 @@
       Whether you suspect that you may have one of the above conditions or not,
       we strongly recommend that you see a doctor about your sleep problems.
       Ideally, they would refer you to specialist or directly put you into a
-      sleep lab for a few nights whether your condition can be thoroughly
-      assessed by qualified professionals. This website is not designed to help
-      people with any of the above conditions. However, many people struggle to
-      sleep even after ruling out all of the above problems. This is our target
+      sleep lab for a few nights where your condition can be thoroughly assessed
+      by qualified professionals. This website is not designed to help people
+      with any of the above conditions. However, many people struggle to sleep
+      even after ruling out all of the above problems. This is our target
       audience.
     </p>
   </div>

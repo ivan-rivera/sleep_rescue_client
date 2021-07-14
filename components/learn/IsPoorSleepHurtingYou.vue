@@ -3,20 +3,20 @@
     <h1 class="md-h1">Is poor sleep hurting you?</h1>
     <p>
       As we've just learnt, sleep is vital to our well-being, so if you don't
-      get enough of it, then is it really going have a profound, irreversible
+      get enough of it, then is it really going to have a profound, irreversible
       negative effect on your health?
     </p>
     <p>
       While many studies do show that lifelong insomnia can indeed negatively
       affect your health, we recommend that you
-      <span class="underline">do not</span> look into this research. It may be
-      assess "what you are in for", but you are not going to gain anything but
-      unnecessary stress by learning about all the negative health consequences
-      associated with long-term sleep deprivation. Remember that in most cases,
-      primary insomnia is a psychological disorder that is often fulled by
-      stress and anxiety. Short term consequences of insomnia are bad enough to
-      drive its sufferers to take action. The mere fact that you have visited
-      our website suggests that you are doing your best to overcome your
+      <span class="underline">do not</span> look into this research. You might
+      wish to assess "what you are in for", but you are not going to gain
+      anything but unnecessary stress by learning about all the negative health
+      consequences associated with long-term sleep deprivation. Remember that in
+      most cases, primary insomnia is a psychological disorder that is often
+      fuelled by stress and anxiety. Short term consequences of insomnia are bad
+      enough to drive its sufferers to take action. The mere fact that you have
+      visited our website suggests that you are doing your best to overcome your
       insomnia. Hopefully by completing CBT-i you will not need to worry about
       sleep deprivation damaging your health.
     </p>

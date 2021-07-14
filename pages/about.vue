@@ -37,7 +37,7 @@
         </li>
         <li>
           If you are a web developer too, then consider joining me! This project
-          is open-sources and you can find the
+          is open-sourced and you can find the
           <a
             class="web-link"
             href="https://github.com/ivan-rivera/sleep_rescue_api"

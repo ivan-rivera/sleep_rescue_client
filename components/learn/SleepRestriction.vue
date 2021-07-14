@@ -27,7 +27,7 @@
       By the end of the 2-week period you should have an average sleep time,
       let's say 6 hours. If your average is below 5 hours, then use 5 hours
       instead of your average. Next, you need to come up with your desired
-      wake-up time. let's say that your desired wake-up time is 7am. The only
+      wake-up time. Let's say that your desired wake-up time is 7am. The only
       thing that's left to decide now is what time you should go to bed and
       that's where your recorded average sleep time comes into the equation.
       Subtract your average sleep time from your desired wake-up time to find
