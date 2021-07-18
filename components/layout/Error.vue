@@ -10,3 +10,14 @@
     />
   </div>
 </template>
+
+<script>
+export default {
+  mounted() {
+    this.$gtag.event('exception', {
+      description: 'load_failure',
+      fatal: true,
+    })
+  },
+}
+</script>

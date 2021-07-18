@@ -18,7 +18,9 @@
               Feel free to explore our
               <span
                 class="font-bold text-dark bg-secondary rounded-2xl p-2 shadow-md"
-                ><NuxtLink to="/learn">Learning Center</NuxtLink></span
+                ><NuxtLink to="/learn" @click.native="toLearningCenter"
+                  >Learning Center</NuxtLink
+                ></span
               >
             </p>
           </div>
@@ -204,7 +206,17 @@ export default {
       setError: 'setError',
       toggleSignInModal: 'toggleSignInModal',
     }),
+    toLearningCenter() {
+      this.$gtag.event('learning_center_from_index', {
+        event_category: 'engagement',
+        event_label: 'method',
+      })
+    },
     async registerUser() {
+      this.$gtag.event('sign_up', {
+        event_category: 'engagement',
+        event_label: 'method',
+      })
       this.$v.$touch()
       if (this.$v.$invalid) {
         this.flashError(
@@ -231,6 +243,10 @@ export default {
       this.$refs.password_confirmation.setCustomValidity(validity)
     },
     flashError(message) {
+      this.$gtag.event('exception', {
+        description: 'frontpage_server',
+        fatal: true,
+      })
       this.$store.commit('setError', message)
       setTimeout(() => {
         this.$store.commit('setError', null)

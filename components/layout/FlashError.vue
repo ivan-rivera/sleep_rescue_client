@@ -30,6 +30,12 @@ export default {
     mode: 'out-in',
   },
   computed: mapState(['error']),
+  mounted() {
+    this.$gtag.event('exception', {
+      description: 'flash_error',
+      fatal: true,
+    })
+  },
   methods: {
     close() {
       this.$store.commit('setError', null)

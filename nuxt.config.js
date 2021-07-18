@@ -57,6 +57,7 @@ export default {
     { src: '~/plugins/vuejs-datepicker', ssr: false, mode: 'client' },
     { src: '~/plugins/vue2-timepicker', ssr: false },
     { src: '~/plugins/vue-chart', ssr: false },
+    { src: '~/plugins/vue-gtag' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

@@ -154,6 +154,10 @@ export default {
       this.showSignIn = !this.showSignIn
     },
     async login() {
+      this.$gtag.event('login', {
+        event_category: 'engagement',
+        event_label: 'method',
+      })
       try {
         this.isLoading = true
         await this.$auth.loginWith('local', { data: this.loginForm })
@@ -166,6 +170,10 @@ export default {
       }
     },
     async reset() {
+      this.$gtag.event('reset', {
+        event_category: 'engagement',
+        event_label: 'method',
+      })
       try {
         this.isLoading = true
         const response = await this.$axios.$post(
