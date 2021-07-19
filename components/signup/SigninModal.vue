@@ -183,6 +183,10 @@ export default {
         this.resetForm.email = null
         this.resetMessage = response.data.message
       } catch (error) {
+        this.$gtag.event('exception', {
+          description: 'sign_in_failure',
+          fatal: true,
+        })
         this.catchError(error)
       } finally {
         this.isLoading = false
