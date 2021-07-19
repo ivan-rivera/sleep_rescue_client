@@ -5,7 +5,7 @@
       We sent you an email with a confirmation link to
       <span class="attention">{{ email }}</span
       >, please click on that link before proceeding to use this website. It may
-      take 10 mins or so for the email to get delivered.
+      take 10 mins or so for the email to get delivered. Check your spam folder.
       <br />
       <br />
       If you didn't get the email, you can request it again.
