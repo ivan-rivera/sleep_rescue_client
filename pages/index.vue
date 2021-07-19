@@ -285,7 +285,7 @@ export default {
 
 .disclaimer-text {
   @apply text-center text-xs 2xl:text-sm
-  pb-5 pt-10 2xl:pt-16 3xl:pb-16;
+  pb-5 pt-5 2xl:pt-16 3xl:pb-16;
 }
 
 .signup-disclaimer {

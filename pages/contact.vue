@@ -90,6 +90,8 @@ export default {
           user: this.$nuxt.$auth.loggedIn ? this.$nuxt.$auth.user.email : null,
           text: this.contactText,
         })
+        this.contactText = null
+        this.success = true
         setTimeout(() => {
           this.success = false
         }, 5000)
@@ -108,7 +110,7 @@ export default {
 
 <style scoped>
 .contact-text-form {
-  @apply ml-auto mr-auto w-full rounded-t-2xl rounded-bl-2xl bg-primary p-2 text-dark;
+  @apply ml-auto mr-auto w-full rounded-t-2xl rounded-bl-2xl bg-primary p-2 text-white;
   min-height: 150px;
 }
 </style>

@@ -4,7 +4,8 @@
     <span class="block text-center text-2xl mb-14">
       We sent you an email with a confirmation link to
       <span class="attention">{{ email }}</span
-      >, please click on that link before proceeding to use this website.
+      >, please click on that link before proceeding to use this website. It may
+      take 10 mins or so for the email to get delivered.
       <br />
       <br />
       If you didn't get the email, you can request it again.
