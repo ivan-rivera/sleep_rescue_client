@@ -13,6 +13,9 @@
     <div class="flex flex-col">
       <div class="secondary-btn max-w-sm" @click="$auth.logout()">Log out</div>
       <div class="secondary-btn max-w-sm" @click="sendEmail">Send again</div>
+      <div class="secondary-btn max-w-sm" @click="deleteAccount">
+        Delete account
+      </div>
       <div
         v-if="unconfirmedEmail"
         class="secondary-btn max-w-sm"
@@ -63,6 +66,14 @@ export default {
     async cancel() {
       try {
         await this.$axios.get('v1/user/reset')
+        await this.$auth.logout()
+      } catch (_error) {
+        this.message = this.genericError
+      }
+    },
+    async deleteAccount() {
+      try {
+        await this.$axios.delete('v1/user')
         await this.$auth.logout()
       } catch (_error) {
         this.message = this.genericError
