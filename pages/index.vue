@@ -74,7 +74,7 @@
               placeholder="Password..."
               class="form-input"
               required
-              pattern="\w{8,}"
+              pattern="[A-Za-z\d@$!%*?&]{8,}"
               oninput="setCustomValidity('')"
               oninvalid="setCustomValidity('Your password must contain at least 8 alphanumeric characters')"
             />

@@ -23,7 +23,7 @@
           type="password"
           class="form-input-alternative"
           required
-          pattern="\w{8,}"
+          pattern="[A-Za-z\d@$!%*?&]{8,}"
           oninput="setCustomValidity('')"
           oninvalid="setCustomValidity('Must contain at least 8 alphanumeric characters')"
         />
