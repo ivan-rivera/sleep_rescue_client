@@ -89,7 +89,7 @@
           <NuxtLink
             v-if="!$auth.loggedIn"
             to="/"
-            class="nav-btn active-nav-btn mt-1 rounded-2xl w-full"
+            class="nav-btn active-nav-btn mt-1 rounded-2xl w-64"
           >
             Sign up!
           </NuxtLink>
@@ -248,10 +248,11 @@ export default {
   min-width: 300px;
 }
 .small-device-nav {
-  @apply sticky bottom-10 ml-auto mr-auto
-  bg-white rounded-2xl p-2
-  max-w-sm
+  @apply sticky left-0 bottom-0 ml-0 mr-0
+  bg-white p-2
   lg:hidden;
+  width: 100vw;
+  overflow: hidden;
 }
 .nav-btn {
   @apply shadow-md
