@@ -16,8 +16,19 @@
       <font-awesome-icon :icon="['fa', 'info-circle']" />
       <NuxtLink to="/about/">About</NuxtLink>
     </li>
+    <li v-if="!confirmedUser && $auth.loggedIn" class="head-option">
+      <font-awesome-icon :icon="['fa', 'door-open']" class="inline" />
+      <div class="inline" @click="$auth.logout()">Log Out</div>
+    </li>
   </ul>
 </template>
+
+<script>
+import { mapState } from 'vuex'
+export default {
+  computed: mapState(['confirmedUser']),
+}
+</script>
 
 <style scoped>
 .head-option {
