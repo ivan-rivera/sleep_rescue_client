@@ -8,6 +8,7 @@ export default {
   target: 'static',
 
   generate: {
+    fallback: '404.html',
     exclude: [
       '/account',
       '/confirm',
