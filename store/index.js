@@ -1,5 +1,6 @@
 export const state = () => ({
   error: null,
+  confirmedUser: false,
   goalToDelete: null,
   thoughtToDelete: null,
   resultToDelete: null,
@@ -21,6 +22,9 @@ export const state = () => ({
 export const mutations = {
   setError(state, error) {
     state.error = error
+  },
+  setConfirmedUserStatus(state, status) {
+    state.confirmedUser = status
   },
   setGoalToDelete(state, goalId) {
     state.goalToDelete = goalId

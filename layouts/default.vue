@@ -26,8 +26,7 @@ export default {
   components: { Footer, Header, FlashError, Sidebar },
   computed: {
     confirmedUser() {
-      const confirmPath = this?.$route?.name?.includes('confirm') ?? false
-      return this.$auth.loggedIn && !confirmPath
+      return this.$auth.loggedIn && this.$store.state.confirmedUser
     },
   },
 }
