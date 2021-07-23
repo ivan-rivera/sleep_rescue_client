@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">What is sleep?</h1>
+  <Chapter chapter-title="What is sleep?">
     <p>We all need to sleep.</p>
     <p>
       Contrary to what many people think, sleep is an active process and the
@@ -52,29 +51,12 @@
       >. You begin to spend less time in deep sleep and you require less sleep
       per night. Bear this in mind when setting your goals!
     </p>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-what-is-sleep',
-        name: 'What is sleep?',
-        content: 'Everything you need to know about sleep',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>
-
-<style scoped>
-li::before {
-  content: '‣ ';
-}
-a {
-  text-decoration: none;
-  @apply text-secondary hover:underline;
-}
-</style>

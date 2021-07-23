@@ -1,17 +1,16 @@
 <template>
   <ul>
-    <ul v-for="section in sections" :key="section.id">
+    <ul v-for="section in chapters" :key="section.id">
       <li class="section-header" :class="headerColor">{{ section.title }}</li>
       <ul v-for="subsection in section.content" :key="subsection.id">
         <li
           class="class-subsection-header"
           :class="{
             'font-bold text-dark lg:text-secondary':
-              subsection.id === selectedPage,
+              subsection.id === selectedId,
           }"
-          @click="select(subsection.id)"
         >
-          {{ subsection.title }}
+          <NuxtLink :to="subsection.link">{{ subsection.title }}</NuxtLink>
         </li>
       </ul>
     </ul>
@@ -19,24 +18,27 @@
 </template>
 
 <script>
+import { chapters, getIdFromTitle } from '~/assets/js/chapters'
 export default {
   props: {
-    sections: {
-      type: Array,
-      required: true,
-    },
-    selectedPage: {
-      type: Number,
-      required: true,
-    },
-    select: {
-      type: Function,
+    selectedTitle: {
+      type: String,
       required: true,
     },
     headerColor: {
       type: String,
       default: 'text-supplementary',
       required: false,
+    },
+  },
+  data() {
+    return {
+      chapters,
+    }
+  },
+  computed: {
+    selectedId() {
+      return getIdFromTitle(this.selectedTitle)
     },
   },
 }

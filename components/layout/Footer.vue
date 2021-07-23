@@ -3,8 +3,16 @@
     <p>SleepRescue.org © {{ year }}</p>
     <div>
       <p class="footer-item">Built with Phoenix + Nuxt</p>
-      <img class="footer-item" src="images/phoenix.svg" alt="phoenix" />
-      <img class="footer-item" src="images/nuxt-white-small.svg" alt="nuxt" />
+      <img
+        class="footer-item"
+        src="~/static/images/phoenix.svg"
+        alt="phoenix"
+      />
+      <img
+        class="footer-item"
+        src="~/static/images/nuxt-white-small.svg"
+        alt="nuxt"
+      />
     </div>
   </footer>
 </template>

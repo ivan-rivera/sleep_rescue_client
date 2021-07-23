@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">Foreword</h1>
+  <Chapter chapter-title="Foreword">
     <p>Welcome to SleepRescue.org!</p>
     <p>
       By visiting this page, you've taken the first and the most important step
@@ -22,29 +21,12 @@
       <li>Propose a strategy for getting your sleep on track</li>
       <li>Equip you with the tools to implement the above strategy</li>
     </ul>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-foreword',
-        name: 'Foreword',
-        content: 'What you can expect to learn on SleepRescue.org',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>
-
-<style scoped>
-li::before {
-  content: '‣ ';
-}
-a {
-  text-decoration: none;
-  @apply text-secondary hover:underline;
-}
-</style>

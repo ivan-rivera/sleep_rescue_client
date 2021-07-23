@@ -2,7 +2,7 @@
   <header class="header">
     <div class="logo">
       <NuxtLink :to="homePath">
-        <img src="images/logo.svg" alt="logo" />
+        <img src="~/static/images/logo.svg" alt="logo" />
       </NuxtLink>
     </div>
     <div>

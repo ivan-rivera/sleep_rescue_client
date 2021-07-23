@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">Is poor sleep hurting you?</h1>
+  <Chapter chapter-title="Is poor sleep hurting you?">
     <p>
       As we've just learnt, sleep is vital to our well-being, so if you don't
       get enough of it, then is it really going to have a profound, irreversible
@@ -24,19 +23,12 @@
       What you need to know now is that insomnia is a curable disorder and we
       hope to help you overcome it.
     </p>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-poor-sleep',
-        name: 'Is Poor Sleep Hurting You?',
-        content: 'Find our what effect poor sleep is having on your health',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">What is CBT-i?</h1>
+  <Chapter chapter-title="What is CBT-i?">
     <p>
       <a
         href="https://www.mayoclinic.org/diseases-conditions/insomnia/in-depth/insomnia-treatment/art-20046677"
@@ -33,20 +32,12 @@
       factors, we will also consider the effect of your environment on your
       sleep.
     </p>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-cbti',
-        name: 'What is Cognitive Behavioural Therapy for insomnia?',
-        content:
-          'Learn the key points about Cognitive Behavioural Thepray for insomnia (CBT-i)',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>

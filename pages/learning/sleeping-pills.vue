@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">Sleeping pills and natural remedies</h1>
+  <Chapter chapter-title="Sleeping pills and natural remedies">
     <p>
       Sadly, there are no magic pills that would help us sleep with no strings
       attached. Modern pharmacological sleeping pills are usually designed for
@@ -62,20 +61,12 @@
       non-pharmacological solution to their sleep problem and we will talk
       extensively about it next.
     </p>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-pills',
-        name: 'Sleeping Pills and Natural Remedies',
-        content:
-          'Pros and cons of sleeping pills and natural remedies on your long-terms sleep quality',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>

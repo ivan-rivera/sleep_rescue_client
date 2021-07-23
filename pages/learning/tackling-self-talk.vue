@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">Tackling self talk</h1>
+  <Chapter chapter-title="Tackling self-talk">
     <p>
       As we've just learnt, the <em>cognitive</em> part of CBT-i is concerned
       with our thoughts and emotions. In order for you to recover, you need to
@@ -70,20 +69,12 @@
         but you are certainly not helping yourself by thinking it.
       </li>
     </ul>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-intrusive-thoughts',
-        name: 'Countering Negative Self-Talk',
-        content:
-          'Effect of intrusive negative thoughts and how to deal with them',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>

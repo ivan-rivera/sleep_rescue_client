@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">Stimulus Control</h1>
+  <Chapter chapter-title="Stimulus control">
     <p>
       Remember when we said that you should only use your bedroom for sleep and
       sex?
@@ -30,20 +29,12 @@
       insomnia and it is highly effective even though you will probably not
       appreciate it immediately.
     </p>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-stimulus-control',
-        name: 'Stimulus Control',
-        content:
-          'What is Stimulus Control and how it can aide your recovery from insomnia',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>

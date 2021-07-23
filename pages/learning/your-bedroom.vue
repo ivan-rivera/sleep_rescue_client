@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">Your bedroom</h1>
+  <Chapter chapter-title="Your bedroom">
     <p>
       In the previous section we spoke about lifestyle changes that you should
       consider in order to improve your sleep. In this section we are continuing
@@ -33,20 +32,12 @@
         relationship between bed and sleep.
       </li>
     </ul>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-bedroom',
-        name: 'Your Bedroom',
-        content:
-          'Managing your relationship with your bedroom to improve the quality of your sleep',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>

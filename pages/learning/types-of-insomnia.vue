@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">Types of insomnia</h1>
+  <Chapter chapter-title="Types of insomnia">
     <p>
       There are
       <a href="https://www.sleepfoundation.org/insomnia/types-of-insomnia"
@@ -35,20 +34,12 @@
       <NuxtLink to="/isi">Insomnia Severity Index</NuxtLink> to assess how bad
       is your sleep problem.
     </p>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-types-of-insomnia',
-        name: 'Types of Insomnia',
-        content:
-          'Understanding different types of insomnia, how they manifest themselves and how to deal with them',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>

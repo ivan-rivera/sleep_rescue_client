@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">Expectation management</h1>
+  <Chapter chapter-title="Expectation management">
     <p>
       Before we talk about the details of CBT-i, it is important to address your
       expectations.
@@ -32,20 +31,12 @@
       again. I, the author of this article have gone through it several times.
     </p>
     <p>And now we are ready to talk about implementing CBT-i.</p>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-expectation-management',
-        name: 'Expectation Management',
-        content:
-          'Set your expectations straight before starting Cognitive Behavioural Therapy for insomnia',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>

@@ -62,7 +62,7 @@
           </transition>
         </div>
       </NuxtLink>
-      <NuxtLink title="Learning Center" to="/learn">
+      <NuxtLink title="Learning Center" :to="learningCenterPath">
         <div class="option-holder" :class="isSelected('learn')">
           <div class="icon-box">
             <font-awesome-icon :icon="['fa', 'book-medical']" />
@@ -109,6 +109,16 @@ export default {
     return {
       expanded: false,
     }
+  },
+  computed: {
+    learningCenterPath() {
+      const fallback = '/learning/foreword'
+      try {
+        return localStorage.getItem('learningCenterPath') ?? fallback
+      } catch {
+        return fallback
+      }
+    },
   },
   methods: {
     isSelected(page) {

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">Lifestyle changes</h1>
+  <Chapter chapter-title="Lifestyle changes">
     <p>
       Assuming that you've read and internalised previous section on tackling
       negative thoughts, we can now begin addressing the behavioural components
@@ -70,20 +69,12 @@
       you need to pay extra attention to all factors that could rob you of a
       good night's sleep.
     </p>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-lifestyle',
-        name: 'Lifestyle Changes',
-        content:
-          'What lifestyle changes your can introduce to improve your sleep quality',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">Medical conditions and poor sleep</h1>
+  <Chapter chapter-title="Medical conditions">
     <p>
       In the previous section we distinguished between primary and secondary
       insomnia and noted that in the case of secondary insomnia, sleep problems
@@ -118,27 +117,12 @@
       even after ruling out all of the above problems. This is our target
       audience.
     </p>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-medical',
-        name: 'Medical Conditions',
-        content:
-          'What medical conditions may interfere with your sleep and cause insomnia',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>
-
-<style scoped>
-a {
-  text-decoration: none;
-  @apply text-secondary hover:underline;
-}
-</style>

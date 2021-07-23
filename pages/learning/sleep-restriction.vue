@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">Sleep restriction</h1>
+  <Chapter chapter-title="Sleep restriction">
     <p>
       <a
         href="https://stanfordhealthcare.org/medical-treatments/c/cognitive-behavioral-therapy-insomnia/procedures/sleep-restriction.html"
@@ -50,20 +49,12 @@
       hours) for a week. You should continue incrementally updating your sleep
       schedule until your reach your desired sleep window.
     </p>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-sleep-restriction',
-        name: 'Sleep Restriction Therapy',
-        content:
-          'What is Sleep Restriction Therapy and how you can use it to beat insomnia',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>

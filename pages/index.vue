@@ -18,7 +18,9 @@
               Feel free to explore our
               <span
                 class="font-bold text-dark bg-secondary rounded-2xl p-2 shadow-md"
-                ><NuxtLink to="/learn" @click.native="toLearningCenter"
+                ><NuxtLink
+                  :to="learningCenterPath"
+                  @click.native="toLearningCenter"
                   >Learning Center</NuxtLink
                 ></span
               >
@@ -191,6 +193,14 @@ export default {
     passwordsMatch() {
       const form = this.registration.user
       return form.password === form.password_confirmation
+    },
+    learningCenterPath() {
+      const fallback = '/learning/foreword'
+      try {
+        return localStorage.getItem('learningCenterPath') ?? fallback
+      } catch {
+        return fallback
+      }
     },
   },
   beforeCreate() {

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="md-h1">Factors affecting sleep</h1>
+  <Chapter chapter-title="Factors affecting sleep">
     <p>
       There are
       <a
@@ -41,27 +40,12 @@
       however, you may already begin to evaluate your own problem by considering
       these categories.
     </p>
-  </div>
+  </Chapter>
 </template>
 
 <script>
+import Chapter from '~/components/learning/Chapter'
 export default {
-  head: {
-    meta: [
-      {
-        hid: 'sleep-rescue-factors-affecting-sleep',
-        name: 'Factors Affecting Sleep',
-        content:
-          'Learn what factors negatively influence your sleep and what you can do about it',
-      },
-    ],
-  },
+  components: { Chapter },
 }
 </script>
-
-<style scoped>
-a {
-  text-decoration: none;
-  @apply text-secondary hover:underline;
-}
-</style>
