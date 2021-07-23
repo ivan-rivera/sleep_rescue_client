@@ -1,20 +1,12 @@
-# sleep_rescue_client
+# SleepRescue.org
 
-## Build Setup
+This is the frontend for [sleeprescue.org](sleeprescue.org).
 
-```bash
-# install dependencies
-$ yarn install
+Here is a brief demo of how it looks:
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+![](https://media.giphy.com/media/YnXJEaC2yw8LyW3H9z/giphy.gif)
 
-# build for production and launch server
-$ yarn build
-$ yarn start
 
-# generate static project
-$ yarn generate
-```
+You can find the backend [here](https://github.com/ivan-rivera/sleep_rescue_api).
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+If you want to contribute, please be my guest!
