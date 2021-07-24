@@ -167,6 +167,12 @@ export default {
   methods: {
     ...mapMutations(['toggleIsiCreateModal']),
     async createIsi() {
+      this.$ga.event({
+        eventCategory: 'product_use',
+        eventLabel: 'isi_entered',
+        eventAction: 'method',
+        eventValue: 1,
+      })
       try {
         this.isLoading = true
         await this.$axios.patch('v1/isi', {

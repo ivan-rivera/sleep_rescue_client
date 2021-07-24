@@ -301,6 +301,12 @@ export default {
       this.toggleGoalsModal()
     },
     async createGoal() {
+      this.$ga.event({
+        eventCategory: 'product_use',
+        eventLabel: 'goal_entered',
+        eventAction: 'method',
+        eventValue: 1,
+      })
       try {
         this.isLoading = true
         await this.$axios.post('v1/goal', this.constructedGoal)

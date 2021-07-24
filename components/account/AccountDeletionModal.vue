@@ -67,9 +67,11 @@ export default {
   methods: {
     ...mapMutations(['toggleAccountDeletionModal']),
     async deleteAccount() {
-      this.$gtag.event('delete_account', {
-        event_category: 'engagement',
-        event_label: 'method',
+      this.$ga.event({
+        eventCategory: 'engagement',
+        eventLabel: 'delete_account',
+        eventAction: 'method',
+        eventValue: 1,
       })
       try {
         await this.$axios.delete('v1/user', { data: this.form })

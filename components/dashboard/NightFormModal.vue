@@ -268,6 +268,12 @@ export default {
       this.toggleNightFormModal()
     },
     async submitNight() {
+      this.$ga.event({
+        eventCategory: 'product_use',
+        eventLabel: 'night_entered',
+        eventAction: 'method',
+        eventValue: 1,
+      })
       if (this.inputsAreValid) {
         try {
           this.isLoading = true

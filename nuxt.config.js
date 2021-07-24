@@ -58,7 +58,6 @@ export default {
     { src: '~/plugins/vuejs-datepicker', ssr: false, mode: 'client' },
     { src: '~/plugins/vue2-timepicker', ssr: false },
     { src: '~/plugins/vue-chart', ssr: false },
-    { src: '~/plugins/vue-gtag' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -71,6 +70,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/fontawesome',
+    '@nuxtjs/google-analytics',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -155,5 +155,11 @@ export default {
 
   tailwindcss: {
     jit: true,
+  },
+  googleAnalytics: {
+    id: process.env.GA_UA_ID,
+    autoTracking: {
+      screenview: true,
+    },
   },
 }

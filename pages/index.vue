@@ -217,15 +217,19 @@ export default {
       toggleSignInModal: 'toggleSignInModal',
     }),
     toLearningCenter() {
-      this.$gtag.event('learning_center_from_index', {
-        event_category: 'engagement',
-        event_label: 'method',
+      this.ga.event({
+        eventCategory: 'engagement',
+        eventAction: 'learning_center_from_index',
+        eventLabel: 'method',
+        eventValue: 1,
       })
     },
     async registerUser() {
-      this.$gtag.event('sign_up', {
-        event_category: 'engagement',
-        event_label: 'method',
+      this.$ga.event({
+        eventCategory: 'engagement',
+        eventAction: 'sign_up',
+        eventLabel: 'method',
+        eventValue: 1,
       })
       this.$v.$touch()
       if (this.$v.$invalid) {
@@ -253,10 +257,6 @@ export default {
       this.$refs.password_confirmation.setCustomValidity(validity)
     },
     flashError(message) {
-      this.$gtag.event('exception', {
-        description: 'frontpage_server',
-        fatal: true,
-      })
       this.$store.commit('setError', message)
       setTimeout(() => {
         this.$store.commit('setError', null)

@@ -80,10 +80,6 @@ export default {
   },
   methods: {
     async sendForm() {
-      this.$gtag.event('contact', {
-        event_category: 'engagement',
-        event_label: 'method',
-      })
       try {
         this.isLoading = true
         await this.$axios.post('v1/contact', {

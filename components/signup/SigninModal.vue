@@ -154,10 +154,6 @@ export default {
       this.showSignIn = !this.showSignIn
     },
     async login() {
-      this.$gtag.event('login', {
-        event_category: 'engagement',
-        event_label: 'method',
-      })
       try {
         this.isLoading = true
         await this.$auth.loginWith('local', { data: this.loginForm })
@@ -170,10 +166,6 @@ export default {
       }
     },
     async reset() {
-      this.$gtag.event('reset', {
-        event_category: 'engagement',
-        event_label: 'method',
-      })
       try {
         this.isLoading = true
         const response = await this.$axios.$post(
@@ -183,10 +175,6 @@ export default {
         this.resetForm.email = null
         this.resetMessage = response.data.message
       } catch (error) {
-        this.$gtag.event('exception', {
-          description: 'sign_in_failure',
-          fatal: true,
-        })
         this.catchError(error)
       } finally {
         this.isLoading = false

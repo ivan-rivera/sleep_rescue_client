@@ -156,6 +156,12 @@ export default {
       return thought == null ? false : thought.length > limit
     },
     async createThought() {
+      this.$ga.event({
+        eventCategory: 'product_use',
+        eventLabel: 'thought_entered',
+        eventAction: 'method',
+        eventValue: 1,
+      })
       if (this.allowedToSubmit) {
         this.isLoading = true
         try {
