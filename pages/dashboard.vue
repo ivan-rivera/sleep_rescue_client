@@ -78,7 +78,9 @@
       </div>
       <p class="italic text-sm text-center mt-5">
         Be sure to check out our
-        <NuxtLink class="text-secondary hover:underline" to="/learn"
+        <NuxtLink
+          class="text-secondary hover:underline"
+          :to="learningCenterPath"
           >Learning Center</NuxtLink
         >, especially the section on Sleep Restriction which provides
         instructions on how to schedule your sleep.
@@ -245,6 +247,14 @@ export default {
   },
   computed: {
     ...mapState(['showNightFormModal']),
+    learningCenterPath() {
+      const fallback = '/learning/foreword'
+      try {
+        return localStorage.getItem('learningCenterPath') ?? fallback
+      } catch {
+        return fallback
+      }
+    },
     nDaySummary() {
       switch (this.periodSelection) {
         case '0':

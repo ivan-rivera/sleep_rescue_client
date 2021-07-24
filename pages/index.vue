@@ -118,7 +118,7 @@
       </div>
     </div>
     <p class="disclaimer-text">
-      This website was was created by CBT-i practitioners, not by medical
+      This website was created by CBT-i practitioners, not by medical
       professionals, check with your doctor if CBT-i is right for you
     </p>
     <!-- Revealable content -->
