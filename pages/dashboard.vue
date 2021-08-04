@@ -324,7 +324,6 @@ export default {
     },
     async getSleepData(axios, period) {
       const nightsRaw = await axios.get(`v1/night/${period}`)
-      console.log(nightsRaw)
       const nightsData = nightsRaw.data.data
       const dataExists = Object.keys(nightsData).length > 0
       const filledFrame = this.fillFrame(nightsData, period)
