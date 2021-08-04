@@ -4,10 +4,10 @@
       <div class="hero-content">
         <!-- left/top: text and cards -->
         <section>
-          <div class="heading-top text-center mt-5 mb-5">SleepRescue.org</div>
-          <div class="heading-sub text-center">
+          <h1 class="heading-top text-center mt-5 mb-5">SleepRescue.org</h1>
+          <h2 class="heading-sub text-center">
             Let's get your sleep back on track
-          </div>
+          </h2>
           <div class="hero-text">
             Sleep is not a privilege, yet so many of us are struggling with
             insomnia. Sleep Rescue offers resources for self-guided Cognitive
