@@ -47,5 +47,22 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'Factors Affecting Sleep',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Learn what factors affect your sleep and what you can do about it',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords: 'insomnia, sleep, factors, influence',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

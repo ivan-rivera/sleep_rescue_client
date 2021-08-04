@@ -39,5 +39,22 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'Your Bedroom',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Learn about the changes that you will need to introduce into your bedroom to fix your sleep',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords: 'insomnia, bedroom, bed, changes',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

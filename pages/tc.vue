@@ -41,10 +41,11 @@ export default {
     title: 'Terms and Conditions',
     meta: [
       {
-        hid: 'sleep-rescue-tc',
-        name: 'Terms and Conditions',
+        hid: 'description',
+        name: 'description',
         content: 'SleepRescue.org terms and conditions',
       },
+      { charset: 'utf-8' },
     ],
   },
 }

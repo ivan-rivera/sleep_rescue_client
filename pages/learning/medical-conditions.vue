@@ -124,5 +124,21 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'Medical Conditions',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'What medical conditions can cause insomnia?',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords: 'insomnia, medical conditions, health, sleep',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

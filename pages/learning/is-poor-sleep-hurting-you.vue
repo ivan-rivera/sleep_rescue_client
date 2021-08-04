@@ -30,5 +30,21 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'Is Poor Sleep Hurting You?',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Is poor sleep hurting your health?',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords: 'insomnia, health, long term, consequences',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

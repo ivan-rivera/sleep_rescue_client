@@ -68,5 +68,21 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'Sleeping Pills',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Overview of modern sleeping pills',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords: 'insomnia, medicine, pills',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

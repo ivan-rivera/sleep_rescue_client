@@ -76,5 +76,22 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'Lifestyle Changes',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Learn about the necessary lifestyle changes that will improve your sleep',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords: 'insomnia, lifestyle, better sleep',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

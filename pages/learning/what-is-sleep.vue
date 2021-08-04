@@ -58,5 +58,21 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'What is Sleep?',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'What is sleep and why do we need it?',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords: 'insomnia, sleep',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

@@ -76,5 +76,22 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'Insomnia and Negative Self Talk',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Insomnia can drive people to initiate negative self talk with themselves -- learn to identify it and overcome it',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords: 'insomnia, self talk, negative thoughts',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

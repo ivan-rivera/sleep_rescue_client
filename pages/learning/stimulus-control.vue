@@ -36,5 +36,22 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'Stimulus Control',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Learn about stimulus control and how it can help you defeat insomnia',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords: 'insomnia, stimulus control',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

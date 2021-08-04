@@ -11,7 +11,7 @@
       </p>
       <img
         v-if="!thoughtsExist"
-        src="images/thoughts.svg"
+        src="~/static/images/thoughts.svg"
         alt="thoughts"
         class="opacity-50 behind mb-5 ml-auto mr-auto"
       />

@@ -73,10 +73,11 @@ export default {
     title: 'About us',
     meta: [
       {
-        hid: 'about-sleep-rescue',
-        name: 'About Sleep Rescue',
+        hid: 'description',
+        name: 'description',
         content: 'SleepRescue: who we are and what we do',
       },
+      { charset: 'utf-8' },
     ],
   },
 }

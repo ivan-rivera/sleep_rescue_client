@@ -18,9 +18,7 @@
               Feel free to explore our
               <span
                 class="font-bold text-dark bg-secondary rounded-2xl p-2 shadow-md"
-                ><NuxtLink
-                  :to="learningCenterPath"
-                  @click.native="toLearningCenter"
+                ><NuxtLink :to="learningCenterPath"
                   >Learning Center</NuxtLink
                 ></span
               >
@@ -176,11 +174,18 @@ export default {
     title: 'Signup',
     meta: [
       {
-        hid: 'signup-description',
-        name: 'SleepRescue signup',
+        hid: 'description',
+        name: 'description',
         content:
           'Sign up for SleepRescue.org and start fixing your insomnia today',
       },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords:
+          'insomnia, sleeplessness, cbti, cognitive behavioural therapy',
+      },
+      { charset: 'utf-8' },
     ],
   },
   computed: {
@@ -216,14 +221,6 @@ export default {
       setError: 'setError',
       toggleSignInModal: 'toggleSignInModal',
     }),
-    toLearningCenter() {
-      this.ga.event({
-        eventCategory: 'engagement',
-        eventAction: 'learning_center_from_index',
-        eventLabel: 'method',
-        eventValue: 1,
-      })
-    },
     async registerUser() {
       this.$ga.event({
         eventCategory: 'engagement',

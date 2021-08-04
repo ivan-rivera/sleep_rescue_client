@@ -68,9 +68,10 @@ export default {
     meta: [
       {
         hid: 'sleep-rescue-contact',
-        name: 'Contact SleepRescue.org admins',
-        content: 'Get in touch with SleepRescue.org admins',
+        name: 'description',
+        content: 'description',
       },
+      { charset: 'utf-8' },
     ],
   },
   computed: {

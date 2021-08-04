@@ -41,5 +41,21 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'Types of Insomnia',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Learn about different types of insomnia',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords: 'insomnia, types',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

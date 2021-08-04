@@ -100,7 +100,7 @@
           Add goal
         </div>
         <img
-          src="images/goals.svg"
+          src="~/static/images/goals.svg"
           alt="goals"
           class="absolute m-auto top-44 bottom-0 left-0 right-0 opacity-50 behind"
         />

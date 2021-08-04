@@ -42,10 +42,11 @@ export default {
     title: 'Privacy',
     meta: [
       {
-        hid: 'sleep-rescue-privacy',
-        name: 'SleepRescue.org privacy statement',
+        hid: 'description',
+        name: 'description',
         content: 'Matters concerning your privacy',
       },
+      { charset: 'utf-8' },
     ],
   },
 }

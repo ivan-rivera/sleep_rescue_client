@@ -38,7 +38,7 @@
       </div>
       <img
         v-if="results.length === 0"
-        src="images/isi.svg"
+        src="~/static/images/isi.svg"
         alt="survey"
         class="opacity-50 behind mb-5 ml-auto mr-auto"
       />

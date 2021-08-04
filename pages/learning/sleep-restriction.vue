@@ -56,5 +56,22 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'Sleep Restriction Therapy',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Learn about Sleep Restriction Therapy and use start using it to defeat insomnia',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords: 'insomnia, srt, sleep restriction therapy',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

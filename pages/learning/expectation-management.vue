@@ -38,5 +38,22 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'Expectation Management',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Before you can fix your insomnia, you need to manage your own expectations',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords: 'insomnia, expectations, how much sleep do I need',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

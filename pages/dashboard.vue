@@ -37,7 +37,7 @@
             <img
               v-if="!dataExists"
               class="no-records-card"
-              src="images/metrics.svg"
+              src="~/static/images/metrics.svg"
               alt="metrics"
             />
             <bar-chart

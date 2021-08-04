@@ -28,5 +28,23 @@
 import Chapter from '~/components/learning/Chapter'
 export default {
   components: { Chapter },
+  head: {
+    title: 'Foreword',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Learn about insomnia, sleep and Cognitive Behavioural Therapy for insomnia',
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        keywords:
+          'insomnia, sleeplessness, cbti, cognitive behavioural therapy for insomnia',
+      },
+      { charset: 'utf-8' },
+    ],
+  },
 }
 </script>

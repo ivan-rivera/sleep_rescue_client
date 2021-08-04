@@ -32,7 +32,7 @@
         </div>
       </div>
       <img
-        src="images/profile.svg"
+        src="~/static/images/profile.svg"
         alt="account"
         class="ml-auto hidden transform lg:block lg:scale-75 xl:scale-100"
       />
