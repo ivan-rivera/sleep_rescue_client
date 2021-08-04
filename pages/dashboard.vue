@@ -306,9 +306,9 @@ export default {
     getDateRange(n, anchor = new Date()) {
       const dates = []
       for (let i = 0; i < n; i++) {
+        anchor.setDate(anchor.getDate() - 1)
         const currentDate = new Date(anchor)
         dates.push(currentDate.toISOString().split('T')[0])
-        anchor.setDate(anchor.getDate() - 1)
       }
       return dates
     },
@@ -324,6 +324,7 @@ export default {
     },
     async getSleepData(axios, period) {
       const nightsRaw = await axios.get(`v1/night/${period}`)
+      console.log(nightsRaw)
       const nightsData = nightsRaw.data.data
       const dataExists = Object.keys(nightsData).length > 0
       const filledFrame = this.fillFrame(nightsData, period)

@@ -16,7 +16,7 @@
           v-model="pickedDate"
           :inline="true"
           :monday-first="true"
-          :disabled-dates="{ from: new Date() }"
+          :disabled-dates="{ from: yesterday }"
           @selected="pickToggle"
         />
       </no-ssr>
@@ -200,6 +200,11 @@ export default {
     }
   },
   computed: {
+    yesterday() {
+      const yesterday = new Date()
+      yesterday.setDate(yesterday.getDate() - 1)
+      return new Date(yesterday)
+    },
     inputsAreValid() {
       return this.efficiency > 0 && this.upDateTime >= this.awakeDateTime
     },
