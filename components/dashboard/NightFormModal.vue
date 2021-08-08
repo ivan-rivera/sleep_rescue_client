@@ -248,7 +248,7 @@ export default {
       return Math.floor(this.totalMinsInBed / 60)
     },
     minsInBed() {
-      return Math.round((this.totalMinsInBed / 60 - this.hoursInBed) * 100)
+      return Math.round((this.totalMinsInBed / 60 - this.hoursInBed) * 60)
     },
     totalMinsAsleep() {
       return this.totalMinsInBed - this.totalMinsAwake
@@ -257,7 +257,7 @@ export default {
       return Math.floor(this.totalMinsAsleep / 60)
     },
     minsAsleep() {
-      return Math.round((this.totalMinsAsleep / 60 - this.hoursAsleep) * 100)
+      return Math.round((this.totalMinsAsleep / 60 - this.hoursAsleep) * 60)
     },
     efficiency() {
       return this.totalMinsAsleep / this.totalMinsInBed
