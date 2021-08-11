@@ -32,14 +32,12 @@
           </select>
         </span>
       </div>
+      <div class="goal-setting"></div>
       <div class="goal-setting">
-        <p>
+        <p class="specification">
           To be <u>{{ greaterOrLess }}</u
           >...
         </p>
-      </div>
-      <div class="goal-setting">
-        <p class="specification">Than...</p>
         <span class="dropdown-selector arrow-selector drop-select">
           <select
             v-if="metricSelection == '0'"
@@ -152,7 +150,7 @@ export default {
   computed: {
     ...mapState(['showGoalsModal']),
     greaterOrLess() {
-      return ['0', '3', '4'].includes(this.metricSelection) ? 'greater' : 'less'
+      return ['0', '3', '4'].includes(this.metricSelection) ? 'over' : 'under'
     },
     buttonLabel() {
       return this.isLoading ? 'Processing...' : 'Submit'
@@ -329,7 +327,7 @@ export default {
 
 <style scoped>
 .goal-setting {
-  @apply text-white flex flex-row pl-2 pr-2 items-center;
+  @apply text-white flex flex-row pl-2 pr-2 items-center text-sm;
 }
 .specification {
   @apply w-full;

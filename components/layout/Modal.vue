@@ -38,7 +38,7 @@ export default {
 
 <style lang="scss">
 .sr-modal {
-  @apply fixed top-5 left-6 right-6 overflow-y-scroll overflow-x-hidden
+  @apply absolute top-5 left-0 right-0 overflow-y-scroll overflow-x-hidden
   focus:outline-none
   ml-auto mr-auto pt-10 pb-5
   text-dark

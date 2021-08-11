@@ -1,11 +1,15 @@
 <template>
-  <Modal modal-width="" class="pb-10" @toggleModal="toggleCreateThoughtModal">
+  <Modal
+    modal-width="max-w-md"
+    class="pb-10"
+    @toggleModal="toggleCreateThoughtModal"
+  >
     <h1 class="title-text text-center mt-8 mb-8">Create a Thought</h1>
     <form
       action=""
       name="create-thought"
       method="post"
-      class="ml-auto mr-auto w-full"
+      class="ml-auto mr-auto"
       @submit.prevent="createThought"
     >
       <div>
