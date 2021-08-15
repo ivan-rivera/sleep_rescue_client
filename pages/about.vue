@@ -8,7 +8,7 @@
         struggles to sleep at night (thankfully not so much anymore!). I was
         frustrated with the lack of available resources online which is why I
         decided to build this website. SleepRescue.org was largely inspired by
-        <a class="web-link" href="sleepio.com">Sleepio.com</a>
+        <a class="web-link" href="https://www.sleepio.com">Sleepio.com</a>
         which admittedly is a better version of this site, however, sadly it is
         not available in all countries. If you can sign up to it for free, then
         I'd encourage you to try it out. In addition to Sleepio.com, this
