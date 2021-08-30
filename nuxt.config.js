@@ -135,6 +135,7 @@ export default {
     axios: {
       baseURL: process.env.SR_BACKEND_BASE_URL,
     },
+    gaId: process.env.GA_UA_ID,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -28,7 +28,7 @@ export default {
     script: [
       {
         hid: 'gtm-script1',
-        src: `https://www.googletagmanager.com/gtag/js?id=${process.env.GA_UA_ID}`,
+        src: `https://www.googletagmanager.com/gtag/js?id=${this.$config.gaId}`,
         async: true,
         defer: true,
       },
@@ -40,7 +40,7 @@ export default {
           dataLayer.push(arguments)
         }
         gtag('js', new Date())
-        gtag('config', '${process.env.GA_UA_ID}')
+        gtag('config', '${this.$config.gaId}')
         `,
         type: 'text/javascript',
         charset: 'utf-8',
