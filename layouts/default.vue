@@ -24,29 +24,6 @@ import Footer from '~/components/layout/Footer'
 import Sidebar from '~/components/layout/Sidebar'
 export default {
   components: { Footer, Header, FlashError, Sidebar },
-  head: {
-    script: [
-      {
-        hid: 'gtm-script1',
-        src: `https://www.googletagmanager.com/gtag/js?id=${this.$config.gaId}`,
-        async: true,
-        defer: true,
-      },
-      {
-        hid: 'gtm-script2',
-        innerHTML: `
-        window.dataLayer = window.dataLayer || []
-        function gtag() {
-          dataLayer.push(arguments)
-        }
-        gtag('js', new Date())
-        gtag('config', '${this.$config.gaId}')
-        `,
-        type: 'text/javascript',
-        charset: 'utf-8',
-      },
-    ],
-  },
   computed: {
     confirmedUser() {
       return this.$auth.loggedIn && this.$store.state.confirmedUser
