@@ -82,3 +82,6 @@ export const mutations = {
     state.accountConfirmed = false
   },
 }
+
+export const getters = {}
+export const actions = {}
