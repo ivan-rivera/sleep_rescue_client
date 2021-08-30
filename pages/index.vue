@@ -134,7 +134,6 @@ import SigninModal from '~/components/signup/SigninModal'
 import FormEntry from '~/components/layout/FormEntry'
 import CookiesNotice from '~/components/signup/CookiesNotice'
 export default {
-  auth: false,
   components: {
     CookiesNotice,
     HeroCard,

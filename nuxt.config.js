@@ -132,6 +132,9 @@ export default {
           maxAge: 60 * 60 * 24 * 90,
           type: '',
         },
+        user: {
+          property: false,
+        },
         refreshToken: {
           property: 'data.renewal_token',
           maxAge: 60 * 60 * 24 * 90,
@@ -141,7 +144,7 @@ export default {
           login: { url: '/v1/session', method: 'post' },
           logout: { url: '/v1/session', method: 'delete' },
           refresh: { url: '/v1/session/renew', method: 'post' },
-          user: { url: '/v1/user', method: 'get', propertyName: 'user' },
+          user: { url: '/v1/user', method: 'get', propertyName: false },
         },
       },
     },
@@ -156,7 +159,6 @@ export default {
     axios: {
       baseURL: process.env.SR_BACKEND_BASE_URL,
     },
-    gaId: process.env.GA_UA_ID,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
