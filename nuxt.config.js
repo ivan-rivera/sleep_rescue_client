@@ -107,7 +107,7 @@ export default {
   },
 
   auth: {
-    localStorage: false,
+    localStorage: true,
     watchLoggedIn: true,
     redirect: {
       login: '/',
